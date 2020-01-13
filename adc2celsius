@@ -5,7 +5,7 @@ import sys
 
 # parameters
 V25   = 0.76;                # V at 25 C
-Vref  = 2.93;                # reference voltage
+Vref  = 2.95;            # reference voltage
 slope = 2.5;                 # mv/C
 
 range = 4096.0;              # max ADC output value (12 bit converter)
