@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+# convert 12-bit ADC temperature sensor reading to Celsius
+
+import sys
+
+# parameters
+V25   = 0.76;                # V at 25 C
+Vref  = 2.93;                # reference voltage
+slope = 2.5;                 # mv/C
+
+range = 4096.0;              # max ADC output value (12 bit converter)
+reading25 = V25/Vref*range   # sensor reading at 25 C
+
+# sensor reading
+reading  = float(sys.argv[1]);
+
+# Celsius temperature
+
+temp = (reading - reading25)/slope + 25.0;
+
+print('{0:.0f} = {1:.1f} C'.format(reading, temp));
