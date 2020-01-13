@@ -21,8 +21,6 @@ with Housekeeping.Display;  use Housekeeping.Display;
 
 with STM32.Board;
 
-with Ada.Real_Time;
-
 package body Housekeeping is
 
    procedure Run;
@@ -43,14 +41,12 @@ package body Housekeeping is
    ---------
 
    procedure Run is
-      use Ada.Real_Time;
       OBC_T :Analog_Data;  -- OBC temperature
    begin
       loop
          STM32.Board.Green_LED.Toggle;
          Get (OBC_T);
          Put (OBC_T);
-         delay until Clock + Milliseconds(1000);
       end loop;
    end Run;
 

@@ -17,4 +17,4 @@ The examples make use of the [Ada Drivers Library](https://github.com/AdaCore/Ad
 
 ## Documentation
 
-See the `docs` folder for a labotaory manual and othe documents. 
+See the `docs` folder for a laboratory manual and other documents. 
