@@ -31,7 +31,6 @@ package body Housekeeping is
 
    procedure Initialize is
    begin
-      STM32.Board.Initialize_LEDs;
       Sensor.Initialize;
       Run;
    end Initialize;
@@ -44,7 +43,8 @@ package body Housekeeping is
       OBC_T :Analog_Data;  -- OBC temperature
    begin
       loop
-         STM32.Board.Green_LED.Toggle;
+         -- toggle LED to inidicate that housekeepiong is on
+         STM32.Board.Blue_LED.Toggle;
          Get (OBC_T);
          Put (OBC_T);
       end loop;

@@ -22,8 +22,16 @@ with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
 --  must be somewhere in the closure of the context clauses.
 
 with Housekeeping;
+--  The Housekeeping subsystem reads sensors on the platform
+
+with STM32.Board;
+--  Board LEDs are used to show systen status
 
 procedure OBSW is
 begin
-   Housekeeping.Initialize;
+   STM32.Board.Initialize_LEDs;
+   -- set LED to signal system is on
+   STM32.Board.Green_LED.Set;
+   -- initialize subsystems
+   Housekeeping.Initialize; -- does not return
 end OBSW;
