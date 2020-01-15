@@ -30,7 +30,7 @@ with STM32.Board;
 procedure OBSW is
 begin
    STM32.Board.Initialize_LEDs;
-   -- set LED to signal system is on
+   -- set LED to indicate that the system is on
    STM32.Board.Green_LED.Set;
    -- initialize subsystems
    Housekeeping.Initialize; -- does not return

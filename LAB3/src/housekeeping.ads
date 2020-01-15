@@ -19,9 +19,6 @@
 
 package Housekeeping is
 
-   Period : Natural := 1000; -- ms
-   -- housekeeping sensors are read with this period
-
    --  Initialize the housekeeping functions
    --  The HK sensors are read continously, and the values
    --  are shown on the display

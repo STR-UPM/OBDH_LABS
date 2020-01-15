@@ -43,10 +43,10 @@ package body Housekeeping is
       OBC_T :Analog_Data;  -- OBC temperature
    begin
       loop
-         -- toggle LED to inidicate that housekeepiong is on
-         STM32.Board.Blue_LED.Toggle;
          Get (OBC_T);
          Put (OBC_T);
+         -- toggle LED to indicate that housekeeping is operatve
+         STM32.Board.Blue_LED.Toggle;
       end loop;
    end Run;
 
