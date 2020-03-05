@@ -5,17 +5,19 @@ import sys
 
 # parameters
 V25   = 0.76;                # V at 25 C
-Vref  = 2.95;            # reference voltage
-slope = 2.5;                 # mv/C
+Vref  = 2.95;                # reference voltage
+Scale = 0.01;                # V/ºC
+Offset = -5.6;               # ºC (experimental calibration)
 
 range = 4096.0;              # max ADC output value (12 bit converter)
-reading25 = V25/Vref*range   # sensor reading at 25 C
 
 # sensor reading
-reading  = float(sys.argv[1]);
+R = float(sys.argv[1]);
+V = R/range*Vref;
+
+#print('{0:.0f} = {1:.3f} V'.format(R, V));
 
 # Celsius temperature
+T = (V - V25)/Scale + 25.0 + Offset;
 
-temp = (reading - reading25)/slope + 25.0;
-
-print('{0:.0f} = {1:.1f} C'.format(reading, temp));
+print('{0:.0f} = {1:.1f} C'.format(R, T));
