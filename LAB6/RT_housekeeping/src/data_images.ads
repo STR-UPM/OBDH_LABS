@@ -21,8 +21,10 @@ with Housekeeping.Data; use Housekeeping.Data;
 
 package Data_Images is
 
+   -- String image of a raw analog data value
    function Image (X : Analog_Data) return String;
 
+   -- String image of a mission time value
    function Image (X : Mission_Time) return String;
 
 end  Data_Images;

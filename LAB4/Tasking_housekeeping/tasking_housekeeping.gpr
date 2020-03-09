@@ -1,7 +1,7 @@
-with "../Ada_Drivers_Library/boards/stm32f407_discovery/stm32f407_discovery_full.gpr";
+with "../../Ada_Drivers_Library/boards/stm32f407_discovery/stm32f407_discovery_full.gpr";
 
 project Tasking_Housekeeping 
- extends "../Ada_Drivers_Library/examples/shared/common/common.gpr" 
+ extends "../../Ada_Drivers_Library/examples/shared/common/common.gpr" 
 is
 
    for Languages use ("Ada");

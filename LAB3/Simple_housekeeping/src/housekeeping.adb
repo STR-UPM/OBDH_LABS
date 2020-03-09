@@ -45,7 +45,7 @@ package body Housekeeping is
       loop
          Get (OBC_T);
          Put (OBC_T);
-         -- toggle LED to indicate that housekeeping is operatve
+         -- toggle LED to indicate that housekeeping is operative
          STM32.Board.Blue_LED.Toggle;
       end loop;
    end Run;
