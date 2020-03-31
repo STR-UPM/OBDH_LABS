@@ -20,7 +20,7 @@
 with STM32.Device;      use STM32.Device;
 with STM32.ADC;         use STM32.ADC;
 
-package body Housekeeping.Sensor is
+package body Sensor is
 
    ----------------
    -- Initialize --
@@ -82,4 +82,4 @@ package body Housekeeping.Sensor is
 
    end Get;
 
-end Housekeeping.Sensor;
+end Sensor;

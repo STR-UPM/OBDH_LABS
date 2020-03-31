@@ -15,8 +15,8 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
-with Housekeeping.Data;     use Housekeeping.Data;
-with Housekeeping.Sensor;
+with Housekeeping_Data;     use Housekeeping_Data;
+with Sensor;
 with Storage;
 
 with STM32.Board;
@@ -46,16 +46,16 @@ package body Housekeeping is
    begin
       loop
          delay until Next_Time;
-         Get (Data);
+         Get(Data);
          Storage.Put (Data);
          STM32.Board.Blue_LED.Toggle;
          Next_Time := Next_Time + Period;
       end loop;
    end Housekeeping_Task;
 
-   --------------
-   -- Get data --
-   --------------
+   ---------
+   -- Get --
+   ---------
 
    procedure Get (S : out State) is
       OBC_T : Analog_Data;

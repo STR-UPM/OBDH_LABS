@@ -15,34 +15,14 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Storage subsystem
+-- Image strings for data
 
-with Housekeeping_Data; use Housekeeping_Data;
+package Housekeeping_Data.Images is
 
-package Storage is
+   -- String image of a raw analog data value
+   function Image (X : Analog_Data) return String;
 
-   procedure Put (Data : State);
-   -- Store a data state
-   -- Overwrite the stored value even if has not been consumed
-   -- (it is a fresh value)
+   -- String image of a mission time value
+   function Image (X : Mission_Time) return String;
 
-   procedure Get (Data : out State);
-   -- Get the last stored data state
-   -- Waits if there is no fresh data value
-
-private
-
-   protected Buffer
-     with Priority => 20
-   is
-      procedure Put (Data : State);
-      entry Get (Data : out State);
-   private
-      Value : State;
-      Fresh : Boolean := False;
-   end Buffer;
-
-   procedure Put (Data : State)     renames Buffer.Put;
-   procedure Get (Data : out State) renames Buffer.Get;
-
-end Storage;
+end  Housekeeping_Data.Images;

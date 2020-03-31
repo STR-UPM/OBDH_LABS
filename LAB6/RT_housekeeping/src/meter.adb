@@ -14,17 +14,12 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
+--  WCET measurements
 
--- Image strings for data
+with WCET_Code;
 
-with Housekeeping.Data; use Housekeeping.Data;
-
-package Data_Images is
-
-   -- String image of a raw analog data value
-   function Image (X : Analog_Data) return String;
-
-   -- String image of a mission time value
-   function Image (X : Mission_Time) return String;
-
-end  Data_Images;
+procedure Meter is
+begin
+   WCET_Code.Initialize;
+   WCET_Code.Meter;
+end Meter;

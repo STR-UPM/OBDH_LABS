@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2018, Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -15,14 +15,30 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
-with Housekeeping.Data; use Housekeeping.Data;
+-- Image strings for data
 
-package Housekeeping.Sensor is
+with Ada.Strings;       use Ada.Strings;
+with Ada.Strings.Fixed; use Ada.Strings.Fixed;
 
-   -- initialize the sensor operation
-   procedure Initialize;
+package body Housekeeping_Data.Images is
 
-   --  get a value from the temperature sensor
-   procedure Get (T : out Analog_Data);
+   -----------
+   -- Image --
+   -----------
 
-end Housekeeping.Sensor;
+   function Image (X : Analog_Data) return String is
+      S : String (1..4);
+   begin
+      Move(Trim(X'Img, Both), S, Justify => Right, Pad => '0');
+      return S;
+   end Image;
+
+
+   function Image (X : Mission_Time) return String is
+      S : String (1..10);
+   begin
+      Move(Trim(X'Img, Both), S, Justify => Right, Pad => '0');
+      return S;
+   end Image;
+
+end Housekeeping_Data.Images;

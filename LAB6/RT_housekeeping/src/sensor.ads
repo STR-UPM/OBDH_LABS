@@ -15,25 +15,14 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
---  Data types for the housekeeping subsystem
+with Housekeeping_Data; use Housekeeping_Data;
 
-with HAL; use HAL;
+package Sensor is
 
-package Housekeeping.Data is
+   -- initialize the sensor operation
+   procedure Initialize;
 
-   type Analog_Data is new UInt16;
-   --  Raw ADC reading.
-   --  To be converted to engineering units on ground.
-   --  Range is 0 .. 4095 (12 bit ADC) for 3 V reference voltage.
-   
-   type Mission_Time is new Uint64;
-   --  Seconds since system startup
-   
-   type State is
-      record
-         Data      : Analog_Data;
-         Timestamp : Mission_Time;
-      end record;
-   --  Data are timestamped for transmission to ground
-   
-end Housekeeping.Data;
+   --  get a value from the temperature sensor
+   procedure Get (T : out Analog_Data);
+
+end Sensor;

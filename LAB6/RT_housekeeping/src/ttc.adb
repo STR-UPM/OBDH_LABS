@@ -16,7 +16,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
-with Housekeeping.Data;     use Housekeeping.Data;
+with Housekeeping_Data;     use Housekeeping_Data;
 with Storage;
 
 with Serial_IO.Blocking;    use Serial_IO.Blocking;
@@ -25,7 +25,7 @@ with Message_Buffers;       use Message_Buffers;
 
 with STM32.Board;
 
-with Data_Images;            use Data_Images;
+with Housekeeping_Data.Images;            use Housekeeping_Data.Images;
 with Ada.Characters.Latin_1; use Ada.Characters.Latin_1;
 
 package body TTC is

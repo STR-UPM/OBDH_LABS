@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020 Universidad Politécnica de Madrid           --
+--          Copyright (C) 2018, Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -15,30 +15,25 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Image strings for data
+--  Data types for the housekeeping subsystem
 
-with Ada.Strings;       use Ada.Strings;
-with Ada.Strings.Fixed; use Ada.Strings.Fixed;
+with HAL; use HAL;
 
-package body Data_Images is
+package Housekeeping_Data is
 
-   -----------
-   -- Image --
-   -----------
-
-   function Image (X : Analog_Data) return String is
-      S : String (1..4);
-   begin
-      Move(Trim(X'Img, Both), S, Justify => Right, Pad => '0');
-      return S;
-   end Image;
-
-
-   function Image (X : Mission_Time) return String is
-      S : String (1..10);
-   begin
-      Move(Trim(X'Img, Both), S, Justify => Right, Pad => '0');
-      return S;
-   end Image;
-
-end Data_Images;
+   type Analog_Data is new UInt16;
+   --  Raw ADC reading.
+   --  To be converted to engineering units on ground.
+   --  Range is 0 .. 4095 (12 bit ADC) for 3 V reference voltage.
+   
+   type Mission_Time is new Uint64;
+   --  Seconds since system startup
+   
+   type State is
+      record
+         Data      : Analog_Data;
+         Timestamp : Mission_Time;
+      end record;
+   --  Data are timestamped for transmission to ground
+   
+end Housekeeping_Data;
