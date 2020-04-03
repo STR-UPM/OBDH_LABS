@@ -31,7 +31,7 @@ package body Storage is
       procedure Put (Data : State) is
       begin
          Value := Data;
-         fresh := True;
+         Fresh := True;
       end Put;
 
       ---------
@@ -43,6 +43,16 @@ package body Storage is
          Data := Value;
          Fresh := False;
       end Get;
+
+      -------------------
+      -- Get_Immediate --
+      -------------------
+
+      entry Get_Immediate (Data : out State) when True is
+      begin
+         Data := Value;
+         Fresh := False;
+      end Get_Immediate;
 
    end Buffer;
 

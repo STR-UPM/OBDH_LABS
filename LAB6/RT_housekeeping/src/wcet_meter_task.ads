@@ -14,45 +14,24 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
+-- Code for WCET measurements
 
--- Storage subsystem
+with Ada.Real_Time; use Ada.Real_Time;
 
-with Housekeeping_Data; use Housekeeping_Data;
-with System;
+package WCET_Meter_Task is
 
-package Storage is
-
-   procedure Put (Data : State);
-   -- Store a data state
-   -- Overwrite the stored value even if has not been consumed
-   -- (it is a fresh value)
-
-   procedure Get (Data : out State);
-   -- Get the last stored data state
-   -- Waits if there is no fresh data value
-
-   procedure Get_Immediate (Data : out State);
-   -- Get the last stored data state immediately
-   -- Used mostly for wcet measurements
-
-   -- Real-time attributes
-   ST_Priority : constant System.Priority := 20;
+   procedure Initialize;
+   -- initialize devices
 
 private
 
-   protected Buffer
-     with Priority => ST_Priority
-   is
-      procedure Put (Data : State);
-      entry     Get (Data : out State);
-      entry     Get_Immediate (Data : out State);
-   private
-      Value : State;
-      Fresh : Boolean := False;
-   end Buffer;
+   Start_Delay : Time_Span := To_Time_Span (1.0);
+   -- delay for devices to initialize
 
-   procedure Put (Data : State)     renames Buffer.Put;
-   procedure Get (Data : out State) renames Buffer.Get;
-   procedure Get_Immediate (Data : out State) renames Buffer.Get_Immediate;
+   N : constant := 1_000_000;
+   -- number of times the code is exercised
 
-end Storage;
+   Test_Period : constant Time_Span := To_Time_Span(60.0);
+   -- the test is repeated with this period
+
+end WCET_Meter_Task;

@@ -18,11 +18,13 @@
 --  Housekeeping subsystem
 
 with Ada.Real_Time; use Ada.Real_Time;
+with System;
 
 package Housekeeping is
 
    --  Real-time attributes
-   Period : Time_Span := Milliseconds (1000);  -- 1s
+   Period      : Time_Span := Milliseconds (1000);  -- 1s
+   HK_Priority : constant System.Priority := 20;
 
    --  Initialize the housekeeping subsystem
    procedure Initialize;
@@ -32,6 +34,6 @@ private
    Start_Delay : Time_Span := Milliseconds (1000); -- 1s
 
    task Housekeeping_Task
-     with Priority => 20;
+     with Priority => HK_Priority;
 
 end Housekeeping;

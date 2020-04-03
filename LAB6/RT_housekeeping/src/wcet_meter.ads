@@ -14,12 +14,9 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
---  WCET measurements
 
-with WCET_Code;
+--  On-board software system - WCET meter procedure specification
 
-procedure Meter is
-begin
-   WCET_Code.Initialize;
-   WCET_Code.Meter;
-end Meter;
+with System;
+procedure WCET_Meter
+  with Priority => System.Priority'First;

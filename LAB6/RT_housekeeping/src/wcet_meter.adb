@@ -14,45 +14,25 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
+--  WCET meter program
+--  The actual measurements are carried out in WECT_Meter_Task
 
--- Storage subsystem
+with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
+--  The "last chance handler" is the user-defined routine that is called when
+--  an exception is propagated. We need it in the executable, therefore it
+--  must be somewhere in the closure of the context clauses.
 
-with Housekeeping_Data; use Housekeeping_Data;
-with System;
+with WCET_Meter_Task;
 
-package Storage is
+with STM32.Board;
 
-   procedure Put (Data : State);
-   -- Store a data state
-   -- Overwrite the stored value even if has not been consumed
-   -- (it is a fresh value)
-
-   procedure Get (Data : out State);
-   -- Get the last stored data state
-   -- Waits if there is no fresh data value
-
-   procedure Get_Immediate (Data : out State);
-   -- Get the last stored data state immediately
-   -- Used mostly for wcet measurements
-
-   -- Real-time attributes
-   ST_Priority : constant System.Priority := 20;
-
-private
-
-   protected Buffer
-     with Priority => ST_Priority
-   is
-      procedure Put (Data : State);
-      entry     Get (Data : out State);
-      entry     Get_Immediate (Data : out State);
-   private
-      Value : State;
-      Fresh : Boolean := False;
-   end Buffer;
-
-   procedure Put (Data : State)     renames Buffer.Put;
-   procedure Get (Data : out State) renames Buffer.Get;
-   procedure Get_Immediate (Data : out State) renames Buffer.Get_Immediate;
-
-end Storage;
+procedure WCET_Meter is
+begin
+   STM32.Board.Initialize_LEDs;
+   STM32.Board.Green_LED.Set;
+   WCET_Meter_Task.Initialize;
+    -- do nothing while the meter task runs
+   loop
+      null;
+   end loop;
+end WCET_Meter;
