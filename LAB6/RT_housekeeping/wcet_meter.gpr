@@ -1,12 +1,12 @@
 with "../../Ada_Drivers_Library/boards/stm32f407_discovery/stm32f407_discovery_full.gpr";
 
-project Real_Time_Housekeeping 
+project WCET_Meter 
  extends "../../Ada_Drivers_Library/examples/shared/common/common.gpr" 
 is
 
    for Languages use ("Ada");
-   for Main use ("obsw.adb");
-   for Source_Dirs use ("src", "src/serial_ports/**");
+   for Main use ("wcet_meter.adb");
+   for Source_Dirs use ("src/**");
    for Object_Dir use "obj";
    for Runtime ("Ada") use STM32F407_Discovery_Full'Runtime("Ada");
 
@@ -18,4 +18,4 @@ is
 
   package Compiler renames STM32F407_Discovery_Full.Compiler;
 
-end Real_Time_Housekeeping;
+end WCET_Meter;
