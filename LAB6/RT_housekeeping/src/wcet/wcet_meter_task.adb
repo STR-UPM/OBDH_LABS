@@ -161,7 +161,7 @@ package body WCET_Meter_Task is
             Put ("ST");
             Put ("Put (" & N'Img & " times) : "
                  & Duration'Image(To_Duration(C1)) & " s");
-            Put ("Get  (" & N'Img & " times) : "
+            Put ("Get (" & N'Img & " times) : "
                  & Duration'Image(To_Duration(C2)) & " s");
          end ST;
 
