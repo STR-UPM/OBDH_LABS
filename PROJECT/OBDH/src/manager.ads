@@ -17,6 +17,10 @@
 
 --  Manager subsystem
 
+with Ada.Real_Time; use Ada.Real_Time;
+
+with System;
+
 package Manager is
 
    type Operating_Mode is
@@ -31,6 +35,14 @@ package Manager is
    -- set the operation mode
    procedure Set_Mode (To : Operating_Mode);
 
+   -- coverage timer parameters
+   Coverage_Window_Length  : Time_Span := To_Time_Span (60.0); -- 1 min
+   Coverage_Timer_Priority : System.Priority := 15;
 
+private
+
+   -- timer for maximum coverage window
+   task Coverage_Timer
+     with Priority => Coverage_Timer_Priority;
 
 end Manager;

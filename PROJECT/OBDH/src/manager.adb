@@ -15,6 +15,9 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
+with TTC;          use TTC;
+with TTC.Messages; use TTC.Messages;
+
 with STM32.Board;
 
 package body Manager is
@@ -26,6 +29,7 @@ package body Manager is
    protected System_Mode is
       function Current_Mode return Operating_Mode;
       procedure Set_Mode (To : Operating_Mode);
+      entry Await_Coverage;
    private
       Mode : Operating_Mode := Idle;
    end System_Mode;
@@ -70,6 +74,25 @@ package body Manager is
          Mode := To;
       end Set_Mode;
 
+      entry Await_Coverage when Mode = Coverage is
+      begin
+         null;
+      end Await_Coverage;
+
    end System_Mode;
+
+   --------------------
+   -- Coverage_Timer --
+   --------------------
+
+   task body Coverage_Timer is
+   begin
+      loop
+         System_Mode.Await_Coverage;
+         delay until Clock + Coverage_Window_Length;
+         Send (TM_Mode(Idle));
+         System_Mode.Set_Mode(Idle);
+      end loop;
+   end Coverage_Timer;
 
 end Manager;

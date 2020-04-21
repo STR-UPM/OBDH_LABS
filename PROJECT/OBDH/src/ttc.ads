@@ -24,10 +24,10 @@ package TTC is
 
    -- Real-time attributes
    Basic_TM_Period   : Time_Span := Milliseconds (10_000); -- 10 s
-   Basic_TM_Priority : constant System.Priority := 10;
+   Basic_TM_Priority : constant System.Priority := 12;
 
-   TC_Period         : Time_Span := Milliseconds (1000);   --   1 s
-   TC_Priority       : constant System.Priority := 5;
+   TC_Period         : Time_Span := Milliseconds (2000);   --  2 s
+   TC_Priority       : constant System.Priority := 10;
    -- The TC receiver task has a lower priority than the TM task in order
    -- no to block the serial line.
 
