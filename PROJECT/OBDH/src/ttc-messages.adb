@@ -108,7 +108,7 @@ package body TTC.Messages is
 
    function TM_Mode (M : Operating_Mode) return String is
    begin
-      return Timestamp & " | MODE  " & M'Img
+      return Timestamp & " | MODE " & M'Img
         & CR & LF;
    end TM_Mode;
 
