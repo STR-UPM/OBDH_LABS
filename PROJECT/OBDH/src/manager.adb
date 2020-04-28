@@ -90,8 +90,10 @@ package body Manager is
       loop
          System_Mode.Await_Coverage;
          delay until Clock + Coverage_Window_Length;
-         Send (TM_Mode(Idle));
-         Set_Mode(Idle);
+         if Current_Mode = Coverage then
+            Send (TM_Mode(Idle));
+            Set_Mode(Idle);
+         end if;
       end loop;
    end Coverage_Timer;
 
