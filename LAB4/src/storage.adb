@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020  Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid            --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -15,21 +15,35 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+package body Storage is
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
 
-package TTC.Messages is
+   ------------
+   -- Buffer --
+   ------------
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+   protected body Buffer is
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
+      ---------
+      -- Put --
+      ---------
 
-end TTC.Messages;
+      procedure Put (Data : Analog_Data) is
+      begin
+         Value := Data;
+         fresh := True;
+      end Put;
+
+      ---------
+      -- Get --
+      ---------
+
+      entry Get (Data : out Analog_Data) when Fresh is
+      begin
+         Data := Value;
+         Fresh := False;
+      end Get;
+
+   end Buffer;
+
+end Storage;

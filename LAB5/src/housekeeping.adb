@@ -15,21 +15,39 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+with Housekeeping.Data;     use Housekeeping.Data;
+with Housekeeping.Sensor;
+with Storage;
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+with STM32.Board;
 
-package TTC.Messages is
+with Ada.Real_Time; use Ada.Real_Time;
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+package body Housekeeping is
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
+   ----------------
+   -- Initialize --
+   ----------------
 
-end TTC.Messages;
+   procedure Initialize is
+   begin
+      Sensor.Initialize;
+   end Initialize;
+
+   ----------------------------
+   -- Housekeeping task body --
+   ----------------------------
+
+   task body Housekeeping_Task is
+      OBC_T :Analog_Data;  -- OBC temperature
+   begin
+      loop
+         delay until Clock + Milliseconds (1000);
+         Sensor.Get (OBC_T);
+         Storage.Put (OBC_T);
+         -- toggle LED to show HK operation
+         STM32.Board.Blue_LED.Toggle;
+      end loop;
+   end Housekeeping_Task;
+
+end Housekeeping;

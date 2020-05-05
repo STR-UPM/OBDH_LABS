@@ -1,12 +1,12 @@
 ﻿#! /usr/bin/env python3
 #
-# ground station for satellite obdh mockup
+# Ground station for satellite obdh mockup
 #
-# this file is part of OBDH_LABS https://github...
+# This file is part of OBDH_LABS https://github...
 #
 # (c) 2020 Juan A. de la Puente <juan.de.la.puente@upm.es>
 #
-# BSD License
+# SPDX-License-Identifier:    BSD-3-Clause
 #
 
 import serial
@@ -14,7 +14,8 @@ import threading
 import os
 from datetime import datetime, timezone
 
-# serial line parameters
+# serial line parameters 
+# change serial port name to whatever you have on your platform
 
 serial_port = 'COM4'
 baudrate = 115200

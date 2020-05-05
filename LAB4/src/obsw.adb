@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020  Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid            --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -14,22 +14,31 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
+--  On-board software system - main procedure
 
--- Parsing and formatting functions for TTC messages
+with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
+--  The "last chance handler" is the user-defined routine that is called when
+--  an exception is propagated. We need it in the executable, therefore it
+--  must be somewhere in the closure of the context clauses.
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+with Housekeeping;
+with TTC;
 
-package TTC.Messages is
+with STM32.Board;
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+procedure OBSW is
+begin
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
+   STM32.Board.Initialize_LEDs;
+   -- set LED to indicate that system is on
+   STM32.Board.Green_LED.Set;
+   -- initialize subsystems
+   Housekeeping.Initialize;
+   TTC.Initialize;
 
-end TTC.Messages;
+   -- do nothing while application tasks run
+   loop
+      null;
+   end loop;
+
+end OBSW;

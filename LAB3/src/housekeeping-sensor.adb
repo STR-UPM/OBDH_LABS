@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020  Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -20,10 +20,7 @@
 with STM32.Device;      use STM32.Device;
 with STM32.ADC;         use STM32.ADC;
 
-package body Sensors is
-
-   -- all signals are read from ADC1
-   ADC : Analog_To_Digital_Converter renames ADC_1;
+package body Housekeeping.Sensor is
 
    ----------------
    -- Initialize --
@@ -31,38 +28,34 @@ package body Sensors is
 
    procedure Initialize is
 
-      -- specify all channels to be read from this ADC
-
-       All_Regular_Conversions : constant Regular_Channel_Conversions :=
+      All_Regular_Conversions : constant Regular_Channel_Conversions :=
         (1 => (Channel     => Temperature_Sensor.Channel,
-               Sample_Time => Sample_144_Cycles),
-         2 => (Channel     => VBat.Channel,
-               Sample_Time => Sample_144_Cycles)
-        );  -- needs 10 us minimum
+               Sample_Time => Sample_144_Cycles));  -- needs 10 micros minimum
 
    begin
       Enable_Clock (Temperature_Sensor.ADC.all);
+
       Reset_All_ADC_Units;
 
-      Configure_Common_Properties -- for all ADCs
+      Configure_Common_Properties
         (Mode           => Independent,
          Prescalar      => PCLK2_Div_2,
          DMA_Mode       => Disabled,
          Sampling_Delay => Sampling_Delay_5_Cycles);
 
       Configure_Unit
-        (ADC,
+        (Temperature_Sensor.ADC.all,
          Resolution => ADC_Resolution_12_Bits,
          Alignment  => Right_Aligned);
 
       Configure_Regular_Conversions
-        (ADC,
+        (Temperature_Sensor.ADC.all,
          Trigger     => Software_Triggered,
          Continuous  => False,
          Enable_EOC  => True,
          Conversions => All_Regular_Conversions);
 
-      Enable (ADC);
+      Enable (ADC_1);
 
    end Initialize;
 
@@ -70,21 +63,23 @@ package body Sensors is
    -- Get --
    ---------
 
-   procedure Get (Data : out Analog_Data_Table) is
+   procedure Get (T : out Analog_Data) is
+
       Successful : Boolean;
       Timed_Out : exception;
+
    begin
-      Start_Conversion (ADC);
-      for S in Analog_Signal loop
-         Poll_For_Status (ADC,
-                          Regular_Channel_Conversion_Complete,
-                          Successful);
-         if Successful then
-            Data(S) := Analog_Data (Conversion_Value (ADC));
-         else
-            raise Timed_Out;
-         end if;
-      end loop;
+
+      Start_Conversion (Temperature_Sensor.ADC.all);
+      Poll_For_Status (Temperature_Sensor.ADC.all,
+                       Regular_Channel_Conversion_Complete,
+                       Successful);
+      if not Successful then
+         raise Timed_Out;
+      end if;
+
+      T := Analog_Data (Conversion_Value (Temperature_Sensor.ADC.all));
+
    end Get;
 
-end Sensors;
+end Housekeeping.Sensor;

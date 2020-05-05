@@ -15,21 +15,15 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+--  Data types for the housekeeping subsystem
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+with HAL; use HAL;
 
-package TTC.Messages is
+package Housekeeping.Data is
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
-
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
-
-end TTC.Messages;
+      type Analog_Data is new UInt16;
+   --  Raw ADC reading.
+   --  To be converted to engineering units on ground.
+   --  Range is 0 .. 4095 (12 bit ADC) for 3 V reference voltage.
+   
+end Housekeeping.Data;

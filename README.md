@@ -6,7 +6,7 @@ Code for the MUSE/OBDH course laboratory
 This repository uses submodules. To clone it, you need to use the --recursive git option:
 
 ```
-$ git clone --recursive https://github.com/STR-UPM/Embedded_Ada_Examples.git
+$ git clone --recursive https://github.com/STR-UPM/OBDH_LABS.git
 ```
 
 ## Environment

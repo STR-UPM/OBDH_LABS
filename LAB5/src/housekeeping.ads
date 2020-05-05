@@ -15,21 +15,15 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+--  Housekeeping subsystem
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+package Housekeeping is
 
-package TTC.Messages is
+   --  Initialize the housekeeping subsystem
+   procedure Initialize;
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+private
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
+   task Housekeeping_Task;
 
-end TTC.Messages;
+end Housekeeping;

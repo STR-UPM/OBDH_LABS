@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020  Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -15,21 +15,14 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+with Housekeeping.Data; use Housekeeping.Data;
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+package Housekeeping.Sensor is
 
-package TTC.Messages is
+   -- initialize the sensor operation
+   procedure Initialize;
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+   --  get a value from the temperature sensor
+   procedure Get (T : out Analog_Data);
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
-
-end TTC.Messages;
+end Housekeeping.Sensor;

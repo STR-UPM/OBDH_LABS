@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020  Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -15,21 +15,18 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+with Ada.Text_IO; use Ada.Text_IO;
+-- only works when run from the debugger using semihosting
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+package body Housekeeping.Display is
 
-package TTC.Messages is
+   ---------
+   -- Put --
+   ---------
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+   procedure Put (T : Analog_Data) is
+   begin
+      Put_Line (T'Img);
+   end Put;
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
-
-end TTC.Messages;
+end Housekeeping.Display;

@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2020  Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -15,21 +15,37 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
--- Parsing and formatting functions for TTC messages
+with Housekeeping.Data; use Housekeeping.Data;
+with TTC.Display;
+with Storage;
 
-with TTC.Data;      use TTC.Data;
-with Platform.Data; use Platform.Data;
-with Manager;       use Manager;
+with STM32.Board;
 
-package TTC.Messages is
+package body TTC is
 
-   -- Parse TC message
-   function TC (TC_Message : String) return TC_Type;
+   ----------------
+   -- Initialize --
+   ----------------
 
-   -- Format TM messages
-   function TM_Hello (S : State) return String;
-   function TM_Mode (M : Operating_Mode) return String;
-   function TM_Housekeeping (Length : Positive := 1) return String;
-   function TM_Error (Message : String) return String;
+   procedure Initialize is
+   begin
+      -- nothing to do
+      null;
+   end Initialize;
 
-end TTC.Messages;
+   -------------
+   -- TM_Task --
+   -------------
+
+   task body TM_Task is
+      T : Analog_Data;
+   begin
+      loop
+         Storage.Get (T);
+         Display.Put (T);
+         -- toggle LED to show TM operation
+         STM32.Board.Orange_LED.Toggle;
+      end loop;
+   end TM_Task;
+
+end TTC;
