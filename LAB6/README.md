@@ -6,6 +6,10 @@ This version includes real-time attributes and priority assignments.
 
 There are two projects in the `RT_Housekeeping` folder:
 
-* `real_time_housekeeping` is the main real-time OBDH program
-* `wcet_meter` is an auxiliary tool that can be used to estimate the execution time of the real-time task and protected operation bodies
+* `real_time_housekeeping` is the main real-time OBDH program.
+* `wcet_meter` is an auxiliary tool that can be used to estimate the execution time of the real-time task and protected operation bodies.
+
+Source files in the `src/serial_ports` directory have been taken from the 
+Ada Drivers Library examples and are redistributed under the term of the 
+acompanying License (Copyright © 2015-2016, AdaCore).
 
