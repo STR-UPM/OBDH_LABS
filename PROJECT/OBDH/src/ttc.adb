@@ -86,11 +86,11 @@ package body TTC is
          begin
             Get (COM, Incoming'Unchecked_Access);
             Process_TC (TC(Content(Incoming)));
+            Next_Time := Clock + TC_Period;
          exception
             when Constraint_Error =>  -- empty TC
                Send (TM_Error("NULL TC"));
          end Get_TC;
-         Next_Time := Next_Time + TC_Period;
       end loop;
    end TC_Task;
 
