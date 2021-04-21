@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 # change serial port name to whatever you have on your platform
 
 serial_port = 'COM4'
+#serial_port = '/dev/ttyUSB0'
 baudrate = 115200
 s = serial.Serial(serial_port,baudrate) # Open serial port
 
