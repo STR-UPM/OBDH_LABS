@@ -1,6 +1,9 @@
 # OBDH_LABS
 Code for the MUSE/OBDH course laboratory
 
+# ACS branch
+Code for the LAB7, which includes ACS-PIL, of the MUSE/OBDH 
+
 ## Important notice
 
 This repository uses submodules. To clone it, you need to use the --recursive git option:
