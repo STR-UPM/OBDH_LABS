@@ -1,0 +1,16 @@
+with "../Ada_Drivers_Library/boards/stm32f407_discovery/stm32f407_discovery_full.gpr";
+
+project Distributed_Housekeeping extends "../Ada_Drivers_Library/examples/shared/common/common.gpr" is
+
+   for Languages use ("Ada");
+   for Main use ("obsw.adb");
+   for Source_Dirs use ("src/**", "../utilities/src/**");
+   for Object_Dir use "obj";
+   for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
+   for Create_Missing_Dirs use "True";
+
+   package Compiler renames Stm32F407_Discovery_Full.Compiler;
+   for Target use "arm-eabi";
+
+end Distributed_Housekeeping;
+
