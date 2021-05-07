@@ -1,0 +1,5 @@
+project Native_Serial_Test is
+    for Source_Dirs use ("src");
+    for Object_Dir use "obj";
+    for Main use ("native_serial_test.adb");
+end Native_Serial_Test;
