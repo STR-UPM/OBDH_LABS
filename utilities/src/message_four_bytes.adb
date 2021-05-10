@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2021 Universidad Politécnica de Madrid           --
+--       Copyright (C) 2017-2019, Universidad Politécnica de Madrid         --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -11,27 +11,36 @@
 -- License for  more details.  You should have  received  a copy of the GNU --
 -- General  Public  License  distributed  with  this  software;   see  file --
 -- COPYING3.  If not, go to http://www.gnu.org/licenses for a complete copy --
--- of the license.
+-- of the license.                                                          --
 --                                                                          --
 ------------------------------------------------------------------------------
--- convert raw temperature sensor readings to degrees Celsius
 
-with HK_Data;             use HK_Data;
-with HK_Data.Converter;   use HK_Data.Converter;
-with TTC_Data.Strings;    use TTC_Data.Strings;
+with Unchecked_Conversion;
 
-with Ada.Text_IO;         use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+package body Message_Four_Bytes is
 
-procedure Temperature is
-   Raw_Value : Integer;
-begin
-   Put_line("Convert raw values from a temperature sensor to Celsius");
-   Put_Line("Enter an integer value, or 0 to exit");
-   loop
-      Put("> ");
-      Get(Raw_Value);
-      exit when Raw_Value <= 0;
-      Put_Line(Image(Temperature(Sensor_Reading(Raw_Value))));
-   end loop;
-end Temperature;
+   subtype Four_Bytes_String is String (1..4);
+   
+   function Four_Bytes_To_String is new
+     Unchecked_Conversion (Four_Bytes, Four_Bytes_String);
+   
+   function To_String (To : Four_Bytes) return String is
+   begin
+      return String(Four_Bytes_To_String (To));
+   end To_String;
+   
+   procedure Set (This : in out Message; To : Four_Bytes) is
+      T_String : Four_Bytes_String;
+   begin
+      T_String := Four_Bytes_To_String(To);
+      Set (This, T_String);
+   end Set;
+   
+   procedure Unset (This : in Message; To : out Four_Bytes) is
+      function String_To_Four_Bytes is new
+        Unchecked_Conversion (Four_Bytes_String, Four_Bytes);
+   begin
+      To := String_To_Four_Bytes (This.Content (1 .. 4));
+   end Unset;
+
+end Message_Four_Bytes;

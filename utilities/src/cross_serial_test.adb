@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2021 Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -14,24 +14,36 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
--- convert raw temperature sensor readings to degrees Celsius
+with Serial_IO.Blocking;    use Serial_IO.Blocking;
+with Peripherals_Blocking ; use Peripherals_Blocking;
+with Message_Buffers;       use Message_Buffers;
 
-with HK_Data;             use HK_Data;
-with HK_Data.Converter;   use HK_Data.Converter;
-with TTC_Data.Strings;    use TTC_Data.Strings;
+with STM32.Board;
 
-with Ada.Text_IO;         use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Message_Four_Bytes;
 
-procedure Temperature is
-   Raw_Value : Integer;
+procedure cross_serial_test is
+
+   package MF is new Message_Four_Bytes (Four_Bytes => Float);
+   package MI is new Message_Four_Bytes (Four_Bytes => Integer);
+
+   Data : aliased Message (Physical_Size => 4);
+   F: Float := 1.0;
+   I: Integer := 1;
+
 begin
-   Put_line("Convert raw values from a temperature sensor to Celsius");
-   Put_Line("Enter an integer value, or 0 to exit");
+   STM32.Board.Initialize_LEDs;
+   Initialize (COM);
+   Configure (COM, Baud_Rate => 115_200);
    loop
-      Put("> ");
-      Get(Raw_Value);
-      exit when Raw_Value <= 0;
-      Put_Line(Image(Temperature(Sensor_Reading(Raw_Value))));
+      Get_Fixed (COM, Data'Unchecked_Access);
+      MF.Unset (Data, F);
+      Get_Fixed (COM, Data'Unchecked_Access);
+      MI.Unset (Data, I);
+      MF.Set (Data, F);
+      Put (COM, Data'Unchecked_Access);
+      MI.Set (Data, I);
+      Put (COM, Data'Unchecked_Access);
+      STM32.Board.Red_LED.Toggle;
    end loop;
-end Temperature;
+end cross_serial_test;

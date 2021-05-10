@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2021 Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -14,24 +14,33 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
--- convert raw temperature sensor readings to degrees Celsius
+--  On-board software system - main procedure
 
-with HK_Data;             use HK_Data;
-with HK_Data.Converter;   use HK_Data.Converter;
-with TTC_Data.Strings;    use TTC_Data.Strings;
+with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
+--  The "last chance handler" is the user-defined routine that is called when
+--  an exception is propagated. We need it in the executable, therefore it
+--  must be somewhere in the closure of the context clauses.
 
-with Ada.Text_IO;         use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Housekeeping;
+with TTC;
+with ADCS;
 
-procedure Temperature is
-   Raw_Value : Integer;
+with STM32.Board;
+
+procedure OBSW is
 begin
-   Put_line("Convert raw values from a temperature sensor to Celsius");
-   Put_Line("Enter an integer value, or 0 to exit");
+
+   STM32.Board.Initialize_LEDs;
+   -- set LED to indicate that system is on
+   STM32.Board.Green_LED.Set;
+   -- initialize subsystems
+   Housekeeping.Initialize;
+   TTC.Initialize;
+   ADCS.Initialize;
+
+   -- do nothing while application tasks run
    loop
-      Put("> ");
-      Get(Raw_Value);
-      exit when Raw_Value <= 0;
-      Put_Line(Image(Temperature(Sensor_Reading(Raw_Value))));
+      null;
    end loop;
-end Temperature;
+
+end OBSW;

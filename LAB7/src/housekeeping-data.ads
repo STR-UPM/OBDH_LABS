@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2021 Universidad Politécnica de Madrid           --
+--          Copyright (C) 2018, Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -14,24 +14,16 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
--- convert raw temperature sensor readings to degrees Celsius
 
-with HK_Data;             use HK_Data;
-with HK_Data.Converter;   use HK_Data.Converter;
-with TTC_Data.Strings;    use TTC_Data.Strings;
+--  Data types for the housekeeping subsystem
 
-with Ada.Text_IO;         use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with HAL; use HAL;
 
-procedure Temperature is
-   Raw_Value : Integer;
-begin
-   Put_line("Convert raw values from a temperature sensor to Celsius");
-   Put_Line("Enter an integer value, or 0 to exit");
-   loop
-      Put("> ");
-      Get(Raw_Value);
-      exit when Raw_Value <= 0;
-      Put_Line(Image(Temperature(Sensor_Reading(Raw_Value))));
-   end loop;
-end Temperature;
+package Housekeeping.Data is
+
+      type Analog_Data is new UInt16;
+   --  Raw ADC reading.
+   --  To be converted to engineering units on ground.
+   --  Range is 0 .. 4095 (12 bit ADC) for 3 V reference voltage.
+   
+end Housekeeping.Data;

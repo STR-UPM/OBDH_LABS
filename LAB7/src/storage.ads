@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2021 Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -14,24 +14,33 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
--- convert raw temperature sensor readings to degrees Celsius
 
-with HK_Data;             use HK_Data;
-with HK_Data.Converter;   use HK_Data.Converter;
-with TTC_Data.Strings;    use TTC_Data.Strings;
+-- Storage subsystem
 
-with Ada.Text_IO;         use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Housekeeping.Data; use Housekeeping.Data;
 
-procedure Temperature is
-   Raw_Value : Integer;
-begin
-   Put_line("Convert raw values from a temperature sensor to Celsius");
-   Put_Line("Enter an integer value, or 0 to exit");
-   loop
-      Put("> ");
-      Get(Raw_Value);
-      exit when Raw_Value <= 0;
-      Put_Line(Image(Temperature(Sensor_Reading(Raw_Value))));
-   end loop;
-end Temperature;
+package Storage is
+
+   procedure Put (Data : Analog_Data);
+   -- Store an analog data value
+   -- Overwrite the stored value even if has not been consumed
+   -- (it is a fresh value)
+
+   procedure Get (Data : out Analog_Data);
+   -- Get the last stored data value
+   -- Waits if there is no fresh data value
+
+private
+
+   protected Buffer is
+      procedure Put (Data : Analog_Data);
+      entry Get (Data : out Analog_Data);
+   private
+      Value : Analog_Data;
+      Fresh : Boolean := False;
+   end Buffer;
+
+   procedure Put (Data : Analog_Data)     renames Buffer.Put;
+   procedure Get (Data : out Analog_Data) renames Buffer.Get;
+
+end Storage;

@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --                                                                          --
---          Copyright (C) 2021 Universidad Politécnica de Madrid           --
+--          Copyright (C) 2020 Universidad Politécnica de Madrid           --
 --                                                                          --
 -- This is free software;  you can redistribute it  and/or modify it  under --
 -- terms of the  GNU General Public License as published  by the Free Soft- --
@@ -14,24 +14,38 @@
 -- of the license.
 --                                                                          --
 ------------------------------------------------------------------------------
--- convert raw temperature sensor readings to degrees Celsius
 
-with HK_Data;             use HK_Data;
-with HK_Data.Converter;   use HK_Data.Converter;
-with TTC_Data.Strings;    use TTC_Data.Strings;
+with Housekeeping.Data; use Housekeeping.Data;
+with TTC.Display;
+with Storage;
 
-with Ada.Text_IO;         use Ada.Text_IO;
-with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with STM32.Board;
 
-procedure Temperature is
-   Raw_Value : Integer;
-begin
-   Put_line("Convert raw values from a temperature sensor to Celsius");
-   Put_Line("Enter an integer value, or 0 to exit");
-   loop
-      Put("> ");
-      Get(Raw_Value);
-      exit when Raw_Value <= 0;
-      Put_Line(Image(Temperature(Sensor_Reading(Raw_Value))));
-   end loop;
-end Temperature;
+package body TTC is
+
+   ----------------
+   -- Initialize --
+   ----------------
+
+   procedure Initialize is
+   begin
+      -- nothing to do
+      null;
+   end Initialize;
+
+   -------------
+   -- TM_Task --
+   -------------
+
+   task body TM_Task is
+      T : Analog_Data;
+   begin
+      loop
+         Storage.Get (T);
+         Display.Put (T);
+         -- toggle LED to show TM operation
+         STM32.Board.Orange_LED.Toggle;
+      end loop;
+   end TM_Task;
+
+end TTC;
