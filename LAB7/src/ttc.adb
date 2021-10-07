@@ -39,12 +39,15 @@ package body TTC is
 
    task body TM_Task is
       T : Analog_Data;
+      Next_Time : Time := Clock + Start_Delay;
    begin
       loop
+         delay until Next_Time;
          Storage.Get (T);
          Display.Put (T);
          -- toggle LED to show TM operation
          STM32.Board.Orange_LED.Toggle;
+         Next_Time := Next_Time + Period;
       end loop;
    end TM_Task;
 

@@ -15,8 +15,6 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
-with Ada.Real_Time;
-
 with Ada.Numerics;
 with Interfaces;
 
@@ -57,11 +55,6 @@ package ADCS.Parameters is
          m_m        : Maximum_Torque;
          MT_Working : Working_Axis;
       end record;
-   
-   Period       : constant Ada.Real_Time.Time_Span
-     := Ada.Real_Time.Milliseconds (100);                           --    2 s
-   Initial_Delay       : constant Ada.Real_Time.Time_Span
-     := Ada.Real_Time.Milliseconds (1_000);                           --    2 s
    
    --- Default parameters for controller block ----
    Default_omega      : constant Omega_Axis := (0.0, 0.0, 0.1);

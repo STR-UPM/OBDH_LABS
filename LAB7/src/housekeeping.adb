@@ -21,8 +21,6 @@ with Storage;
 
 with STM32.Board;
 
-with Ada.Real_Time; use Ada.Real_Time;
-
 package body Housekeeping is
 
    ----------------
@@ -40,13 +38,15 @@ package body Housekeeping is
 
    task body Housekeeping_Task is
       OBC_T :Analog_Data;  -- OBC temperature
+      Next_Time : Time := Clock + Start_Delay;
    begin
       loop
-         delay until Clock + Milliseconds (1000);
+         delay until Next_Time;
          Sensor.Get (OBC_T);
          Storage.Put (OBC_T);
          -- toggle LED to show HK operation
          STM32.Board.Blue_LED.Toggle;
+         Next_Time := Next_Time + Period;
       end loop;
    end Housekeeping_Task;
 

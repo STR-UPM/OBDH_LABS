@@ -17,7 +17,6 @@
 
 -- ADCS subsystem
 with ADCS.Parameters;    use ADCS.Parameters;
-with Ada.Real_Time;      use Ada.Real_Time;
 with STM32.Board;
 with ADCS.HW;
 
@@ -42,16 +41,15 @@ package body ADCS is
    task body ADCS_Task is
       procedure Control;
       pragma Import (C, Control, "control_step");
-      Next   : Ada.Real_Time.Time := Ada.Real_Time.Clock + Initial_Delay;
+      Next_Time   : Ada.Real_Time.Time := Ada.Real_Time.Clock + Initial_Delay;
    begin
       loop
-         delay until Next;
+         delay until Next_Time;
          Control_Input.B_b_T := ADCS.HW.Get;
          Control;
          ADCS.HW.Put (Control_Output.Control);
-         Next := Next + Period;
          STM32.Board.Red_LED.Toggle;
+         Next_Time := Next_Time + Period;
       end loop;
    end ADCS_Task;
-
 end ADCS;

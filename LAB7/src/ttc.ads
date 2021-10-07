@@ -17,14 +17,24 @@
 
 -- TTC subsystem
 
+with Ada.Real_Time; use Ada.Real_Time;
+with System;
+
 package TTC is
+
+   -- Real-time attributes
+   Period      : Time_Span := Milliseconds (10_000); -- 10 s
+   TC_Priority : constant System.Priority := 10;
 
    --  Initialize the TTC subsystem
    procedure Initialize;
 
 private
 
+   Start_Delay : Time_Span := Milliseconds (1000); -- 1s
+
    -- telemetry task
-   task TM_Task;
+   task TM_Task
+     with Priority => TC_Priority;
 
 end TTC;
