@@ -16,8 +16,6 @@
 ------------------------------------------------------------------------------
 
 with Ada.Text_IO; use Ada.Text_IO;
-with HK_Data; use HK_Data;
-with HK_Data.Converter; use HK_Data.Converter;
 -- only works when run from the debugger using semihosting
 
 package body TTC.Display is
@@ -27,10 +25,8 @@ package body TTC.Display is
    ---------
 
    procedure Put (T : Analog_Data) is
-      T_Aux : constant Temperature_Range :=
-        Temperature (Sensor_Reading (T));
    begin
-      Put_Line (T_Aux'Img);
+      Put_Line (T'Img);
    end Put;
 
 end TTC.Display;

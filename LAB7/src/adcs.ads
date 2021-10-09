@@ -17,14 +17,25 @@
 
 -- ADCS subsystem
 
+with Ada.Real_Time; use Ada.Real_Time;
+with System;
+
 package ADCS is
+
+   Period       : constant Ada.Real_Time.Time_Span
+     := Ada.Real_Time.Milliseconds (100);                  -- Should be 2 s
+   ADCS_Priority : constant System.Priority := 10;
 
    --  Initialize the ADCS subsystem
    procedure Initialize;
 
 private
 
+   Initial_Delay       : constant Ada.Real_Time.Time_Span
+     := Ada.Real_Time.Milliseconds (1_000);                           --    1 s
+
    -- ADCS task
-   task ADCS_Task;
+   task ADCS_Task
+      with Priority => ADCS_Priority;
 
 end ADCS;
