@@ -1,0 +1,12 @@
+mscdocument Native_Implementation /* MSC AND */;
+    language ASN.1;
+    data Native_Implementation.asn;
+
+/* CIF MSCDOCUMENT (0, 0) (4200, 2300) */
+
+mscdocument Nominal /* MSC LEAF */;
+
+msc Native_Implementation;
+endmsc;
+endmscdocument;
+endmscdocument;

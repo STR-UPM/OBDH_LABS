@@ -1,0 +1,173 @@
+PACKAGE deploymentview::DV::Node_Linux
+PUBLIC
+
+WITH Taste;
+WITH Deployment;
+WITH TASTE_DV_Properties;
+WITH deploymentview::DV;
+WITH Memory_Properties;
+WITH ARINC653;
+
+PROCESS demo
+END demo;
+
+PROCESS IMPLEMENTATION demo.others
+END demo.others;
+
+END deploymentview::DV::Node_Linux;
+
+PACKAGE deploymentview::DV
+PUBLIC
+ 
+WITH interfaceview::IV::OBSW::Manager;
+
+WITH interfaceview::IV::OBSW::Platform;
+ 
+WITH interfaceview::IV::OBSW::ACS::ACS_Algorithm;
+
+WITH interfaceview::IV::OBSW::ACS::Measurer_And_Actuator;
+
+
+WITH interfaceview::IV::OBSW::TTC;
+
+WITH interfaceview::IV::OBSW::Storage;
+
+WITH interfaceview::IV::OBSW::Simulated_ACS_HW;
+
+WITH interfaceview::IV::OBSW::Sensors;
+
+
+WITH interfaceview::IV::GSSW;
+
+
+WITH ocarina_processors_x86;
+WITH deploymentview::DV::Node_Linux;
+WITH Taste;
+WITH Deployment;
+WITH interfaceview::IV;
+WITH TASTE_DV_Properties;
+
+SYSTEM Node_Linux
+END Node_Linux;
+
+SYSTEM IMPLEMENTATION Node_Linux.others
+SUBCOMPONENTS 
+   IV_Manager : SYSTEM interfaceview::IV::OBSW::Manager::Manager.others {
+      Taste::FunctionName => "Manager";
+   };
+
+   IV_Platform : SYSTEM interfaceview::IV::OBSW::Platform::Platform.others {
+      Taste::FunctionName => "Platform";
+   };
+ 
+   IV_ACS_Algorithm : SYSTEM interfaceview::IV::OBSW::ACS::ACS_Algorithm::ACS_Algorithm.others {
+      Taste::FunctionName => "ACS_Algorithm";
+   };
+
+   IV_Measurer_And_Actuator : SYSTEM interfaceview::IV::OBSW::ACS::Measurer_And_Actuator::Measurer_And_Actuator.others {
+      Taste::FunctionName => "Measurer_And_Actuator";
+   };
+
+
+   IV_TTC : SYSTEM interfaceview::IV::OBSW::TTC::TTC.others {
+      Taste::FunctionName => "TTC";
+   };
+
+   IV_Storage : SYSTEM interfaceview::IV::OBSW::Storage::Storage.others {
+      Taste::FunctionName => "Storage";
+   };
+
+   IV_Simulated_ACS_HW : SYSTEM interfaceview::IV::OBSW::Simulated_ACS_HW::Simulated_ACS_HW.others {
+      Taste::FunctionName => "Simulated_ACS_HW";
+   };
+
+   IV_Sensors : SYSTEM interfaceview::IV::OBSW::Sensors::Sensors.others {
+      Taste::FunctionName => "Sensors";
+   };
+
+
+   IV_GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others {
+      Taste::FunctionName => "GSSW";
+   };
+
+   demo : PROCESS deploymentview::DV::Node_Linux::demo.others {
+      Deployment::Port_Number => 0;
+      TASTE::CFlags => "-no-pie";
+      TASTE::LDFlags => "-no-pie";
+   };
+   x86_linux : PROCESSOR ocarina_processors_x86::x86.linux;
+PROPERTIES 
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Manager;
+   
+   
+   
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Platform;
+   
+   
+   
+ 
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_ACS_Algorithm;
+   
+   
+   
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Measurer_And_Actuator;
+   
+   
+   
+
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_TTC;
+   
+   
+   
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Storage;
+   
+   
+   
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Simulated_ACS_HW;
+   
+   
+   
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Sensors;
+   
+   
+   
+
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_GSSW;
+   
+   
+   
+
+   Actual_Processor_Binding => (reference (x86_linux)) APPLIES TO demo;
+END Node_Linux.others;
+
+SYSTEM deploymentview
+END deploymentview;
+
+SYSTEM IMPLEMENTATION deploymentview.others
+SUBCOMPONENTS
+  Node_Linux : SYSTEM Node_Linux.others;
+  interfaceview : SYSTEM interfaceview::IV::interfaceview.others;
+END deploymentview.others;
+
+PROPERTIES
+  Taste::coordinates => "0 0 297000 210000";
+  Taste::version => "3.0";
+  Taste::interfaceView => "InterfaceView.aadl";
+  Taste::HWLibraries => ("ocarina_components.aadl");
+END deploymentview::DV;

@@ -1,0 +1,906 @@
+---------------------------------------------------
+-- AADL2.2
+-- TASTE type interfaceview
+-- 
+-- generated code: do not edit
+---------------------------------------------------
+
+
+PACKAGE interfaceview::IV::GSSW
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::TTC;
+
+SUBPROGRAM PI_TM
+FEATURES
+    Telemetry : IN PARAMETER DataView::TM_Type {
+       Taste::encoding => NATIVE;
+    };
+END PI_TM;
+
+SUBPROGRAM IMPLEMENTATION PI_TM.others
+END PI_TM.others;
+
+
+SUBPROGRAM RI_TC
+FEATURES
+    Telecommand : IN PARAMETER DataView::TC_Type {
+       Taste::encoding => NATIVE;
+    };
+END RI_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_TC.others
+END RI_TC.others;
+
+
+
+SYSTEM GSSW
+FEATURES
+   PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: GSSW:: PI_TM.others {
+      Taste::InterfaceName           => "TM";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::RCMperiod               => 0 ms;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::Associated_Queue_Size   => 1;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "TC";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::RCMperiod               => 0 ms;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::Associated_Queue_Size   => 1;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = GSSW
+   -- ignored property: is_type = NO
+   Source_Language => (GUI);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END GSSW;
+
+SYSTEM IMPLEMENTATION GSSW.others
+END GSSW.others;
+
+END interfaceview::IV::GSSW;
+
+
+
+
+PACKAGE interfaceview::IV::OBSW::Manager
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::TTC;
+
+SUBPROGRAM PI_Process_TC
+FEATURES
+    TC : IN PARAMETER DataView::TC_Type {
+       Taste::encoding => NATIVE;
+    };
+END PI_Process_TC;
+
+SUBPROGRAM IMPLEMENTATION PI_Process_TC.others
+END PI_Process_TC.others;
+
+
+SUBPROGRAM PI_Current_Mode
+FEATURES
+    Current : OUT PARAMETER DataView::Operating_Mode {
+       Taste::encoding => NATIVE;
+    };
+END PI_Current_Mode;
+
+SUBPROGRAM IMPLEMENTATION PI_Current_Mode.others
+END PI_Current_Mode.others;
+
+
+
+SYSTEM Manager
+FEATURES
+   PI_Process_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Manager:: PI_Process_TC.others {
+      Taste::InterfaceName           => "Process_TC";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   PI_Current_Mode : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Manager:: PI_Current_Mode.others {
+      Taste::InterfaceName           => "Current_Mode";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = Manager
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END Manager;
+
+SYSTEM IMPLEMENTATION Manager.others
+SUBCOMPONENTS
+   Coverage_Timer : DATA DataView::Timer {
+      Taste::FS_Default_Value => "";
+   };
+END Manager.others;
+
+END interfaceview::IV::OBSW::Manager;
+
+
+
+PACKAGE interfaceview::IV::OBSW::Platform
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::Sensors;
+WITH interfaceview::IV::OBSW::Storage;
+
+SUBPROGRAM PI_Housekeeping_Task
+END PI_Housekeeping_Task;
+
+SUBPROGRAM IMPLEMENTATION PI_Housekeeping_Task.others
+END PI_Housekeeping_Task.others;
+
+
+SUBPROGRAM RI_Get
+FEATURES
+    Analog_Data : OUT PARAMETER DataView::Analog_Data_Table {
+       Taste::encoding => NATIVE;
+    };
+END RI_Get;
+
+SUBPROGRAM IMPLEMENTATION RI_Get.others
+END RI_Get.others;
+
+
+SUBPROGRAM RI_Put
+FEATURES
+    In_Data : IN PARAMETER DataView::State {
+       Taste::encoding => NATIVE;
+    };
+END RI_Put;
+
+SUBPROGRAM IMPLEMENTATION RI_Put.others
+END RI_Put.others;
+
+
+
+SYSTEM Platform
+FEATURES
+   PI_Housekeeping_Task : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Platform:: PI_Housekeeping_Task.others {
+      Taste::InterfaceName           => "Housekeeping_Task";            
+      Taste::RCMoperationKind        => cyclic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 1000 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Cyclic_Offset => 0;      
+   };
+   RI_Get : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Sensors:: PI_Get.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Get";            
+      Taste::RCMoperationKind        => unprotected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_Put : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Storage:: PI_Put.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Put";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = Platform
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END Platform;
+
+SYSTEM IMPLEMENTATION Platform.others
+END Platform.others;
+
+END interfaceview::IV::OBSW::Platform;
+
+
+
+
+PACKAGE interfaceview::IV::OBSW::ACS::ACS_Algorithm
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::ACS::Measurer_And_Actuator;
+
+SUBPROGRAM PI_Step
+FEATURES
+    Bbt : IN PARAMETER DataView::T_B_b_T {
+       Taste::encoding => NATIVE;
+    };
+    p2 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    p3 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    p4 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    p5 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    Control : OUT PARAMETER DataView::T_Control {
+       Taste::encoding => NATIVE;
+    };
+END PI_Step;
+
+SUBPROGRAM IMPLEMENTATION PI_Step.others
+END PI_Step.others;
+
+
+
+SYSTEM ACS_Algorithm
+FEATURES
+   PI_Step : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: ACS:: ACS_Algorithm:: PI_Step.others {
+      Taste::InterfaceName           => "Step";            
+      Taste::RCMoperationKind        => unprotected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = ACS_Algorithm
+   -- ignored property: is_type = NO
+   Source_Language => (Ada);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END ACS_Algorithm;
+
+SYSTEM IMPLEMENTATION ACS_Algorithm.others
+END ACS_Algorithm.others;
+
+END interfaceview::IV::OBSW::ACS::ACS_Algorithm;
+
+
+
+PACKAGE interfaceview::IV::OBSW::ACS::Measurer_And_Actuator
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::ACS::ACS_Algorithm;
+WITH interfaceview::IV::OBSW::Simulated_ACS_HW;
+
+SUBPROGRAM PI_Tick
+END PI_Tick;
+
+SUBPROGRAM IMPLEMENTATION PI_Tick.others
+END PI_Tick.others;
+
+
+SUBPROGRAM RI_Read_MGM
+FEATURES
+    BBT : OUT PARAMETER DataView::T_B_b_T {
+       Taste::encoding => NATIVE;
+    };
+END RI_Read_MGM;
+
+SUBPROGRAM IMPLEMENTATION RI_Read_MGM.others
+END RI_Read_MGM.others;
+
+
+SUBPROGRAM RI_control_MGT
+FEATURES
+    control : IN PARAMETER DataView::T_Control {
+       Taste::encoding => NATIVE;
+    };
+END RI_control_MGT;
+
+SUBPROGRAM IMPLEMENTATION RI_control_MGT.others
+END RI_control_MGT.others;
+
+
+SUBPROGRAM RI_Step
+FEATURES
+    Bbt : IN PARAMETER DataView::T_B_b_T {
+       Taste::encoding => NATIVE;
+    };
+    p2 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    p3 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    p4 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    p5 : IN PARAMETER DataView::T_UInt16 {
+       Taste::encoding => NATIVE;
+    };
+    Control : OUT PARAMETER DataView::T_Control {
+       Taste::encoding => NATIVE;
+    };
+END RI_Step;
+
+SUBPROGRAM IMPLEMENTATION RI_Step.others
+END RI_Step.others;
+
+
+
+SYSTEM Measurer_And_Actuator
+FEATURES
+   PI_Tick : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: ACS:: Measurer_And_Actuator:: PI_Tick.others {
+      Taste::InterfaceName           => "Tick";            
+      Taste::RCMoperationKind        => cyclic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 1000 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Cyclic_Offset => 0;      
+   };
+   RI_Read_MGM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_Read_MGM.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Read_MGM";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+   };
+   RI_control_MGT : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_control_MGT.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "control_MGT";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+   };
+   RI_Step : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: ACS:: ACS_Algorithm:: PI_Step.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Step";            
+      Taste::RCMoperationKind        => unprotected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = Measurer_And_Actuator
+   -- ignored property: is_type = NO
+   Source_Language => (Ada);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END Measurer_And_Actuator;
+
+SYSTEM IMPLEMENTATION Measurer_And_Actuator.others
+END Measurer_And_Actuator.others;
+
+END interfaceview::IV::OBSW::ACS::Measurer_And_Actuator;
+
+
+PACKAGE interfaceview::IV::OBSW::ACS
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::ACS::ACS_Algorithm;
+WITH interfaceview::IV::OBSW::ACS::Measurer_And_Actuator;
+WITH interfaceview::IV::OBSW::Simulated_ACS_HW;
+
+SUBPROGRAM RI_Read_MGM
+FEATURES
+    BBT : OUT PARAMETER DataView::T_B_b_T {
+       Taste::encoding => NATIVE;
+    };
+END RI_Read_MGM;
+
+SUBPROGRAM IMPLEMENTATION RI_Read_MGM.others
+END RI_Read_MGM.others;
+
+
+SUBPROGRAM RI_control_MGT
+FEATURES
+    control : IN PARAMETER DataView::T_Control {
+       Taste::encoding => NATIVE;
+    };
+END RI_control_MGT;
+
+SUBPROGRAM IMPLEMENTATION RI_control_MGT.others
+END RI_control_MGT.others;
+
+
+
+SYSTEM ACS
+FEATURES
+   RI_Read_MGM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_Read_MGM.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Read_MGM";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_control_MGT : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_control_MGT.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "control_MGT";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = ACS
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END ACS;
+
+SYSTEM IMPLEMENTATION ACS.others
+SUBCOMPONENTS
+   ACS_Algorithm : SYSTEM interfaceview::IV::OBSW::ACS::ACS_Algorithm::ACS_Algorithm.others;
+   Measurer_And_Actuator : SYSTEM interfaceview::IV::OBSW::ACS::Measurer_And_Actuator::Measurer_And_Actuator.others;
+CONNECTIONS
+   Measurer_And_Actuator_RI_Read_MGM_ACS_PI_Read_MGM : SUBPROGRAM ACCESS RI_Read_MGM -> Measurer_And_Actuator.RI_Read_MGM;
+   Measurer_And_Actuator_RI_control_MGT_ACS_PI_control_MGT : SUBPROGRAM ACCESS RI_control_MGT -> Measurer_And_Actuator.RI_control_MGT;
+   Measurer_And_Actuator_RI_Step_ACS_Algorithm_PI_Step : SUBPROGRAM ACCESS ACS_Algorithm.PI_Step -> Measurer_And_Actuator.RI_Step;
+END ACS.others;
+
+END interfaceview::IV::OBSW::ACS;
+
+
+
+PACKAGE interfaceview::IV::OBSW::TTC
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::GSSW;
+WITH interfaceview::IV::OBSW::Manager;
+WITH interfaceview::IV::OBSW::Storage;
+
+SUBPROGRAM PI_TM_Basic_Task
+END PI_TM_Basic_Task;
+
+SUBPROGRAM IMPLEMENTATION PI_TM_Basic_Task.others
+END PI_TM_Basic_Task.others;
+
+
+SUBPROGRAM PI_TC_Task
+END PI_TC_Task;
+
+SUBPROGRAM IMPLEMENTATION PI_TC_Task.others
+END PI_TC_Task.others;
+
+
+SUBPROGRAM PI_TC
+FEATURES
+    Telecommand : IN PARAMETER DataView::TC_Type {
+       Taste::encoding => NATIVE;
+    };
+END PI_TC;
+
+SUBPROGRAM IMPLEMENTATION PI_TC.others
+END PI_TC.others;
+
+
+SUBPROGRAM RI_Get
+FEATURES
+    Out_Data : OUT PARAMETER DataView::State {
+       Taste::encoding => NATIVE;
+    };
+END RI_Get;
+
+SUBPROGRAM IMPLEMENTATION RI_Get.others
+END RI_Get.others;
+
+
+SUBPROGRAM RI_Process_TC
+FEATURES
+    TC : IN PARAMETER DataView::TC_Type {
+       Taste::encoding => NATIVE;
+    };
+END RI_Process_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_Process_TC.others
+END RI_Process_TC.others;
+
+
+SUBPROGRAM RI_Current_Mode
+FEATURES
+    Current : OUT PARAMETER DataView::Operating_Mode {
+       Taste::encoding => NATIVE;
+    };
+END RI_Current_Mode;
+
+SUBPROGRAM IMPLEMENTATION RI_Current_Mode.others
+END RI_Current_Mode.others;
+
+
+SUBPROGRAM RI_TM
+FEATURES
+    Telemetry : IN PARAMETER DataView::TM_Type {
+       Taste::encoding => NATIVE;
+    };
+END RI_TM;
+
+SUBPROGRAM IMPLEMENTATION RI_TM.others
+END RI_TM.others;
+
+
+
+SYSTEM TTC
+FEATURES
+   PI_TM_Basic_Task : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TM_Basic_Task.others {
+      Taste::InterfaceName           => "TM_Basic_Task";            
+      Taste::RCMoperationKind        => cyclic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 1000 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Cyclic_Offset => 0;      
+   };
+   PI_TC_Task : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC_Task.others {
+      Taste::InterfaceName           => "TC_Task";            
+      Taste::RCMoperationKind        => cyclic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 1000 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Cyclic_Offset => 0;      
+   };
+   PI_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC.others {
+      Taste::InterfaceName           => "TC";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::RCMperiod               => 0 ms;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::Associated_Queue_Size   => 1;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_Get : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Storage:: PI_Get.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Get";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_Process_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Manager:: PI_Process_TC.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Process_TC";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_Current_Mode : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Manager:: PI_Current_Mode.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "Current_Mode";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: GSSW:: PI_TM.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "TM";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+   };
+PROPERTIES
+   -- ignored property: name = TTC
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END TTC;
+
+SYSTEM IMPLEMENTATION TTC.others
+END TTC.others;
+
+END interfaceview::IV::OBSW::TTC;
+
+
+
+PACKAGE interfaceview::IV::OBSW::Storage
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::Platform;
+WITH interfaceview::IV::OBSW::TTC;
+
+SUBPROGRAM PI_Put
+FEATURES
+    In_Data : IN PARAMETER DataView::State {
+       Taste::encoding => NATIVE;
+    };
+END PI_Put;
+
+SUBPROGRAM IMPLEMENTATION PI_Put.others
+END PI_Put.others;
+
+
+SUBPROGRAM PI_Get
+FEATURES
+    Out_Data : OUT PARAMETER DataView::State {
+       Taste::encoding => NATIVE;
+    };
+END PI_Get;
+
+SUBPROGRAM IMPLEMENTATION PI_Get.others
+END PI_Get.others;
+
+
+
+SYSTEM Storage
+FEATURES
+   PI_Put : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Storage:: PI_Put.others {
+      Taste::InterfaceName           => "Put";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   PI_Get : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Storage:: PI_Get.others {
+      Taste::InterfaceName           => "Get";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = Storage
+   -- ignored property: is_type = NO
+   Source_Language => (Ada);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END Storage;
+
+SYSTEM IMPLEMENTATION Storage.others
+SUBCOMPONENTS
+   Capacity : DATA DataView::T_UInt16 {
+      Taste::FS_Default_Value => "5";
+   };
+END Storage.others;
+
+END interfaceview::IV::OBSW::Storage;
+
+
+
+PACKAGE interfaceview::IV::OBSW::Simulated_ACS_HW
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::ACS::Measurer_And_Actuator;
+
+SUBPROGRAM PI_Read_MGM
+FEATURES
+    BBT : OUT PARAMETER DataView::T_B_b_T {
+       Taste::encoding => NATIVE;
+    };
+END PI_Read_MGM;
+
+SUBPROGRAM IMPLEMENTATION PI_Read_MGM.others
+END PI_Read_MGM.others;
+
+
+SUBPROGRAM PI_control_MGT
+FEATURES
+    control : IN PARAMETER DataView::T_Control {
+       Taste::encoding => NATIVE;
+    };
+END PI_control_MGT;
+
+SUBPROGRAM IMPLEMENTATION PI_control_MGT.others
+END PI_control_MGT.others;
+
+
+
+SYSTEM Simulated_ACS_HW
+FEATURES
+   PI_Read_MGM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_Read_MGM.others {
+      Taste::InterfaceName           => "Read_MGM";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   PI_control_MGT : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_control_MGT.others {
+      Taste::InterfaceName           => "control_MGT";            
+      Taste::RCMoperationKind        => protected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = Simulated_ACS_HW
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END Simulated_ACS_HW;
+
+SYSTEM IMPLEMENTATION Simulated_ACS_HW.others
+END Simulated_ACS_HW.others;
+
+END interfaceview::IV::OBSW::Simulated_ACS_HW;
+
+
+
+PACKAGE interfaceview::IV::OBSW::Sensors
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::Platform;
+
+SUBPROGRAM PI_Get
+FEATURES
+    Analog_Data : OUT PARAMETER DataView::Analog_Data_Table {
+       Taste::encoding => NATIVE;
+    };
+END PI_Get;
+
+SUBPROGRAM IMPLEMENTATION PI_Get.others
+END PI_Get.others;
+
+
+
+SYSTEM Sensors
+FEATURES
+   PI_Get : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Sensors:: PI_Get.others {
+      Taste::InterfaceName           => "Get";            
+      Taste::RCMoperationKind        => unprotected;      
+      -- Unrecognized property: layer => default      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = Sensors
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END Sensors;
+
+SYSTEM IMPLEMENTATION Sensors.others
+END Sensors.others;
+
+END interfaceview::IV::OBSW::Sensors;
+
+
+PACKAGE interfaceview::IV::OBSW
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::GSSW;
+WITH interfaceview::IV::OBSW::ACS;
+WITH interfaceview::IV::OBSW::Manager;
+WITH interfaceview::IV::OBSW::Platform;
+WITH interfaceview::IV::OBSW::Sensors;
+WITH interfaceview::IV::OBSW::Simulated_ACS_HW;
+WITH interfaceview::IV::OBSW::Storage;
+WITH interfaceview::IV::OBSW::TTC;
+
+SUBPROGRAM PI_TC
+FEATURES
+    Telecommand : IN PARAMETER DataView::TC_Type {
+       Taste::encoding => NATIVE;
+    };
+END PI_TC;
+
+SUBPROGRAM IMPLEMENTATION PI_TC.others
+END PI_TC.others;
+
+
+SUBPROGRAM RI_TM
+FEATURES
+    Telemetry : IN PARAMETER DataView::TM_Type {
+       Taste::encoding => NATIVE;
+    };
+END RI_TM;
+
+SUBPROGRAM IMPLEMENTATION RI_TM.others
+END RI_TM.others;
+
+
+
+SYSTEM OBSW
+FEATURES
+   PI_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC.others {
+      Taste::InterfaceName           => "TC";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::RCMperiod               => 0 ms;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::Associated_Queue_Size   => 1;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+   RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: GSSW:: PI_TM.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "TM";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Interface_Priority      => 1;      
+      Taste::RCMperiod               => 0 ms;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::Associated_Queue_Size   => 1;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+   };
+PROPERTIES
+   -- ignored property: name = OBSW
+   -- ignored property: is_type = NO
+   Source_Language => (SDL);
+   -- ignored property: default_implementation = default
+   -- ignored property: FPGA_Configurations = 
+END OBSW;
+
+SYSTEM IMPLEMENTATION OBSW.others
+SUBCOMPONENTS
+   Manager : SYSTEM interfaceview::IV::OBSW::Manager::Manager.others;
+   Platform : SYSTEM interfaceview::IV::OBSW::Platform::Platform.others;
+   ACS : SYSTEM interfaceview::IV::OBSW::ACS::ACS.others;
+   TTC : SYSTEM interfaceview::IV::OBSW::TTC::TTC.others;
+   Storage : SYSTEM interfaceview::IV::OBSW::Storage::Storage.others;
+   Simulated_ACS_HW : SYSTEM interfaceview::IV::OBSW::Simulated_ACS_HW::Simulated_ACS_HW.others;
+   Sensors : SYSTEM interfaceview::IV::OBSW::Sensors::Sensors.others;
+CONNECTIONS
+   TTC_RI_Get_Storage_PI_Get : SUBPROGRAM ACCESS Storage.PI_Get -> TTC.RI_Get;
+   Platform_RI_Get_Sensors_PI_Get : SUBPROGRAM ACCESS Sensors.PI_Get -> Platform.RI_Get;
+   Platform_RI_Put_Storage_PI_Put : SUBPROGRAM ACCESS Storage.PI_Put -> Platform.RI_Put;
+   ACS_RI_Read_MGM_Simulated_ACS_HW_PI_Read_MGM : SUBPROGRAM ACCESS Simulated_ACS_HW.PI_Read_MGM -> ACS.RI_Read_MGM;
+   ACS_RI_control_MGT_Simulated_ACS_HW_PI_control_MGT : SUBPROGRAM ACCESS Simulated_ACS_HW.PI_control_MGT -> ACS.RI_control_MGT;
+   TTC_RI_Process_TC_Manager_PI_Process_TC : SUBPROGRAM ACCESS Manager.PI_Process_TC -> TTC.RI_Process_TC;
+   TTC_RI_Current_Mode_Manager_PI_Current_Mode : SUBPROGRAM ACCESS Manager.PI_Current_Mode -> TTC.RI_Current_Mode;
+   OBSW_PI_TC_TTC_RI_TC : SUBPROGRAM ACCESS TTC.PI_TC -> PI_TC;
+   TTC_RI_TM_OBSW_PI_TM : SUBPROGRAM ACCESS RI_TM -> TTC.RI_TM;
+END OBSW.others;
+
+END interfaceview::IV::OBSW;
+
+
+PACKAGE interfaceview::IV
+PUBLIC
+
+WITH interfaceview::IV::GSSW;
+WITH interfaceview::IV::OBSW;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+
+SYSTEM interfaceview
+PROPERTIES
+   Taste::dataView     => ("DataView");
+   TASTE::dataViewPath => ("DataView.aadl");
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others;
+  OBSW : SYSTEM interfaceview::IV::OBSW::OBSW.others;
+CONNECTIONS
+   GSSW_RI_TC_OBSW_PI_TC : SUBPROGRAM ACCESS OBSW.PI_TC -> GSSW.RI_TC;
+   OBSW_RI_TM_GSSW_PI_TM : SUBPROGRAM ACCESS GSSW.PI_TM -> OBSW.RI_TM;
+END interfaceview.others;
+
+PROPERTIES
+   Taste::dataView     => ("DataView");
+   Taste::dataViewPath => ("DataView.aadl");
+   Taste::coordinates  => "0 0 297000 210000";
+   Taste::version      => "3.0";
+END interfaceview::IV;
