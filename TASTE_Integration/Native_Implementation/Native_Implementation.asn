@@ -11,6 +11,8 @@ BEGIN
     T-UInt64 ::= INTEGER (0 .. 18446744073709551615)
     T-Float  ::= REAL (-3.4e+38 .. 3.4e+38)
 
+    Mission-Time ::= T-UInt64
+
     -------------------------------------------
     -- Data types used for the ACS component --
     -------------------------------------------
@@ -31,8 +33,6 @@ BEGIN
         obc-t Analog-Data, -- OBC temperature
         obc-v Analog-Data  -- OBC supply voltages
     }
-
-    Mission-Time ::= T-UInt64
 
     -----------------------------------------------
     -- Data types used for the Storage component --
