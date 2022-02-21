@@ -37,7 +37,7 @@ BEGIN
     -----------------------------------------------
     -- Data types used for the Storage component --
     -----------------------------------------------
-    State ::= SEQUENCE {
+    Satellite-State ::= SEQUENCE {
         timestamp   Mission-Time,
         data        Analog-Data-Table
     }
@@ -66,10 +66,10 @@ BEGIN
         tm-payload      Contents
     }
 
-    TM-Hello ::= TM-Message {State}
+    TM-Hello ::= TM-Message {Satellite-State}
 
     hk-size INTEGER ::= 4
-    TM-Housekeeping ::= TM-Message {SEQUENCE(SIZE(hk-size)) OF State}
+    TM-Housekeeping ::= TM-Message {SEQUENCE(SIZE(hk-size)) OF Satellite-State}
 
     TM-Mode ::= TM-Message {Operating-Mode}
 
