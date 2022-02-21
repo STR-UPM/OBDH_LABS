@@ -1,0 +1,17 @@
+Context-storage DEFINITIONS ::=
+BEGIN
+   IMPORTS
+      T-UInt16 FROM NATIVE-IMPLEMENTATION-DATAVIEW;
+
+--  Group all context parameters of this function in a record
+Context-storage ::= SEQUENCE {
+   capacity T-UInt16
+
+}
+
+--  Declare a constant with the values set by the user in the interface view
+storage-ctxt Context-storage ::= {
+   capacity 5
+
+}
+END
