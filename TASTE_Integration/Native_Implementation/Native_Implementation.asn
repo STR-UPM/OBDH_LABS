@@ -60,33 +60,27 @@ BEGIN
         request-hk
     }
 
-    -- TMs:
-    TM-Hello ::= SEQUENCE {
+    -- TMs:    
+    TM-Message {Contents} ::=  SEQUENCE {
         tm-timestamp    Mission-Time,
-        sensors-state   State
+        tm-payload      Contents
     }
+
+    TM-Hello ::= TM-Message {State}
 
     hk-size INTEGER ::= 4
-    TM-Housekeeping ::= SEQUENCE {
-        tm-timestamp    Mission-Time,
-        hk-data         SEQUENCE(SIZE(hk-size)) OF State
-    }
+    TM-Housekeeping ::= TM-Message {SEQUENCE(SIZE(hk-size)) OF State}
 
-    TM-Mode ::= SEQUENCE {
-        tm-timestamp    Mission-Time,
-        op-mode         Operating-Mode
-    }
+    TM-Mode ::= TM-Message {Operating-Mode}
 
     msg-size INTEGER ::= 80
-    TM-Error ::= SEQUENCE {
-        tm-timestamp    Mission-Time,
-        error-message   OCTET STRING (SIZE (msg-size))
-    }
+    TM-Error ::= TM-Message {OCTET STRING (SIZE (msg-size))}
 
     TM-Type ::= CHOICE {
         hello   TM-Hello,
         hk      TM-Housekeeping,
-        err   TM-Error
+        mode    TM-Mode,
+        err     TM-Error
     }
 
 END
