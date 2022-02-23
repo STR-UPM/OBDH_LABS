@@ -53,29 +53,44 @@ BEGIN
     -----------------------------------------
     -- TM and TC used by the TTC component --
     -----------------------------------------
+    ------
     -- TC:
+    ------
     TC-Type ::= ENUMERATED {
         open-link,
         close-link,
         request-hk
     }
-
-    -- TMs:    
+    ------
+    -- TM:
+    ------
     TM-Message {Contents} ::=  SEQUENCE {
         tm-timestamp    Mission-Time,
         tm-payload      Contents
     }
 
-    TM-Hello ::= TM-Message {Satellite-State}
+    -- Hello
+    TM-Hello-Contents ::= SEQUENCE {
+        op-mode Operating-Mode,
+        analog-data Analog-Data-Table
+    }
+    TM-Hello ::= TM-Message {TM-Hello-Contents}
 
+    -- Housekeeping
     hk-size INTEGER ::= 4
-    TM-Housekeeping ::= TM-Message {SEQUENCE(SIZE(hk-size)) OF Satellite-State}
+    TM-Housekeeping-Contents ::= SEQUENCE(SIZE(hk-size)) OF Satellite-State
+    TM-Housekeeping ::= TM-Message {TM-Housekeeping-Contents}
 
-    TM-Mode ::= TM-Message {Operating-Mode}
+    -- Mode
+    TM-Mode-Contents ::= Operating-Mode
+    TM-Mode ::= TM-Message {TM-Mode-Contents}
 
+    -- Error
     msg-size INTEGER ::= 80
-    TM-Error ::= TM-Message {OCTET STRING (SIZE (msg-size))}
+    TM-Error-Contents ::= OCTET STRING (SIZE (0 .. msg-size))
+    TM-Error ::= TM-Message {TM-Error-Contents}
 
+    -- TM as a choice of TM types:
     TM-Type ::= CHOICE {
         hello   TM-Hello,
         hk      TM-Housekeeping,
