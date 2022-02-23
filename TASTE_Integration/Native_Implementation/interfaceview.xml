@@ -1,87 +1,88 @@
-<InterfaceView asn1file="Native_Implementation.asn" mscfile="/home/taste/OBDH_LABS/TASTE_Integration/Native_Implementation/Native_Implementation.msc">
-<Function name="GSSW" is_type="NO" language="GUI" default_implementation="default" FPGA_Configurations="">
-    <Property name="Taste::coordinates" value="61700 -37900 81700 -6900"/>
-<Provided_Interface name="TM" kind="Sporadic" layer="default" miat="0" stack_size="50" priority="1" queue_size="1" wcet="0">
-    <Input_Parameter name="Telemetry" type="TM-Type" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="61700 -11900"/>
-</Provided_Interface>
-
-<Required_Interface name="TC" kind="Sporadic" layer="default" miat="0" stack_size="50" priority="1" queue_size="1" wcet="0">
-    <Input_Parameter name="Telecommand" type="TC-Type" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="61700 -28300"/>
-    <Property name="Taste::RootCoordinates" value="133800 -800"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-    <Implementations>
-        <Implementation name="default" language="GUI"/>
-    </Implementations>
-</Function>
-
+<InterfaceView asn1file="Native_Implementation.acn" mscfile="/home/taste/OBDH_LABS/TASTE_Integration/Native_Implementation/Native_Implementation.msc">
 <Function name="OBSW" is_type="NO" language="SDL" default_implementation="default" FPGA_Configurations="">
     <Property name="Taste::coordinates" value="8200 -38000 52700 -7000"/>
-    <Property name="Taste::RootCoordinates" value="39300 -21200 133800 44000"/>
-<Provided_Interface name="TC" kind="Sporadic" layer="default" miat="0" stack_size="50" priority="1" queue_size="1" wcet="0">
+    <Property name="Taste::RootCoordinates" value="39300 -28900 133800 44000"/>
+<Provided_Interface name="TC" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
     <Input_Parameter name="Telecommand" type="TC-Type" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="52700 -28300"/>
-    <Property name="Taste::RootCoordinates" value="133800 -1000"/>
+    <Property name="Taste::RootCoordinates" value="133800 4200"/>
 </Provided_Interface>
 
-<Required_Interface name="TM" kind="Sporadic" layer="default" miat="0" stack_size="50" priority="1" queue_size="1" wcet="0">
+<Required_Interface name="TM" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
     <Input_Parameter name="Telemetry" type="TM-Type" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="52700 -11800"/>
-    <Property name="Taste::RootCoordinates" value="133800 4000"/>
+    <Property name="Taste::RootCoordinates" value="133800 -1000"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
 <Function name="Manager" is_type="NO" language="SDL" default_implementation="default" FPGA_Configurations="">
-    <Property name="Taste::coordinates" value="75600 -18600 95600 -9600"/>
+    <Property name="Taste::coordinates" value="74000 -24900 97800 -15000"/>
     <ContextParameter name="Coverage_Timer" type="Timer" value=""/>
 <Provided_Interface name="Process_TC" kind="Protected" layer="default" wcet="0">
     <Input_Parameter name="TC" type="TC-Type" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="95600 -16400"/>
+    <Property name="Taste::coordinates" value="97800 -21900"/>
 </Provided_Interface>
 
 <Provided_Interface name="Current_Mode" kind="Protected" layer="default" wcet="0">
     <Output_Parameter name="Current" type="Operating-Mode" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="95600 -11800"/>
+    <Property name="Taste::coordinates" value="97800 -17400"/>
 </Provided_Interface>
+
+<Required_Interface name="HK_Task" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Property name="Taste::coordinates" value="93200 -15000"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface name="TM_Error" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Input_Parameter name="Contents" type="TM-Error-Contents" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="76900 -15000"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface name="TM_Mode" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Input_Parameter name="op_mode" type="Operating-Mode" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="85500 -15000"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
 
     <Implementations>
         <Implementation name="default" language="SDL"/>
     </Implementations>
 </Function>
 
-<Function name="Platform" is_type="NO" language="SDL" default_implementation="default" FPGA_Configurations="">
-    <Property name="Taste::coordinates" value="46700 -4800 67300 6800"/>
-<Provided_Interface name="HK_Tick" kind="Cyclic" layer="default" stack_size="50" priority="1" period="1000" dispatch_offset="0" wcet="0">
-    <Property name="Taste::coordinates" value="57200 -4800"/>
+<Function name="Platform" is_type="NO" language="Ada" default_implementation="default" FPGA_Configurations="">
+    <Property name="Taste::coordinates" value="46700 -5900 67500 7700"/>
+<Provided_Interface name="HK_Tick" kind="Cyclic" layer="default" period="1000" dispatch_offset="0" priority="1" stack_size="50" wcet="0">
+    <Property name="Taste::coordinates" value="57200 -5900"/>
 </Provided_Interface>
 
 <Required_Interface name="Get" kind="Unprotected" layer="default" wcet="0">
     <Output_Parameter name="Analog_Data" type="Analog-Data-Table" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="57200 6800"/>
+    <Property name="Taste::coordinates" value="57200 7700"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
 <Required_Interface name="Put" kind="Protected" layer="default" wcet="0">
     <Input_Parameter name="In_Data" type="Satellite-State" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="67300 4800"/>
+    <Property name="Taste::coordinates" value="67500 5600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
     <Implementations>
-        <Implementation name="default" language="SDL"/>
+        <Implementation name="alternative" language="SDL"/>
+        <Implementation name="default" language="Ada"/>
     </Implementations>
 </Function>
 
 <Function name="ACS" is_type="NO" language="SDL" default_implementation="default" FPGA_Configurations="">
     <Property name="Taste::coordinates" value="103900 12200 124000 20200"/>
-    <Property name="Taste::RootCoordinates" value="14300 9700 54700 38900"/>
+    <Property name="Taste::RootCoordinates" value="14300 9700 56100 38900"/>
 <Required_Interface name="Read_MGM" kind="Protected" layer="default" wcet="0">
     <Output_Parameter name="BBT" type="T-B-b-T" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="107500 20200"/>
@@ -101,11 +102,12 @@
 <Function name="ACS_Algorithm" is_type="NO" language="QGenAda" default_implementation="default" FPGA_Configurations="">
     <Property name="Taste::coordinates" value="19900 11900 49900 19900"/>
 <Provided_Interface name="Step" kind="Unprotected" layer="default" wcet="0">
-    <Input_Parameter name="Bbt" type="T-B-b-T" encoding="NATIVE"/>
-    <Input_Parameter name="p2" type="T-UInt16" encoding="NATIVE"/>
-    <Input_Parameter name="p3" type="T-UInt16" encoding="NATIVE"/>
-    <Input_Parameter name="p4" type="T-UInt16" encoding="NATIVE"/>
-    <Input_Parameter name="p5" type="T-UInt16" encoding="NATIVE"/>
+    <Input_Parameter name="BBT" type="T-B-b-T" encoding="NATIVE"/>
+    <Input_Parameter name="Omega" type="T-Omega" encoding="NATIVE"/>
+    <Input_Parameter name="K_PB" type="T-Float" encoding="NATIVE"/>
+    <Input_Parameter name="K_PE" type="T-Float" encoding="NATIVE"/>
+    <Input_Parameter name="M_M" type="T-Float" encoding="NATIVE"/>
+    <Input_Parameter name="MT_Working" type="T-MT-Working" encoding="NATIVE"/>
     <Output_Parameter name="Control" type="T-Control" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="35000 19900"/>
 </Provided_Interface>
@@ -116,33 +118,34 @@
 </Function>
 
 <Function name="Measurer_And_Actuator" is_type="NO" language="Ada" default_implementation="default" FPGA_Configurations="">
-    <Property name="Taste::coordinates" value="20100 25000 50200 33000"/>
-<Provided_Interface name="Tick" kind="Cyclic" layer="default" stack_size="50" priority="1" period="1000" dispatch_offset="0" wcet="0">
-    <Property name="Taste::coordinates" value="23600 25000"/>
+    <Property name="Taste::coordinates" value="20100 26600 50200 34600"/>
+<Provided_Interface name="Tick" kind="Cyclic" layer="default" period="1000" dispatch_offset="0" priority="1" stack_size="50" wcet="0">
+    <Property name="Taste::coordinates" value="23600 26600"/>
 </Provided_Interface>
 
 <Required_Interface name="Read_MGM" kind="Sporadic" layer="default">
     <Output_Parameter name="BBT" type="T-B-b-T" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="23500 33000"/>
+    <Property name="Taste::coordinates" value="23500 34600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface name="control_MGT" kind="Sporadic" layer="default">
     <Input_Parameter name="control" type="T-Control" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="45800 33000"/>
+    <Property name="Taste::coordinates" value="45800 34600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface name="Step" kind="Unprotected" layer="default" wcet="0">
-    <Input_Parameter name="Bbt" type="T-B-b-T" encoding="NATIVE"/>
-    <Input_Parameter name="p2" type="T-UInt16" encoding="NATIVE"/>
-    <Input_Parameter name="p3" type="T-UInt16" encoding="NATIVE"/>
-    <Input_Parameter name="p4" type="T-UInt16" encoding="NATIVE"/>
-    <Input_Parameter name="p5" type="T-UInt16" encoding="NATIVE"/>
+    <Input_Parameter name="BBT" type="T-B-b-T" encoding="NATIVE"/>
+    <Input_Parameter name="Omega" type="T-Omega" encoding="NATIVE"/>
+    <Input_Parameter name="K_PB" type="T-Float" encoding="NATIVE"/>
+    <Input_Parameter name="K_PE" type="T-Float" encoding="NATIVE"/>
+    <Input_Parameter name="M_M" type="T-Float" encoding="NATIVE"/>
+    <Input_Parameter name="MT_Working" type="T-MT-Working" encoding="NATIVE"/>
     <Output_Parameter name="Control" type="T-Control" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="35000 25000"/>
+    <Property name="Taste::coordinates" value="35000 26600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
@@ -155,19 +158,19 @@
 <Connection >
     <Source func_name="Measurer_And_Actuator" ri_name="Read_MGM"/>
     <Target func_name="ACS" ri_name="Read_MGM"/>
-    <Property name="Taste::coordinates" value="23500 33600 23500 36100 23500 38600"/>
+    <Property name="Taste::coordinates" value="23500 35200 23500 38600"/>
 </Connection>
 
 <Connection >
     <Source func_name="Measurer_And_Actuator" ri_name="control_MGT"/>
     <Target func_name="ACS" ri_name="control_MGT"/>
-    <Property name="Taste::coordinates" value="45800 33600 45800 36100 45700 38600"/>
+    <Property name="Taste::coordinates" value="45800 35200 45700 38600"/>
 </Connection>
 
 <Connection >
     <Source func_name="Measurer_And_Actuator" ri_name="Step"/>
     <Target func_name="ACS_Algorithm" pi_name="Step"/>
-    <Property name="Taste::coordinates" value="35000 24400 35000 22300 35000 20200"/>
+    <Property name="Taste::coordinates" value="35000 26000 35000 20200"/>
 </Connection>
 
     <Implementations>
@@ -176,46 +179,60 @@
 </Function>
 
 <Function name="TTC" is_type="NO" language="SDL" default_implementation="default" FPGA_Configurations="">
-    <Property name="Taste::coordinates" value="103600 -4700 123600 6900"/>
-<Provided_Interface name="TM_Basic_Task" kind="Cyclic" layer="default" stack_size="50" priority="1" period="1000" dispatch_offset="0" wcet="0">
-    <Property name="Taste::coordinates" value="106800 6900"/>
+    <Property name="Taste::coordinates" value="103800 -12300 124400 8000"/>
+<Provided_Interface name="TM_Basic_Task" kind="Cyclic" layer="default" period="1000" dispatch_offset="0" priority="1" stack_size="50" wcet="0">
+    <Property name="Taste::coordinates" value="108600 8000"/>
 </Provided_Interface>
 
-<Provided_Interface name="TC_Task" kind="Cyclic" layer="default" stack_size="50" priority="1" period="1000" dispatch_offset="0" wcet="0">
-    <Property name="Taste::coordinates" value="119400 6900"/>
+<Provided_Interface name="TC_Task" kind="Cyclic" layer="default" period="1000" dispatch_offset="0" priority="1" stack_size="50" wcet="0">
+    <Property name="Taste::coordinates" value="121400 8000"/>
 </Provided_Interface>
 
-<Provided_Interface name="TC" kind="Sporadic" layer="default" miat="0" stack_size="50" priority="1" queue_size="1" wcet="0">
+<Provided_Interface name="TC" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
     <Input_Parameter name="Telecommand" type="TC-Type" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="123600 -1000"/>
+    <Property name="Taste::coordinates" value="124400 4200"/>
 </Provided_Interface>
 
-<Required_Interface name="Get" kind="Protected" layer="default" wcet="0">
-    <Output_Parameter name="Out_Data" type="Satellite-State" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="103600 4900"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
+<Provided_Interface name="HK_Task" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Property name="Taste::coordinates" value="103800 -9000"/>
+</Provided_Interface>
+
+<Provided_Interface name="TM_Error" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Input_Parameter name="Contents" type="TM-Error-Contents" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="103800 -3500"/>
+</Provided_Interface>
+
+<Provided_Interface name="TM_Mode" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Input_Parameter name="op_mode" type="Operating-Mode" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="103800 -6300"/>
+</Provided_Interface>
 
 <Required_Interface name="Process_TC" kind="Protected" layer="default" wcet="0">
     <Input_Parameter name="TC" type="TC-Type" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="119200 -4700"/>
+    <Property name="Taste::coordinates" value="120000 -12300"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
 <Required_Interface name="Current_Mode" kind="Protected" layer="default" wcet="0">
     <Output_Parameter name="Current" type="Operating-Mode" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="107600 -4700"/>
+    <Property name="Taste::coordinates" value="107400 -12300"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
 <Required_Interface name="TM" kind="Sporadic" layer="default">
     <Input_Parameter name="Telemetry" type="TM-Type" encoding="NATIVE"/>
-    <Property name="Taste::coordinates" value="123600 4000"/>
+    <Property name="Taste::coordinates" value="124400 -1000"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
+</Required_Interface>
+
+<Required_Interface name="Get" kind="Protected" layer="default" wcet="0">
+    <Output_Parameter name="Out_Data" type="Satellite-State" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="103800 5800"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
     <Implementations>
@@ -270,26 +287,27 @@
     </Implementations>
 </Function>
 
-<Comment name="Simulated ACS HW:\n============\n\nReads simulated enviornment by means of TCP sockets">
-    <Property name="Taste::coordinates" value="75000 31100 97300 41600"/>
-</Comment>
+<Function name="Function_12" is_type="NO" language="SDL" default_implementation="default" FPGA_Configurations="">
+    <Property name="Taste::coordinates" value="43700 -18500 63700 -10500"/>
+    <Implementations>
+        <Implementation name="default" language="SDL"/>
+    </Implementations>
+</Function>
 
-<Connection >
-    <Source func_name="TTC" ri_name="Get"/>
-    <Target func_name="Storage" pi_name="Get"/>
-    <Property name="Taste::coordinates" value="103000 4900 99500 4900 99500 15600 96000 15600"/>
-</Connection>
+<Comment name="Simulated ACS HW:\n============\n\nReads simulated enviornment by means of TCP sockets">
+    <Property name="Taste::coordinates" value="74000 31300 96300 41800"/>
+</Comment>
 
 <Connection >
     <Source func_name="Platform" ri_name="Get"/>
     <Target func_name="Sensors" pi_name="Get"/>
-    <Property name="Taste::coordinates" value="57200 7400 57200 33500"/>
+    <Property name="Taste::coordinates" value="57200 8300 57200 33500"/>
 </Connection>
 
 <Connection >
     <Source func_name="Platform" ri_name="Put"/>
     <Target func_name="Storage" pi_name="Put"/>
-    <Property name="Taste::coordinates" value="67900 4800 71600 4800 71600 15800 75400 15800"/>
+    <Property name="Taste::coordinates" value="68100 5600 71700 5600 71700 15800 75400 15800"/>
 </Connection>
 
 <Connection >
@@ -301,31 +319,55 @@
 <Connection >
     <Source func_name="ACS" ri_name="control_MGT"/>
     <Target func_name="Simulated_ACS_HW" pi_name="control_MGT"/>
-    <Property name="Taste::coordinates" value="120200 20800 120300 33500"/>
+    <Property name="Taste::coordinates" value="120200 20800 120200 27100 120300 33500"/>
 </Connection>
 
 <Connection >
     <Source func_name="TTC" ri_name="Process_TC"/>
     <Target func_name="Manager" pi_name="Process_TC"/>
-    <Property name="Taste::coordinates" value="119200 -5300 119200 -16400 95900 -16400"/>
+    <Property name="Taste::coordinates" value="120000 -12900 120000 -21900 98100 -21900"/>
 </Connection>
 
 <Connection >
     <Source func_name="TTC" ri_name="Current_Mode"/>
     <Target func_name="Manager" pi_name="Current_Mode"/>
-    <Property name="Taste::coordinates" value="107600 -5300 107600 -11800 95900 -11800"/>
+    <Property name="Taste::coordinates" value="107400 -12900 107400 -17400 98100 -17400"/>
 </Connection>
 
 <Connection >
     <Source func_name="OBSW" pi_name="TC"/>
     <Target func_name="TTC" pi_name="TC"/>
-    <Property name="Taste::coordinates" value="133200 -1000 123900 -1000"/>
+    <Property name="Taste::coordinates" value="133200 4200 124700 4200"/>
 </Connection>
 
 <Connection >
     <Source func_name="TTC" ri_name="TM"/>
     <Target func_name="OBSW" ri_name="TM"/>
-    <Property name="Taste::coordinates" value="124200 4000 133500 4000"/>
+    <Property name="Taste::coordinates" value="124900 -1000 133500 -1000"/>
+</Connection>
+
+<Connection >
+    <Source func_name="Manager" ri_name="HK_Task"/>
+    <Target func_name="TTC" pi_name="HK_Task"/>
+    <Property name="Taste::coordinates" value="93200 -14500 93200 -9000 103500 -9000"/>
+</Connection>
+
+<Connection  name="Manager_TM_Error____TTC_TM_Error">
+    <Source func_name="Manager" ri_name="TM_Error"/>
+    <Target func_name="TTC" pi_name="TM_Error"/>
+    <Property name="Taste::coordinates" value="76900 -14400 76900 -3500 103500 -3500"/>
+</Connection>
+
+<Connection >
+    <Source func_name="Manager" ri_name="TM_Mode"/>
+    <Target func_name="TTC" pi_name="TM_Mode"/>
+    <Property name="Taste::coordinates" value="85500 -14400 85500 -6300 103500 -6300"/>
+</Connection>
+
+<Connection >
+    <Source func_name="TTC" ri_name="Get"/>
+    <Target func_name="Storage" pi_name="Get"/>
+    <Property name="Taste::coordinates" value="103200 5800 99600 5800 99600 15600 96000 15600"/>
 </Connection>
 
     <Implementations>
@@ -333,16 +375,40 @@
     </Implementations>
 </Function>
 
-<Connection >
-    <Source func_name="OBSW" ri_name="TM"/>
-    <Target func_name="GSSW" pi_name="TM"/>
-    <Property name="Taste::coordinates" value="53300 -11800 61400 -11900"/>
-</Connection>
+<Function name="GSSW" is_type="NO" language="GUI" default_implementation="default" FPGA_Configurations="">
+    <Property name="Taste::coordinates" value="61700 -37900 81700 -6900"/>
+<Provided_Interface name="TM" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Input_Parameter name="Telemetry" type="TM-Type" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="61700 -11900"/>
+</Provided_Interface>
+
+<Required_Interface name="TC" kind="Sporadic" layer="default" miat="0" priority="1" stack_size="50" queue_size="1" wcet="0">
+    <Input_Parameter name="Telecommand" type="TC-Type" encoding="NATIVE"/>
+    <Property name="Taste::coordinates" value="61700 -28300"/>
+    <Property name="Taste::RootCoordinates" value="133800 -800"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="GUI"/>
+    </Implementations>
+</Function>
 
 <Connection >
     <Source func_name="GSSW" ri_name="TC"/>
     <Target func_name="OBSW" pi_name="TC"/>
     <Property name="Taste::coordinates" value="61100 -28300 53000 -28300"/>
 </Connection>
+
+<Connection >
+    <Source func_name="OBSW" ri_name="TM"/>
+    <Target func_name="GSSW" pi_name="TM"/>
+    <Property name="Taste::coordinates" value="53300 -11800 61400 -11900"/>
+</Connection>
+
+<Comment name="Reserved words by TASTE:\n================\n\nmode, server, state">
+    <Property name="Taste::coordinates" value="46500 0 66500 8000"/>
+</Comment>
 
 </InterfaceView>
