@@ -1,0 +1,25 @@
+/* CIF PROCESS (250, 149), (150, 75) */
+process Platform;
+    /* CIF TEXT (241, 119), (191, 56) */
+    -- Local variables:
+    dcl adt Analog_Data_Table;
+    dcl sat_state Satellite_State;
+    /* CIF ENDTEXT */
+    /* CIF START (245, 13), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (240, 63), (79, 35) */
+        NEXTSTATE Wait_Tick;
+    /* CIF state (494, 9), (79, 35) */
+    state Wait_Tick;
+        /* CIF input (493, 64), (83, 35) */
+        input HK_Tick;
+            /* CIF PROCEDURECALL (498, 119), (72, 35) */
+            call Get(adt);
+            /* CIF task (462, 174), (143, 35) */
+            task sat_state.data := adt;
+            /* CIF PROCEDURECALL (481, 224), (106, 35) */
+            call Put(sat_state);
+            /* CIF NEXTSTATE (489, 274), (89, 35) */
+            NEXTSTATE Wait_Tick;
+    endstate;
+endprocess Platform;

@@ -1,0 +1,144 @@
+NATIVE-IMPLEMENTATION-DATAVIEW DEFINITIONS ::=
+BEGIN
+
+    --IMPORTS T-UInt16 FROM TASTE-BasicTypes;
+    --MyInteger ::= INTEGER (0 .. 10000)
+
+    -------------------------
+    -- Reusable data types --
+    -------------------------
+    T-UInt16 ::= INTEGER (0 .. 65535)
+    T-UInt64 ::= INTEGER (0 .. 18446744073709551615)
+    T-Float  ::= REAL (-3.4e+38 .. 3.4e+38)
+
+    -------------------------------------------
+    -- Data types used for the ACS component --
+    -------------------------------------------
+    -- Input types:
+    T-B-b-T      ::= SEQUENCE (SIZE(15)) OF T-Float
+    T-Omega      ::= SEQUENCE (SIZE(3))  OF T-Float
+    T-MT-Working ::= SEQUENCE (SIZE(3))  OF T-Float
+
+    -- Output types:
+    T-Control    ::= SEQUENCE (SIZE(3))  OF T-Float
+
+    -----------------------------------------------
+    -- Data types used for the Sensors component --
+    -----------------------------------------------
+    Analog-Data ::= T-UInt16
+
+    Analog-Data-Table ::= SEQUENCE {
+        obc-t Analog-Data, -- OBC temperature
+        obc-v Analog-Data  -- OBC supply voltages
+    }
+
+    Mission-Time ::= T-UInt64
+
+    -----------------------------------------------
+    -- Data types used for the Storage component --
+    -----------------------------------------------
+    Satellite-State ::= SEQUENCE {
+        timestamp   Mission-Time,
+        data        Analog-Data-Table
+    }
+
+    -----------------------------------------------
+    -- Data types used for the Manager component --
+    -----------------------------------------------
+    Operating-Mode ::= ENUMERATED {
+        idle,
+        coverage
+    }
+
+    -----------------------------------------
+    -- TM and TC used by the TTC component --
+    -----------------------------------------
+    -- TC:
+    TC-Type ::= ENUMERATED {
+        open-link,
+        close-link,
+        request-hk
+    }
+
+    -- TMs:    
+    TM-Message {Contents} ::=  SEQUENCE {
+        tm-timestamp    Mission-Time,
+        tm-payload      Contents
+    }
+
+    TM-Hello ::= TM-Message {Satellite-State}
+
+    hk-size INTEGER ::= 4
+    TM-Housekeeping ::= TM-Message {SEQUENCE(SIZE(hk-size)) OF Satellite-State}
+
+    TM-Mode ::= TM-Message {Operating-Mode}
+
+    msg-size INTEGER ::= 80
+    TM-Error ::= TM-Message {OCTET STRING (SIZE (msg-size))}
+
+    TM-Type ::= CHOICE {
+        hello   TM-Hello,
+        hk      TM-Housekeeping,
+        mode    TM-Mode,
+        err     TM-Error
+    }
+
+END
+                    --~~~~~~~~~~~~~~~~~~~~~--
+                    -- Brief ASN1 tutorial --
+                    --~~~~~~~~~~~~~~~~~~~~~--
+-- ASN.1 Type definitions must start with an uppercase
+-- Field names in records (SEQUENCE) must start with a lowercase
+-- Underscores are not allowed: use dash (hyphen) 
+-- For integers do not assume that small ranges will be translated to small
+-- types in C or Ada (expect unsigned or signed 64 bits types with subtypes
+-- for the range in Ada)
+
+-- Simple types:
+
+-- TASTE-Boolean ::= BOOLEAN
+-- MyInteger   ::= INTEGER (0..255)
+-- MyReal      ::= REAL (0.0 .. 1000.0)
+-- MyBool      ::= BOOLEAN
+-- MyEnum      ::= ENUMERATED { hello, world, how-are-you }
+
+-- Complex types:
+
+--  MySeq       ::= SEQUENCE {
+--      input-data  MyInteger,
+--      output-data MyInteger,
+--      validity    ENUMERATED { valid, invalid }
+--  }
+--
+--  MyChoice    ::= CHOICE {
+--      a BOOLEAN,
+--      b MySeq
+--  }
+--
+--  MySeqOf     ::= SEQUENCE (SIZE (2)) OF MyEnum
+--
+--  MyOctStr    ::= OCTET STRING (SIZE (3))
+--
+--  -- You can also declare constants
+--  myVar       MySeqOf     ::= { hello, world }
+
+TASTE-BasicTypes DEFINITIONS ::=
+BEGIN
+
+-- Set of TASTE predefined basic types
+
+T-Int32 ::=  INTEGER (-2147483648 .. 2147483647)
+
+T-UInt32 ::= INTEGER (0 .. 4294967295)
+
+T-Int8 ::= INTEGER (-128 .. 127)
+
+T-UInt8 ::= INTEGER (0 .. 255)
+
+T-Boolean ::= BOOLEAN
+
+T-Null-Record ::= SEQUENCE {}
+
+END
+
+

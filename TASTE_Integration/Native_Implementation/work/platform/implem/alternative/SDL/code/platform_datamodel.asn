@@ -1,0 +1,15 @@
+Platform-Datamodel DEFINITIONS ::=
+BEGIN
+IMPORTS
+   T-UInt16, T-UInt64, T-Float, T-B-b-T, T-Omega, T-MT-Working, T-Control, Analog-Data, Analog-Data-Table, Mission-Time, Satellite-State, Operating-Mode, TC-Type, TM-Hello, TM-Housekeeping, TM-Mode, TM-Error, TM-Type FROM NATIVE-IMPLEMENTATION-DATAVIEW
+   T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean, T-Null-Record FROM TASTE-BasicTypes;
+
+Platform-States ::= ENUMERATED {wait}
+
+Platform-Context ::= SEQUENCE {
+   state Platform-States,
+   init-done BOOLEAN
+}
+
+Tm-type-selection ::= ENUMERATED {hello-present(1), hk-present(2), mode-present(3), err-present(4)}
+END
