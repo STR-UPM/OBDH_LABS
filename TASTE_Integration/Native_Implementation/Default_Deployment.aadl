@@ -18,8 +18,6 @@ END deploymentview::DV::Node_Linux;
 
 PACKAGE deploymentview::DV
 PUBLIC
-
-WITH interfaceview::IV::GSSW;
  
 WITH interfaceview::IV::OBSW::Manager;
 
@@ -39,6 +37,8 @@ WITH interfaceview::IV::OBSW::Simulated_ACS_HW;
 WITH interfaceview::IV::OBSW::Sensors;
 
 
+WITH interfaceview::IV::GSSW;
+
 
 WITH ocarina_processors_x86;
 WITH deploymentview::DV::Node_Linux;
@@ -51,11 +51,7 @@ SYSTEM Node_Linux
 END Node_Linux;
 
 SYSTEM IMPLEMENTATION Node_Linux.others
-SUBCOMPONENTS
-   IV_GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others {
-      Taste::FunctionName => "GSSW";
-   };
- 
+SUBCOMPONENTS 
    IV_Manager : SYSTEM interfaceview::IV::OBSW::Manager::Manager.others {
       Taste::FunctionName => "Manager";
    };
@@ -90,6 +86,10 @@ SUBCOMPONENTS
    };
 
 
+   IV_GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others {
+      Taste::FunctionName => "GSSW";
+   };
+
    demo : PROCESS deploymentview::DV::Node_Linux::demo.others {
       Deployment::Port_Number => 0;
       TASTE_DV_Properties::CoverageEnabled => false;
@@ -97,13 +97,7 @@ SUBCOMPONENTS
       TASTE::LDFlags => "-no-pie";
    };
    x86_linux : PROCESSOR ocarina_processors_x86::x86.linux;
-PROPERTIES
-   
-   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_GSSW;
-   
-   
-   
- 
+PROPERTIES 
    
    Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_Manager;
    
@@ -153,6 +147,12 @@ PROPERTIES
    
    
 
+
+   
+   Taste::APLC_Binding => (reference (demo)) APPLIES TO IV_GSSW;
+   
+   
+   
 
    Actual_Processor_Binding => (reference (x86_linux)) APPLIES TO demo;
 END Node_Linux.others;

@@ -6,75 +6,6 @@
 ---------------------------------------------------
 
 
-PACKAGE interfaceview::IV::GSSW
-PUBLIC
-
-WITH Taste;
-WITH DataView;
-WITH TASTE_IV_Properties;
-WITH interfaceview::IV::OBSW::TTC;
-
-SUBPROGRAM PI_TM
-FEATURES
-    Telemetry : IN PARAMETER DataView::TM_Type {
-       Taste::encoding => NATIVE;
-    };
-END PI_TM;
-
-SUBPROGRAM IMPLEMENTATION PI_TM.others
-END PI_TM.others;
-
-
-SUBPROGRAM RI_TC
-FEATURES
-    Telecommand : IN PARAMETER DataView::TC_Type {
-       Taste::encoding => NATIVE;
-    };
-END RI_TC;
-
-SUBPROGRAM IMPLEMENTATION RI_TC.others
-END RI_TC.others;
-
-
-
-SYSTEM GSSW
-FEATURES
-   PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: GSSW:: PI_TM.others {
-      Taste::InterfaceName           => "TM";            
-      Taste::RCMoperationKind        => sporadic;      
-      -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
-      Taste::Associated_Queue_Size   => 10;      
-      Compute_Execution_Time => 0 ms .. 0 ms;      
-   };
-   RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC.others {
-      Taste::labelInheritance        => "true";
-      Taste::InterfaceName           => "TC";            
-      Taste::RCMoperationKind        => sporadic;      
-      -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
-      Taste::Associated_Queue_Size   => 1;      
-      Compute_Execution_Time => 0 ms .. 0 ms;      
-   };
-PROPERTIES
-   -- ignored property: name = GSSW
-   -- ignored property: is_type = NO
-   Source_Language => (GUI);
-   -- ignored property: default_implementation = QT_GUI
-   -- ignored property: FPGA_Configurations = 
-END GSSW;
-
-SYSTEM IMPLEMENTATION GSSW.others
-END GSSW.others;
-
-END interfaceview::IV::GSSW;
-
-
-
 
 PACKAGE interfaceview::IV::OBSW::Manager
 PUBLIC
@@ -155,33 +86,33 @@ FEATURES
       Taste::InterfaceName           => "HK_Task";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 3;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    RI_TM_Error : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TM_Error.others {
       Taste::labelInheritance        => "true";
       Taste::InterfaceName           => "TM_Error";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 3;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    RI_TM_Mode : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TM_Mode.others {
       Taste::labelInheritance        => "true";
       Taste::InterfaceName           => "TM_Mode";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 3;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
 PROPERTIES
    -- ignored property: name = Manager
@@ -247,11 +178,11 @@ FEATURES
       Taste::InterfaceName           => "HK_Tick";            
       Taste::RCMoperationKind        => cyclic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 1000 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
-      Compute_Execution_Time => 0 ms .. 0 ms;      
       Taste::Interface_Cyclic_Offset => 0;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 1000 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    RI_Get : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Sensors:: PI_Get.others {
       Taste::labelInheritance        => "true";
@@ -418,11 +349,11 @@ FEATURES
       Taste::InterfaceName           => "Tick";            
       Taste::RCMoperationKind        => cyclic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 40 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
-      Compute_Execution_Time => 0 ms .. 0 ms;      
       Taste::Interface_Cyclic_Offset => 0;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 40 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    RI_Read_MGM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Simulated_ACS_HW:: PI_Read_MGM.others {
       Taste::labelInheritance        => "true";
@@ -647,51 +578,51 @@ FEATURES
       Taste::InterfaceName           => "TM_Basic_Task";            
       Taste::RCMoperationKind        => cyclic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 1500 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
-      Compute_Execution_Time => 0 ms .. 0 ms;      
       Taste::Interface_Cyclic_Offset => 0;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 1500 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    PI_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC.others {
       Taste::InterfaceName           => "TC";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 10;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    PI_HK_Task : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_HK_Task.others {
       Taste::InterfaceName           => "HK_Task";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 3;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    PI_TM_Error : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TM_Error.others {
       Taste::InterfaceName           => "TM_Error";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 3;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    PI_TM_Mode : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TM_Mode.others {
       Taste::InterfaceName           => "TM_Mode";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 3;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    RI_Process_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: Manager:: PI_Process_TC.others {
       Taste::labelInheritance        => "true";
@@ -970,22 +901,22 @@ FEATURES
       Taste::InterfaceName           => "TC";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 1;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
    RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: GSSW:: PI_TM.others {
       Taste::labelInheritance        => "true";
       Taste::InterfaceName           => "TM";            
       Taste::RCMoperationKind        => sporadic;      
       -- Unrecognized property: layer => default      
-      Taste::RCMperiod               => 0 ms;      
-      Taste::Interface_Priority      => 1;      
-      Taste::Interface_Stack_Size    => 50;      
       Taste::Associated_Queue_Size   => 10;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
       Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
    };
 PROPERTIES
    -- ignored property: name = OBSW
@@ -1023,11 +954,80 @@ END OBSW.others;
 END interfaceview::IV::OBSW;
 
 
+
+PACKAGE interfaceview::IV::GSSW
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+WITH interfaceview::IV::OBSW::TTC;
+
+SUBPROGRAM PI_TM
+FEATURES
+    Telemetry : IN PARAMETER DataView::TM_Type {
+       Taste::encoding => NATIVE;
+    };
+END PI_TM;
+
+SUBPROGRAM IMPLEMENTATION PI_TM.others
+END PI_TM.others;
+
+
+SUBPROGRAM RI_TC
+FEATURES
+    Telecommand : IN PARAMETER DataView::TC_Type {
+       Taste::encoding => NATIVE;
+    };
+END RI_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_TC.others
+END RI_TC.others;
+
+
+
+SYSTEM GSSW
+FEATURES
+   PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV:: GSSW:: PI_TM.others {
+      Taste::InterfaceName           => "TM";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Associated_Queue_Size   => 10;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
+   };
+   RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV:: OBSW:: TTC:: PI_TC.others {
+      Taste::labelInheritance        => "true";
+      Taste::InterfaceName           => "TC";            
+      Taste::RCMoperationKind        => sporadic;      
+      -- Unrecognized property: layer => default      
+      Taste::Associated_Queue_Size   => 1;      
+      Taste::Interface_Stack_Size    => 50;      
+      Taste::RCMperiod               => 0 ms;      
+      Compute_Execution_Time => 0 ms .. 0 ms;      
+      Taste::Interface_Priority      => 1;      
+   };
+PROPERTIES
+   -- ignored property: name = GSSW
+   -- ignored property: is_type = NO
+   Source_Language => (GUI);
+   -- ignored property: default_implementation = QT_GUI
+   -- ignored property: FPGA_Configurations = 
+END GSSW;
+
+SYSTEM IMPLEMENTATION GSSW.others
+END GSSW.others;
+
+END interfaceview::IV::GSSW;
+
+
 PACKAGE interfaceview::IV
 PUBLIC
 
-WITH interfaceview::IV::GSSW;
 WITH interfaceview::IV::OBSW;
+WITH interfaceview::IV::GSSW;
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
@@ -1040,8 +1040,8 @@ END interfaceview;
 
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
-  GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others;
   OBSW : SYSTEM interfaceview::IV::OBSW::OBSW.others;
+  GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others;
 CONNECTIONS
    OBSW_RI_TM_GSSW_PI_TM : SUBPROGRAM ACCESS GSSW.PI_TM -> OBSW.RI_TM;
    GSSW_RI_TC_OBSW_PI_TC : SUBPROGRAM ACCESS OBSW.PI_TC -> GSSW.RI_TC;

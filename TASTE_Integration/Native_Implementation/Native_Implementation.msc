@@ -1,12 +1,83 @@
 mscdocument Native_Implementation /* MSC AND */;
     language ASN.1;
     data Native_Implementation.asn;
-
 /* CIF MSCDOCUMENT (0, 0) (4200, 2300) */
-
 mscdocument Nominal /* MSC LEAF */;
-
+    language ASN.1;
+    data Native_Implementation.asn;
 msc Native_Implementation;
+endmsc;
+endmscdocument;
+/* CIF MSCDOCUMENT (0, 0) (1072, 566) */
+mscdocument Store_Measurements /* MSC LEAF */;
+    language ASN.1;
+    data Native_Implementation.asn;
+msc Store_Measurements;
+/* CIF INSTANCE (21, 61) (183, 87) (800, 394) */
+instance Platform;
+/* CIF MESSAGE (114, 217) (638, 217) */
+out Get to Sensors;
+/* CIF MESSAGE (114, 307) (976, 307) */
+out Put to Storage;
+endinstance;
+/* CIF INSTANCE (550, 61) (172, 87) (800, 394) */
+instance Sensors;
+/* CIF MESSAGE (114, 217) (638, 217) */
+in Get from Platform;
+endinstance;
+/* CIF INSTANCE (889, 61) (172, 87) (800, 394) */
+instance Storage;
+/* CIF MESSAGE (114, 307) (976, 307) */
+in Put from Platform;
+endinstance;
+endmsc;
+endmscdocument;
+/* CIF MSCDOCUMENT (0, 0) (1101, 770) */
+mscdocument Basic_TM /* MSC LEAF */;
+    language ASN.1;
+    data Native_Implementation.asn;
+msc Basic_TM;
+/* CIF INSTANCE (116, 61) (127, 87) (800, 299) */
+instance TTC;
+/* CIF MESSAGE (180, 280) (622, 280) */
+out Last to Storage;
+/* CIF MESSAGE (180, 370) (894, 370) */
+out TM to GSSW;
+endinstance;
+/* CIF INSTANCE (534, 61) (172, 87) (800, 299) */
+instance Storage;
+/* CIF MESSAGE (180, 280) (622, 280) */
+in Last from TTC;
+endinstance;
+/* CIF INSTANCE (823, 61) (143, 87) (800, 299) */
+instance GSSW;
+/* CIF MESSAGE (180, 370) (894, 370) */
+in TM from TTC;
+endinstance;
+endmsc;
+endmscdocument;
+/* CIF MSCDOCUMENT (0, 0) (2963, 1656) */
+mscdocument TC_Reception /* MSC LEAF */;
+    language ASN.1;
+    data Native_Implementation.asn;
+msc TC_Reception;
+/* CIF INSTANCE (40, 61) (143, 87) (800, 1484) */
+instance GSSW;
+/* CIF MESSAGE (111, 217) (794, 217) */
+out TC to TTC;
+endinstance;
+/* CIF INSTANCE (730, 61) (127, 87) (800, 1484) */
+instance TTC;
+/* CIF MESSAGE (111, 217) (794, 217) */
+in TC from GSSW;
+/* CIF MESSAGE (794, 307) (1471, 307) */
+out Process_TC to Manager;
+endinstance;
+/* CIF INSTANCE (1376, 61) (188, 87) (800, 1484) */
+instance Manager;
+/* CIF MESSAGE (794, 307) (1471, 307) */
+in Process_TC from TTC;
+endinstance;
 endmsc;
 endmscdocument;
 endmscdocument;
