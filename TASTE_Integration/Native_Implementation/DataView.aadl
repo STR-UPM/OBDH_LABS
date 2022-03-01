@@ -3,7 +3,7 @@
 --------------------------------------------------------
 --! MadeInFastMode:True:
 --! InputASN1FileChecksum:c938256ba7825a908623384330b14dca:Native_Implementation.acn:
---! InputASN1FileChecksum:b4fdbf0a20db37db8dc721398509e6cd:Native_Implementation.asn:
+--! InputASN1FileChecksum:3a29a0e68bddc12fef0e89834c6d4f47:Native_Implementation.asn:
 --! InputASN1FileChecksum:ff35cd78b1e82f09b63b209ab7cf7c34:/home/taste/tool-inst/share/taste-types/taste-types.asn:
 --------------------------------------------------------
 
@@ -52,7 +52,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "Analog-Data";
-    TASTE::Position_In_File => [ line => 10 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 27 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aINTEGER;
 END Analog_Data;
@@ -92,7 +92,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "Analog-Data-Table";
-    TASTE::Position_In_File => [ line => 33 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 50 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCE;
 END Analog_Data_Table;
@@ -132,7 +132,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "Mission-Time";
-    TASTE::Position_In_File => [ line => 12 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 29 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aINTEGER;
 END Mission_Time;
@@ -172,7 +172,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "Operating-Mode";
-    TASTE::Position_In_File => [ line => 49 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 66 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aENUMERATED;
 END Operating_Mode;
@@ -212,7 +212,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "Satellite-State";
-    TASTE::Position_In_File => [ line => 41 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 58 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCE;
 END Satellite_State;
@@ -252,7 +252,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-B-b-T";
-    TASTE::Position_In_File => [ line => 21 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 38 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCEOF;
 END T_B_b_T;
@@ -331,7 +331,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-Control";
-    TASTE::Position_In_File => [ line => 26 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 43 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCEOF;
 END T_Control;
@@ -371,7 +371,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-Float";
-    TASTE::Position_In_File => [ line => 13 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 30 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aREAL;
 END T_Float;
@@ -489,7 +489,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-MT-Working";
-    TASTE::Position_In_File => [ line => 23 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 40 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCEOF;
 END T_MT_Working;
@@ -568,7 +568,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-Omega";
-    TASTE::Position_In_File => [ line => 22 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 39 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCEOF;
 END T_Omega;
@@ -608,7 +608,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-UInt16";
-    TASTE::Position_In_File => [ line => 10 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 27 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aINTEGER;
 END T_UInt16;
@@ -687,7 +687,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "T-UInt64";
-    TASTE::Position_In_File => [ line => 12 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 29 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aINTEGER;
 END T_UInt64;
@@ -766,7 +766,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TC-Type";
-    TASTE::Position_In_File => [ line => 60 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 77 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aENUMERATED;
 END TC_Type;
@@ -806,7 +806,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Error";
-    TASTE::Position_In_File => [ line => 68 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 85 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCE;
 END TM_Error;
@@ -846,7 +846,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Error-Contents";
-    TASTE::Position_In_File => [ line => 86 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 103 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSTRING;
 END TM_Error_Contents;
@@ -886,7 +886,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Hello";
-    TASTE::Position_In_File => [ line => 68 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 85 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCE;
 END TM_Hello;
@@ -926,7 +926,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Housekeeping";
-    TASTE::Position_In_File => [ line => 68 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 85 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCE;
 END TM_Housekeeping;
@@ -966,7 +966,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Housekeeping-Contents";
-    TASTE::Position_In_File => [ line => 78 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 95 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCEOF;
 END TM_Housekeeping_Contents;
@@ -1006,7 +1006,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Mode";
-    TASTE::Position_In_File => [ line => 68 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 85 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aSEQUENCE;
 END TM_Mode;
@@ -1046,7 +1046,7 @@ PROPERTIES
     Source_Language => (ASN1);
     -- name of the corresponding data type in the source file:
     Type_Source_Name => "TM-Type";
-    TASTE::Position_In_File => [ line => 90 ; column => 1 ; ];
+    TASTE::Position_In_File => [ line => 107 ; column => 1 ; ];
     -- what kind of type is this?
     TASTE::ASN1_Basic_Type =>aCHOICE;
 END TM_Type;
