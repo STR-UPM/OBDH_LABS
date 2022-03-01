@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Locations>
+  <Project>
+    <vfs_file>/home/taste/OBDH_LABS/TASTE_Integration/Native_Implementation/work/simulated_acs_hw/implem/default/Ada/default.gpr</vfs_file>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/home/taste/OBDH_LABS/TASTE_Integration/Native_Implementation/work/simulated_acs_hw/implem/default/Ada/src/simulated_acs_hw.ads</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/home/taste/OBDH_LABS/TASTE_Integration/Native_Implementation/work/simulated_acs_hw/implem/default/Ada/src/simulated_acs_hw.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

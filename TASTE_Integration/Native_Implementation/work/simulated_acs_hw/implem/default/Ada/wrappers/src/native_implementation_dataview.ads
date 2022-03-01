@@ -43,7 +43,7 @@ function asn1SccAnalog_Data_Equal(val1, val2 : asn1SccAnalog_Data) return Boolea
 
 function asn1SccAnalog_Data_Init return asn1SccAnalog_Data;
 
-ERR_ANALOG_DATA_2:constant Integer := 81; 
+ERR_ANALOG_DATA_2:constant Integer := 91; 
 function asn1SccAnalog_Data_IsConstraintValid(val : asn1SccAnalog_Data) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccAnalog_Data_Table --------------------------------------------
 
@@ -57,11 +57,11 @@ function asn1SccAnalog_Data_Table_Equal(val1, val2 : asn1SccAnalog_Data_Table) r
 
 function asn1SccAnalog_Data_Table_Init return asn1SccAnalog_Data_Table;
 
-ERR_ANALOG_DATA_TABLE:constant Integer := 116; 
-ERR_ANALOG_DATA_TABLE_OBC_T_2_2:constant Integer := 96; 
-ERR_ANALOG_DATA_TABLE_OBC_V_2_2:constant Integer := 111; 
+ERR_ANALOG_DATA_TABLE:constant Integer := 126; 
+ERR_ANALOG_DATA_TABLE_OBC_T_2_2:constant Integer := 106; 
+ERR_ANALOG_DATA_TABLE_OBC_V_2_2:constant Integer := 121; 
 function asn1SccAnalog_Data_Table_IsConstraintValid(val : asn1SccAnalog_Data_Table) return adaasn1rtl.ASN1_RESULT;
-subtype asn1SccT_UInt64 is adaasn1rtl.Asn1UInt range 0 .. 18446744073709551615;
+subtype asn1SccT_UInt64 is adaasn1rtl.Asn1UInt range 0 .. 4294967295;
 
 
 function asn1SccT_UInt64_Equal(val1, val2 : asn1SccT_UInt64) return Boolean;
@@ -70,14 +70,14 @@ function asn1SccT_UInt64_Init return asn1SccT_UInt64;
 
 ERR_T_UINT64:constant Integer := 6; 
 function asn1SccT_UInt64_IsConstraintValid(val : asn1SccT_UInt64) return adaasn1rtl.ASN1_RESULT;
-subtype asn1SccMission_Time is asn1SccT_UInt64 range 0 .. 18446744073709551615;
+subtype asn1SccMission_Time is asn1SccT_UInt64 range 0 .. 4294967295;
 
 
 function asn1SccMission_Time_Equal(val1, val2 : asn1SccMission_Time) return Boolean;
 
 function asn1SccMission_Time_Init return asn1SccMission_Time;
 
-ERR_MISSION_TIME_2:constant Integer := 126; 
+ERR_MISSION_TIME_2:constant Integer := 21; 
 function asn1SccMission_Time_IsConstraintValid(val : asn1SccMission_Time) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccSatellite_State --------------------------------------------
 
@@ -111,58 +111,38 @@ ERR_TM_HELLO:constant Integer := 281;
 ERR_TM_HELLO_TM_TIMESTAMP_2_2:constant Integer := 211; 
 ERR_TM_HELLO_TM_PAYLOAD_2:constant Integer := 276; 
 function asn1SccTM_Hello_IsConstraintValid(val : asn1SccTM_Hello) return adaasn1rtl.ASN1_RESULT;
--- asn1SccTM_Housekeeping --------------------------------------------
--- asn1SccTM_Housekeeping_tm_payload --------------------------------------------
+-- asn1SccTM_Housekeeping_Contents --------------------------------------------
 
 
-subtype asn1SccTM_Housekeeping_tm_payload_index is Integer range 1..4;
-type asn1SccTM_Housekeeping_tm_payload_array is array (asn1SccTM_Housekeeping_tm_payload_index) of asn1SccSatellite_State;
-type asn1SccTM_Housekeeping_tm_payload is  record
-    Data  : asn1SccTM_Housekeeping_tm_payload_array;
+subtype asn1SccTM_Housekeeping_Contents_index is Integer range 1..4;
+type asn1SccTM_Housekeeping_Contents_array is array (asn1SccTM_Housekeeping_Contents_index) of asn1SccSatellite_State;
+type asn1SccTM_Housekeeping_Contents is  record
+    Data  : asn1SccTM_Housekeeping_Contents_array;
 end record;
+
+function asn1SccTM_Housekeeping_Contents_Equal(val1, val2 : asn1SccTM_Housekeeping_Contents) return Boolean;
+
+function asn1SccTM_Housekeeping_Contents_Init return asn1SccTM_Housekeeping_Contents;
+
+ERR_TM_HOUSEKEEPING_CONTENTS:constant Integer := 351; 
+ERR_TM_HOUSEKEEPING_CONTENTS_ELM_2:constant Integer := 346; 
+function asn1SccTM_Housekeeping_Contents_IsConstraintValid(val : asn1SccTM_Housekeeping_Contents) return adaasn1rtl.ASN1_RESULT;
+-- asn1SccTM_Housekeeping --------------------------------------------
 
 type asn1SccTM_Housekeeping is record 
     tm_timestamp : asn1SccT_UInt64;
-    tm_payload : asn1SccTM_Housekeeping_tm_payload;
+    tm_payload : asn1SccTM_Housekeeping_Contents;
 end record;
 
-
-function asn1SccTM_Housekeeping_tm_payload_Equal(val1, val2 : asn1SccTM_Housekeeping_tm_payload) return Boolean;
 
 function asn1SccTM_Housekeeping_Equal(val1, val2 : asn1SccTM_Housekeeping) return Boolean;
 
-function asn1SccTM_Housekeeping_tm_payload_Init return asn1SccTM_Housekeeping_tm_payload;
 function asn1SccTM_Housekeeping_Init return asn1SccTM_Housekeeping;
 
-ERR_TM_HOUSEKEEPING:constant Integer := 371; 
-ERR_TM_HOUSEKEEPING_TM_TIMESTAMP_2_2:constant Integer := 296; 
-ERR_TM_HOUSEKEEPING_TM_PAYLOAD:constant Integer := 366; 
-ERR_TM_HOUSEKEEPING_TM_PAYLOAD_ELM_2:constant Integer := 361; 
+ERR_TM_HOUSEKEEPING:constant Integer := 446; 
+ERR_TM_HOUSEKEEPING_TM_TIMESTAMP_2_2:constant Integer := 366; 
+ERR_TM_HOUSEKEEPING_TM_PAYLOAD_2:constant Integer := 441; 
 function asn1SccTM_Housekeeping_IsConstraintValid(val : asn1SccTM_Housekeeping) return adaasn1rtl.ASN1_RESULT;
--- asn1SccTM_Error --------------------------------------------
-subtype asn1SccTM_Error_tm_payload_index is Integer range 1..80;
-subtype asn1SccTM_Error_tm_payload_array is adaasn1rtl.OctetBuffer(asn1SccTM_Error_tm_payload_index);
-type asn1SccTM_Error_tm_payload is  record
-    Data  : asn1SccTM_Error_tm_payload_array;
-end record;
-
-type asn1SccTM_Error is record 
-    tm_timestamp : asn1SccT_UInt64;
-    tm_payload : asn1SccTM_Error_tm_payload;
-end record;
-
-
-function asn1SccTM_Error_tm_payload_Equal(val1, val2 : asn1SccTM_Error_tm_payload) return Boolean;
-
-function asn1SccTM_Error_Equal(val1, val2 : asn1SccTM_Error) return Boolean;
-
-function asn1SccTM_Error_tm_payload_Init return asn1SccTM_Error_tm_payload;
-function asn1SccTM_Error_Init return asn1SccTM_Error;
-
-ERR_TM_ERROR:constant Integer := 426; 
-ERR_TM_ERROR_TM_TIMESTAMP_2_2:constant Integer := 416; 
-ERR_TM_ERROR_TM_PAYLOAD:constant Integer := 421; 
-function asn1SccTM_Error_IsConstraintValid(val : asn1SccTM_Error) return adaasn1rtl.ASN1_RESULT;
 subtype asn1SccT_Float is adaasn1rtl.Asn1Real;
 
 
@@ -185,8 +165,8 @@ function asn1SccT_B_b_T_Equal(val1, val2 : asn1SccT_B_b_T) return Boolean;
 
 function asn1SccT_B_b_T_Init return asn1SccT_B_b_T;
 
-ERR_T_B_B_T:constant Integer := 26; 
-ERR_T_B_B_T_ELM_2:constant Integer := 21; 
+ERR_T_B_B_T:constant Integer := 36; 
+ERR_T_B_B_T_ELM_2:constant Integer := 31; 
 function asn1SccT_B_b_T_IsConstraintValid(val : asn1SccT_B_b_T) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccT_Omega --------------------------------------------
 
@@ -201,8 +181,8 @@ function asn1SccT_Omega_Equal(val1, val2 : asn1SccT_Omega) return Boolean;
 
 function asn1SccT_Omega_Init return asn1SccT_Omega;
 
-ERR_T_OMEGA:constant Integer := 41; 
-ERR_T_OMEGA_ELM_2:constant Integer := 36; 
+ERR_T_OMEGA:constant Integer := 51; 
+ERR_T_OMEGA_ELM_2:constant Integer := 46; 
 function asn1SccT_Omega_IsConstraintValid(val : asn1SccT_Omega) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccT_MT_Working --------------------------------------------
 
@@ -217,8 +197,8 @@ function asn1SccT_MT_Working_Equal(val1, val2 : asn1SccT_MT_Working) return Bool
 
 function asn1SccT_MT_Working_Init return asn1SccT_MT_Working;
 
-ERR_T_MT_WORKING:constant Integer := 56; 
-ERR_T_MT_WORKING_ELM_2:constant Integer := 51; 
+ERR_T_MT_WORKING:constant Integer := 66; 
+ERR_T_MT_WORKING_ELM_2:constant Integer := 61; 
 function asn1SccT_MT_Working_IsConstraintValid(val : asn1SccT_MT_Working) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccT_Control --------------------------------------------
 
@@ -233,8 +213,8 @@ function asn1SccT_Control_Equal(val1, val2 : asn1SccT_Control) return Boolean;
 
 function asn1SccT_Control_Init return asn1SccT_Control;
 
-ERR_T_CONTROL:constant Integer := 71; 
-ERR_T_CONTROL_ELM_2:constant Integer := 66; 
+ERR_T_CONTROL:constant Integer := 81; 
+ERR_T_CONTROL_ELM_2:constant Integer := 76; 
 function asn1SccT_Control_IsConstraintValid(val : asn1SccT_Control) return adaasn1rtl.ASN1_RESULT;
 subtype asn1SccOperating_Mode_index_range is Integer range 0..1;
 type asn1SccOperating_Mode is (asn1Sccidle, asn1Scccoverage) with Size => adaasn1rtl.Enumerated_Size;
@@ -259,10 +239,51 @@ function asn1SccTM_Mode_Equal(val1, val2 : asn1SccTM_Mode) return Boolean;
 
 function asn1SccTM_Mode_Init return asn1SccTM_Mode;
 
-ERR_TM_MODE:constant Integer := 401; 
-ERR_TM_MODE_TM_TIMESTAMP_2_2:constant Integer := 386; 
-ERR_TM_MODE_TM_PAYLOAD_2:constant Integer := 396; 
+ERR_TM_MODE:constant Integer := 476; 
+ERR_TM_MODE_TM_TIMESTAMP_2_2:constant Integer := 461; 
+ERR_TM_MODE_TM_PAYLOAD_2:constant Integer := 471; 
 function asn1SccTM_Mode_IsConstraintValid(val : asn1SccTM_Mode) return adaasn1rtl.ASN1_RESULT;
+subtype asn1SccTC_Type_index_range is Integer range 0..2;
+type asn1SccTC_Type is (asn1Sccopen_link, asn1Sccclose_link, asn1Sccrequest_hk) with Size => adaasn1rtl.Enumerated_Size;
+for asn1SccTC_Type use
+    (asn1Sccopen_link => 0, asn1Sccclose_link => 1, asn1Sccrequest_hk => 2);
+
+function asn1SccTC_Type_Equal(val1, val2 : asn1SccTC_Type) return Boolean;
+
+function asn1SccTC_Type_Init return asn1SccTC_Type;
+
+ERR_TC_TYPE:constant Integer := 196; 
+function asn1SccTC_Type_IsConstraintValid(val : asn1SccTC_Type) return adaasn1rtl.ASN1_RESULT;
+subtype asn1SccTM_Error_Contents_index is Integer range 1..80;
+subtype asn1SccTM_Error_Contents_array is adaasn1rtl.OctetBuffer(asn1SccTM_Error_Contents_index);
+subtype asn1SccTM_Error_Contents_length_index is Integer range 0..80;
+type asn1SccTM_Error_Contents is  record
+    Length : asn1SccTM_Error_Contents_length_index;
+    Data  : asn1SccTM_Error_Contents_array;
+end record;
+
+function asn1SccTM_Error_Contents_Equal(val1, val2 : asn1SccTM_Error_Contents) return Boolean;
+
+function asn1SccTM_Error_Contents_Init return asn1SccTM_Error_Contents;
+
+ERR_TM_ERROR_CONTENTS:constant Integer := 481; 
+function asn1SccTM_Error_Contents_IsConstraintValid(val : asn1SccTM_Error_Contents) return adaasn1rtl.ASN1_RESULT;
+-- asn1SccTM_Error --------------------------------------------
+
+type asn1SccTM_Error is record 
+    tm_timestamp : asn1SccT_UInt64;
+    tm_payload : asn1SccTM_Error_Contents;
+end record;
+
+
+function asn1SccTM_Error_Equal(val1, val2 : asn1SccTM_Error) return Boolean;
+
+function asn1SccTM_Error_Init return asn1SccTM_Error;
+
+ERR_TM_ERROR:constant Integer := 511; 
+ERR_TM_ERROR_TM_TIMESTAMP_2_2:constant Integer := 496; 
+ERR_TM_ERROR_TM_PAYLOAD_2:constant Integer := 506; 
+function asn1SccTM_Error_IsConstraintValid(val : asn1SccTM_Error) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccTM_Type --------------------------------------------
 
 subtype asn1SccTM_Type_index_range is Integer range 0..3;
@@ -295,23 +316,12 @@ function asn1SccTM_Type_Equal(val1, val2 : asn1SccTM_Type) return Boolean;
 
 function asn1SccTM_Type_Init return asn1SccTM_Type;
 
-ERR_TM_TYPE:constant Integer := 681; 
-ERR_TM_TYPE_HELLO_2:constant Integer := 516; 
-ERR_TM_TYPE_HK_2:constant Integer := 611; 
-ERR_TM_TYPE_MODE_2:constant Integer := 646; 
-ERR_TM_TYPE_ERR_2:constant Integer := 676; 
+ERR_TM_TYPE:constant Integer := 776; 
+ERR_TM_TYPE_HELLO_2:constant Integer := 601; 
+ERR_TM_TYPE_HK_2:constant Integer := 701; 
+ERR_TM_TYPE_MODE_2:constant Integer := 736; 
+ERR_TM_TYPE_ERR_2:constant Integer := 771; 
 function asn1SccTM_Type_IsConstraintValid(val : asn1SccTM_Type) return adaasn1rtl.ASN1_RESULT;
-subtype asn1SccTC_Type_index_range is Integer range 0..2;
-type asn1SccTC_Type is (asn1Sccopen_link, asn1Sccclose_link, asn1Sccrequest_hk) with Size => adaasn1rtl.Enumerated_Size;
-for asn1SccTC_Type use
-    (asn1Sccopen_link => 0, asn1Sccclose_link => 1, asn1Sccrequest_hk => 2);
-
-function asn1SccTC_Type_Equal(val1, val2 : asn1SccTC_Type) return Boolean;
-
-function asn1SccTC_Type_Init return asn1SccTC_Type;
-
-ERR_TC_TYPE:constant Integer := 196; 
-function asn1SccTC_Type_IsConstraintValid(val : asn1SccTC_Type) return adaasn1rtl.ASN1_RESULT;
 pragma Warnings (Off, "there are no others");
 hk_size : constant adaasn1rtl.Asn1Int:= 4;
 msg_size : constant adaasn1rtl.Asn1Int:= 80; 

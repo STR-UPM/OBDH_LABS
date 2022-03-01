@@ -34,7 +34,7 @@ function asn1SccT_Int32_Equal(val1, val2 : asn1SccT_Int32) return Boolean;
 
 function asn1SccT_Int32_Init return asn1SccT_Int32;
 
-ERR_T_INT32:constant Integer := 686; 
+ERR_T_INT32:constant Integer := 781; 
 function asn1SccT_Int32_IsConstraintValid(val : asn1SccT_Int32) return adaasn1rtl.ASN1_RESULT;
 subtype asn1SccT_UInt32 is adaasn1rtl.Asn1UInt range 0 .. 4294967295;
 
@@ -43,7 +43,7 @@ function asn1SccT_UInt32_Equal(val1, val2 : asn1SccT_UInt32) return Boolean;
 
 function asn1SccT_UInt32_Init return asn1SccT_UInt32;
 
-ERR_T_UINT32:constant Integer := 691; 
+ERR_T_UINT32:constant Integer := 786; 
 function asn1SccT_UInt32_IsConstraintValid(val : asn1SccT_UInt32) return adaasn1rtl.ASN1_RESULT;
 subtype asn1SccT_Int8 is adaasn1rtl.Asn1Int range -128 .. 127;
 
@@ -52,7 +52,7 @@ function asn1SccT_Int8_Equal(val1, val2 : asn1SccT_Int8) return Boolean;
 
 function asn1SccT_Int8_Init return asn1SccT_Int8;
 
-ERR_T_INT8:constant Integer := 696; 
+ERR_T_INT8:constant Integer := 791; 
 function asn1SccT_Int8_IsConstraintValid(val : asn1SccT_Int8) return adaasn1rtl.ASN1_RESULT;
 subtype asn1SccT_UInt8 is adaasn1rtl.Asn1UInt range 0 .. 255;
 
@@ -61,7 +61,7 @@ function asn1SccT_UInt8_Equal(val1, val2 : asn1SccT_UInt8) return Boolean;
 
 function asn1SccT_UInt8_Init return asn1SccT_UInt8;
 
-ERR_T_UINT8:constant Integer := 701; 
+ERR_T_UINT8:constant Integer := 796; 
 function asn1SccT_UInt8_IsConstraintValid(val : asn1SccT_UInt8) return adaasn1rtl.ASN1_RESULT;
 subtype asn1SccT_Boolean is adaasn1rtl.Asn1Boolean;
 
@@ -70,7 +70,7 @@ function asn1SccT_Boolean_Equal(val1, val2 : asn1SccT_Boolean) return Boolean;
 
 function asn1SccT_Boolean_Init return asn1SccT_Boolean;
 
-ERR_T_BOOLEAN:constant Integer := 706; 
+ERR_T_BOOLEAN:constant Integer := 801; 
 function asn1SccT_Boolean_IsConstraintValid(val : asn1SccT_Boolean) return adaasn1rtl.ASN1_RESULT;
 -- asn1SccT_Null_Record --------------------------------------------
 
@@ -83,7 +83,7 @@ function asn1SccT_Null_Record_Equal(val1, val2 : asn1SccT_Null_Record) return Bo
 
 function asn1SccT_Null_Record_Init return asn1SccT_Null_Record;
 
-ERR_T_NULL_RECORD:constant Integer := 711; 
+ERR_T_NULL_RECORD:constant Integer := 806; 
 function asn1SccT_Null_Record_IsConstraintValid(val : asn1SccT_Null_Record) return adaasn1rtl.ASN1_RESULT;
 pragma Warnings (Off, "there are no others");
  

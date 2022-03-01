@@ -138,12 +138,12 @@ end asn1SccT_UInt64_Init;
 
 function asn1SccT_UInt64_IsConstraintValid(val : asn1SccT_UInt64) return adaasn1rtl.ASN1_RESULT
 is
-    pragma Unreferenced (val);
     pragma Warnings (Off, "initialization of ret has no effect");        
     ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
     pragma Warnings (On, "initialization of ret has no effect");        
 begin
-    ret := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    ret.Success := (val <= 4294967295);
+    ret.ErrorCode := (if ret.Success then 0 else ERR_T_UINT64);
     return ret;
 end asn1SccT_UInt64_IsConstraintValid;
 
@@ -271,7 +271,7 @@ end asn1SccTM_Hello_IsConstraintValid;
 
 
 
-function asn1SccTM_Housekeeping_tm_payload_Equal (val1, val2 :  asn1SccTM_Housekeeping_tm_payload) return Boolean
+function asn1SccTM_Housekeeping_Contents_Equal (val1, val2 :  asn1SccTM_Housekeeping_Contents) return Boolean
 is
     pragma Warnings (Off, "initialization of ret has no effect");
     ret : Boolean := True;
@@ -287,28 +287,11 @@ begin
     end loop;
 	return ret;
 
-end asn1SccTM_Housekeeping_tm_payload_Equal;
+end asn1SccTM_Housekeeping_Contents_Equal;
 
-function asn1SccTM_Housekeeping_Equal (val1, val2 :  asn1SccTM_Housekeeping) return Boolean
+function asn1SccTM_Housekeeping_Contents_Init return asn1SccTM_Housekeeping_Contents
 is
-    pragma Warnings (Off, "initialization of ret has no effect");
-    ret : Boolean := True;
-    pragma Warnings (On, "initialization of ret has no effect");
-
-begin
-    ret := (val1.tm_timestamp = val2.tm_timestamp);
-
-    if ret then
-        ret := asn1SccTM_Housekeeping_tm_payload_Equal(val1.tm_payload, val2.tm_payload);
-
-    end if;
-	return ret;
-
-end asn1SccTM_Housekeeping_Equal;
-
-function asn1SccTM_Housekeeping_tm_payload_Init return asn1SccTM_Housekeeping_tm_payload
-is
-    val: asn1SccTM_Housekeeping_tm_payload;
+    val: asn1SccTM_Housekeeping_Contents;
     i1:Integer;
 begin
     i1 := 1;
@@ -323,7 +306,43 @@ begin
 	pragma Warnings (Off, "object ""val"" is always");
     return val;
 	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTM_Housekeeping_tm_payload_Init;
+end asn1SccTM_Housekeeping_Contents_Init;
+
+function asn1SccTM_Housekeeping_Contents_IsConstraintValid(val : asn1SccTM_Housekeeping_Contents) return adaasn1rtl.ASN1_RESULT
+is
+    pragma Warnings (Off, "initialization of ret has no effect");        
+    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    pragma Warnings (On, "initialization of ret has no effect");        
+    i1:Integer;
+begin
+    i1 := val.Data'First;
+    while ret.Success and i1 <= 4 loop
+        pragma Loop_Invariant (i1 >= val.Data'First and i1 <= 4);
+        ret := asn1SccSatellite_State_IsConstraintValid(val.Data(i1));
+        i1 := i1+1;
+    end loop;
+    return ret;
+end asn1SccTM_Housekeeping_Contents_IsConstraintValid;
+
+
+
+function asn1SccTM_Housekeeping_Equal (val1, val2 :  asn1SccTM_Housekeeping) return Boolean
+is
+    pragma Warnings (Off, "initialization of ret has no effect");
+    ret : Boolean := True;
+    pragma Warnings (On, "initialization of ret has no effect");
+
+begin
+    ret := (val1.tm_timestamp = val2.tm_timestamp);
+
+    if ret then
+        ret := asn1SccTM_Housekeeping_Contents_Equal(val1.tm_payload, val2.tm_payload);
+
+    end if;
+	return ret;
+
+end asn1SccTM_Housekeeping_Equal;
+
 function asn1SccTM_Housekeeping_Init return asn1SccTM_Housekeeping
 is
     val: asn1SccTM_Housekeeping;
@@ -332,7 +351,7 @@ begin
     --set tm_timestamp 
     val.tm_timestamp := asn1SccT_UInt64_Init;
     --set tm_payload 
-    val.tm_payload := asn1SccTM_Housekeeping_tm_payload_Init;
+    val.tm_payload := asn1SccTM_Housekeeping_Contents_Init;
 	pragma Warnings (Off, "object ""val"" is always");
     return val;
 	pragma Warnings (On, "object ""val"" is always");
@@ -343,88 +362,13 @@ is
     pragma Warnings (Off, "initialization of ret has no effect");        
     ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
     pragma Warnings (On, "initialization of ret has no effect");        
-    i1:Integer;
 begin
     ret := asn1SccT_UInt64_IsConstraintValid(val.tm_timestamp);
     if ret.Success then
-        i1 := val.tm_payload.Data'First;
-        while ret.Success and i1 <= 4 loop
-            pragma Loop_Invariant (i1 >= val.tm_payload.Data'First and i1 <= 4);
-            ret := asn1SccSatellite_State_IsConstraintValid(val.tm_payload.Data(i1));
-            i1 := i1+1;
-        end loop;
+        ret := asn1SccTM_Housekeeping_Contents_IsConstraintValid(val.tm_payload);
     end if;
     return ret;
 end asn1SccTM_Housekeeping_IsConstraintValid;
-
-
-
-function asn1SccTM_Error_tm_payload_Equal (val1, val2 :  asn1SccTM_Error_tm_payload) return Boolean
-is
-
-begin
-	return val1.Data = val2.Data;
-
-end asn1SccTM_Error_tm_payload_Equal;
-
-function asn1SccTM_Error_Equal (val1, val2 :  asn1SccTM_Error) return Boolean
-is
-    pragma Warnings (Off, "initialization of ret has no effect");
-    ret : Boolean := True;
-    pragma Warnings (On, "initialization of ret has no effect");
-
-begin
-    ret := (val1.tm_timestamp = val2.tm_timestamp);
-
-    if ret then
-        ret := asn1SccTM_Error_tm_payload_Equal(val1.tm_payload, val2.tm_payload);
-
-    end if;
-	return ret;
-
-end asn1SccTM_Error_Equal;
-
-function asn1SccTM_Error_tm_payload_Init return asn1SccTM_Error_tm_payload
-is
-    val: asn1SccTM_Error_tm_payload;
-    i1:Integer;
-begin
-    i1 := 1;
-    while i1<= 80 loop
-        --  commented because it casues this warning    
-        --  warning: condition can only be False if invalid values present
-        pragma Loop_Invariant (i1 >=1 and i1<=80);
-        val.Data(i1) := adaasn1rtl.Asn1Byte(0);
-        i1 := i1 + 1;
-    end loop;
-
-	pragma Warnings (Off, "object ""val"" is always");
-    return val;
-	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTM_Error_tm_payload_Init;
-function asn1SccTM_Error_Init return asn1SccTM_Error
-is
-    val: asn1SccTM_Error;
-begin
-
-    --set tm_timestamp 
-    val.tm_timestamp := asn1SccT_UInt64_Init;
-    --set tm_payload 
-    val.tm_payload := asn1SccTM_Error_tm_payload_Init;
-	pragma Warnings (Off, "object ""val"" is always");
-    return val;
-	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTM_Error_Init;
-
-function asn1SccTM_Error_IsConstraintValid(val : asn1SccTM_Error) return adaasn1rtl.ASN1_RESULT
-is
-    pragma Warnings (Off, "initialization of ret has no effect");        
-    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
-    pragma Warnings (On, "initialization of ret has no effect");        
-begin
-    ret := asn1SccT_UInt64_IsConstraintValid(val.tm_timestamp);
-    return ret;
-end asn1SccTM_Error_IsConstraintValid;
 
 
 
@@ -756,6 +700,123 @@ end asn1SccTM_Mode_IsConstraintValid;
 
 
 
+function asn1SccTC_Type_Equal (val1, val2 :  asn1SccTC_Type) return Boolean
+is
+
+begin
+	return val1 = val2;
+
+end asn1SccTC_Type_Equal;
+
+function asn1SccTC_Type_Init return asn1SccTC_Type
+is
+    val: asn1SccTC_Type;
+begin
+    val := asn1Sccopen_link;
+	pragma Warnings (Off, "object ""val"" is always");
+    return val;
+	pragma Warnings (On, "object ""val"" is always");
+end asn1SccTC_Type_Init;
+
+function asn1SccTC_Type_IsConstraintValid(val : asn1SccTC_Type) return adaasn1rtl.ASN1_RESULT
+is
+    pragma Warnings (Off, "initialization of ret has no effect");        
+    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    pragma Warnings (On, "initialization of ret has no effect");        
+begin
+    ret.Success := (((((val = asn1Sccopen_link)) OR ((val = asn1Sccclose_link)))) OR ((val = asn1Sccrequest_hk)));
+    ret.ErrorCode := (if ret.Success then 0 else ERR_TC_TYPE);
+    return ret;
+end asn1SccTC_Type_IsConstraintValid;
+
+
+
+function asn1SccTM_Error_Contents_Equal (val1, val2 :  asn1SccTM_Error_Contents) return Boolean
+is
+
+begin
+	return val1.Length = val2.Length and then val1.Data(1 .. val1.Length) = val2.Data(1 .. val2.Length);
+
+end asn1SccTM_Error_Contents_Equal;
+
+function asn1SccTM_Error_Contents_Init return asn1SccTM_Error_Contents
+is
+    val: asn1SccTM_Error_Contents;
+    i1:Integer;
+begin
+    i1 := 1;
+    while i1<= 80 loop
+        --  commented because it casues this warning    
+        --  warning: condition can only be False if invalid values present
+        pragma Loop_Invariant (i1 >=1 and i1<=80);
+        val.Data(i1) := adaasn1rtl.Asn1Byte(0);
+        i1 := i1 + 1;
+    end loop;
+    val.Length := 0;
+	pragma Warnings (Off, "object ""val"" is always");
+    return val;
+	pragma Warnings (On, "object ""val"" is always");
+end asn1SccTM_Error_Contents_Init;
+
+function asn1SccTM_Error_Contents_IsConstraintValid(val : asn1SccTM_Error_Contents) return adaasn1rtl.ASN1_RESULT
+is
+    pragma Warnings (Off, "initialization of ret has no effect");        
+    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    pragma Warnings (On, "initialization of ret has no effect");        
+begin
+    ret.Success := (val.Length <= 80);
+    ret.ErrorCode := (if ret.Success then 0 else ERR_TM_ERROR_CONTENTS);
+    return ret;
+end asn1SccTM_Error_Contents_IsConstraintValid;
+
+
+
+function asn1SccTM_Error_Equal (val1, val2 :  asn1SccTM_Error) return Boolean
+is
+    pragma Warnings (Off, "initialization of ret has no effect");
+    ret : Boolean := True;
+    pragma Warnings (On, "initialization of ret has no effect");
+
+begin
+    ret := (val1.tm_timestamp = val2.tm_timestamp);
+
+    if ret then
+        ret := asn1SccTM_Error_Contents_Equal(val1.tm_payload, val2.tm_payload);
+
+    end if;
+	return ret;
+
+end asn1SccTM_Error_Equal;
+
+function asn1SccTM_Error_Init return asn1SccTM_Error
+is
+    val: asn1SccTM_Error;
+begin
+
+    --set tm_timestamp 
+    val.tm_timestamp := asn1SccT_UInt64_Init;
+    --set tm_payload 
+    val.tm_payload := asn1SccTM_Error_Contents_Init;
+	pragma Warnings (Off, "object ""val"" is always");
+    return val;
+	pragma Warnings (On, "object ""val"" is always");
+end asn1SccTM_Error_Init;
+
+function asn1SccTM_Error_IsConstraintValid(val : asn1SccTM_Error) return adaasn1rtl.ASN1_RESULT
+is
+    pragma Warnings (Off, "initialization of ret has no effect");        
+    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    pragma Warnings (On, "initialization of ret has no effect");        
+begin
+    ret := asn1SccT_UInt64_IsConstraintValid(val.tm_timestamp);
+    if ret.Success then
+        ret := asn1SccTM_Error_Contents_IsConstraintValid(val.tm_payload);
+    end if;
+    return ret;
+end asn1SccTM_Error_IsConstraintValid;
+
+
+
 function asn1SccTM_Type_Equal (val1, val2 :  asn1SccTM_Type) return Boolean
 is
     pragma Warnings (Off, "initialization of ret has no effect");
@@ -824,37 +885,6 @@ begin
     end if;
     return ret;
 end asn1SccTM_Type_IsConstraintValid;
-
-
-
-function asn1SccTC_Type_Equal (val1, val2 :  asn1SccTC_Type) return Boolean
-is
-
-begin
-	return val1 = val2;
-
-end asn1SccTC_Type_Equal;
-
-function asn1SccTC_Type_Init return asn1SccTC_Type
-is
-    val: asn1SccTC_Type;
-begin
-    val := asn1Sccopen_link;
-	pragma Warnings (Off, "object ""val"" is always");
-    return val;
-	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTC_Type_Init;
-
-function asn1SccTC_Type_IsConstraintValid(val : asn1SccTC_Type) return adaasn1rtl.ASN1_RESULT
-is
-    pragma Warnings (Off, "initialization of ret has no effect");        
-    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
-    pragma Warnings (On, "initialization of ret has no effect");        
-begin
-    ret.Success := (((((val = asn1Sccopen_link)) OR ((val = asn1Sccclose_link)))) OR ((val = asn1Sccrequest_hk)));
-    ret.ErrorCode := (if ret.Success then 0 else ERR_TC_TYPE);
-    return ret;
-end asn1SccTC_Type_IsConstraintValid;
 
 
 pragma Warnings (On, "condition can only be False if invalid values present");
