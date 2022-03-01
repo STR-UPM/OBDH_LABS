@@ -313,6 +313,108 @@ int Decode_NATIVE_T_Float(asn1SccT_Float *pDst, void *pBuffer, size_t iBufferSiz
 }
 #endif
 
+#ifdef __NEED_Mission_Time_UPER
+int Encode_UPER_Mission_Time(void *pBuffer, size_t iMaxBufferSize, const asn1SccMission_Time *pSrc)
+{
+    (void)iMaxBufferSize;
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMission_Time_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+#ifdef __unix__
+	fprintf(stderr, "Could not encode Mission-Time (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_Mission_Time_ACN
+int Encode_ACN_Mission_Time(void *pBuffer, size_t iMaxBufferSize, asn1SccMission_Time *pSrc)
+{
+    (void)iMaxBufferSize;
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMission_Time_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+#ifdef __unix__
+	fprintf(stderr, "Could not encode Mission-Time (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_Mission_Time_NATIVE
+int Encode_NATIVE_Mission_Time(void *pBuffer, size_t iMaxBufferSize, const asn1SccMission_Time *pSrc)
+{
+    (void)iMaxBufferSize;
+    memcpy(pBuffer, pSrc, sizeof(asn1SccMission_Time) );
+    return sizeof(asn1SccMission_Time);
+}
+#endif
+
+#ifdef __NEED_Mission_Time_UPER
+int Decode_UPER_Mission_Time(asn1SccMission_Time *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMission_Time_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+#ifdef __unix__
+	fprintf(stderr, "Could not decode Mission-Time (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_Mission_Time_ACN
+int Decode_ACN_Mission_Time(asn1SccMission_Time *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMission_Time_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+#ifdef __unix__
+	fprintf(stderr, "Could not decode Mission-Time (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_Mission_Time_NATIVE
+int Decode_NATIVE_Mission_Time(asn1SccMission_Time *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    *pDst = *(asn1SccMission_Time *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
 #ifdef __NEED_T_B_b_T_UPER
 int Encode_UPER_T_B_b_T(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_B_b_T *pSrc)
 {
@@ -925,108 +1027,6 @@ int Decode_NATIVE_Analog_Data_Table(asn1SccAnalog_Data_Table *pDst, void *pBuffe
 }
 #endif
 
-#ifdef __NEED_Mission_Time_UPER
-int Encode_UPER_Mission_Time(void *pBuffer, size_t iMaxBufferSize, const asn1SccMission_Time *pSrc)
-{
-    (void)iMaxBufferSize;
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMission_Time_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-#ifdef __unix__
-	fprintf(stderr, "Could not encode Mission-Time (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-#endif
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_Mission_Time_ACN
-int Encode_ACN_Mission_Time(void *pBuffer, size_t iMaxBufferSize, asn1SccMission_Time *pSrc)
-{
-    (void)iMaxBufferSize;
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMission_Time_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-#ifdef __unix__
-	fprintf(stderr, "Could not encode Mission-Time (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-#endif
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_Mission_Time_NATIVE
-int Encode_NATIVE_Mission_Time(void *pBuffer, size_t iMaxBufferSize, const asn1SccMission_Time *pSrc)
-{
-    (void)iMaxBufferSize;
-    memcpy(pBuffer, pSrc, sizeof(asn1SccMission_Time) );
-    return sizeof(asn1SccMission_Time);
-}
-#endif
-
-#ifdef __NEED_Mission_Time_UPER
-int Decode_UPER_Mission_Time(asn1SccMission_Time *pDst, void *pBuffer, size_t iBufferSize)
-{
-    (void)iBufferSize;
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccMission_Time_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-#ifdef __unix__
-	fprintf(stderr, "Could not decode Mission-Time (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-#endif
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_Mission_Time_ACN
-int Decode_ACN_Mission_Time(asn1SccMission_Time *pDst, void *pBuffer, size_t iBufferSize)
-{
-    (void)iBufferSize;
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccMission_Time_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-#ifdef __unix__
-	fprintf(stderr, "Could not decode Mission-Time (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-#endif
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_Mission_Time_NATIVE
-int Decode_NATIVE_Mission_Time(asn1SccMission_Time *pDst, void *pBuffer, size_t iBufferSize)
-{
-    (void)iBufferSize;
-    *pDst = *(asn1SccMission_Time *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
 #ifdef __NEED_Satellite_State_UPER
 int Encode_UPER_Satellite_State(void *pBuffer, size_t iMaxBufferSize, const asn1SccSatellite_State *pSrc)
 {
@@ -1435,6 +1435,108 @@ int Decode_NATIVE_TM_Hello(asn1SccTM_Hello *pDst, void *pBuffer, size_t iBufferS
 }
 #endif
 
+#ifdef __NEED_TM_Housekeeping_Contents_UPER
+int Encode_UPER_TM_Housekeeping_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Housekeeping_Contents *pSrc)
+{
+    (void)iMaxBufferSize;
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccTM_Housekeeping_Contents_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+#ifdef __unix__
+	fprintf(stderr, "Could not encode TM-Housekeeping-Contents (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Housekeeping_Contents_ACN
+int Encode_ACN_TM_Housekeeping_Contents(void *pBuffer, size_t iMaxBufferSize, asn1SccTM_Housekeeping_Contents *pSrc)
+{
+    (void)iMaxBufferSize;
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccTM_Housekeeping_Contents_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+#ifdef __unix__
+	fprintf(stderr, "Could not encode TM-Housekeeping-Contents (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Housekeeping_Contents_NATIVE
+int Encode_NATIVE_TM_Housekeeping_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Housekeeping_Contents *pSrc)
+{
+    (void)iMaxBufferSize;
+    memcpy(pBuffer, pSrc, sizeof(asn1SccTM_Housekeeping_Contents) );
+    return sizeof(asn1SccTM_Housekeeping_Contents);
+}
+#endif
+
+#ifdef __NEED_TM_Housekeeping_Contents_UPER
+int Decode_UPER_TM_Housekeeping_Contents(asn1SccTM_Housekeeping_Contents *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccTM_Housekeeping_Contents_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+#ifdef __unix__
+	fprintf(stderr, "Could not decode TM-Housekeeping-Contents (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Housekeeping_Contents_ACN
+int Decode_ACN_TM_Housekeeping_Contents(asn1SccTM_Housekeeping_Contents *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccTM_Housekeeping_Contents_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+#ifdef __unix__
+	fprintf(stderr, "Could not decode TM-Housekeeping-Contents (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Housekeeping_Contents_NATIVE
+int Decode_NATIVE_TM_Housekeeping_Contents(asn1SccTM_Housekeeping_Contents *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    *pDst = *(asn1SccTM_Housekeeping_Contents *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
 #ifdef __NEED_TM_Housekeeping_UPER
 int Encode_UPER_TM_Housekeeping(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Housekeeping *pSrc)
 {
@@ -1633,6 +1735,108 @@ int Decode_NATIVE_TM_Mode(asn1SccTM_Mode *pDst, void *pBuffer, size_t iBufferSiz
 {
     (void)iBufferSize;
     *pDst = *(asn1SccTM_Mode *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Error_Contents_UPER
+int Encode_UPER_TM_Error_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Error_Contents *pSrc)
+{
+    (void)iMaxBufferSize;
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccTM_Error_Contents_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+#ifdef __unix__
+	fprintf(stderr, "Could not encode TM-Error-Contents (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Error_Contents_ACN
+int Encode_ACN_TM_Error_Contents(void *pBuffer, size_t iMaxBufferSize, asn1SccTM_Error_Contents *pSrc)
+{
+    (void)iMaxBufferSize;
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccTM_Error_Contents_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+#ifdef __unix__
+	fprintf(stderr, "Could not encode TM-Error-Contents (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Error_Contents_NATIVE
+int Encode_NATIVE_TM_Error_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Error_Contents *pSrc)
+{
+    (void)iMaxBufferSize;
+    memcpy(pBuffer, pSrc, sizeof(asn1SccTM_Error_Contents) );
+    return sizeof(asn1SccTM_Error_Contents);
+}
+#endif
+
+#ifdef __NEED_TM_Error_Contents_UPER
+int Decode_UPER_TM_Error_Contents(asn1SccTM_Error_Contents *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccTM_Error_Contents_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+#ifdef __unix__
+	fprintf(stderr, "Could not decode TM-Error-Contents (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Error_Contents_ACN
+int Decode_ACN_TM_Error_Contents(asn1SccTM_Error_Contents *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccTM_Error_Contents_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+#ifdef __unix__
+	fprintf(stderr, "Could not decode TM-Error-Contents (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+#endif
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_TM_Error_Contents_NATIVE
+int Decode_NATIVE_TM_Error_Contents(asn1SccTM_Error_Contents *pDst, void *pBuffer, size_t iBufferSize)
+{
+    (void)iBufferSize;
+    *pDst = *(asn1SccTM_Error_Contents *) pBuffer;
     {
         return 0;
     }

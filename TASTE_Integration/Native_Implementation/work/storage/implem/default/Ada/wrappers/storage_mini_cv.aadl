@@ -14,6 +14,19 @@ PROPERTIES
 END Get.Ada;
 
 
+SUBPROGRAM Last
+FEATURES
+   Out_Data : OUT PARAMETER DataView::Satellite_State {encoding=>NATIVE;};
+
+END Last;
+
+SUBPROGRAM IMPLEMENTATION Last.Ada
+PROPERTIES
+   FV_Name => "storage";
+   Source_Language => Ada;
+END Last.Ada;
+
+
 SUBPROGRAM Put
 FEATURES
    In_Data : IN PARAMETER DataView::Satellite_State {encoding=>NATIVE;};
