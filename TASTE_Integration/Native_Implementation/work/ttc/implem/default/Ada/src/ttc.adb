@@ -40,20 +40,22 @@ package body Ttc is
    -------------
 
    procedure Hk_Task is
-   
+      TM_HK : asn1SccTm_Type (hk_PRESENT);
    begin
-      --  Write your code here
-      null;
+      TM_HK.hk.tm_timestamp := Timestamp;
+      for I in TM_HK.hk.tm_payload.Data'Range loop
+         Get (TM_HK.hk.tm_payload.Data(I));
+      end loop;
+
+      TM (TM_HK);
    end Hk_Task;
    
    --------
    -- TC --
    --------
    
-   procedure Tc (Telecommand : in out asn1SccTc_Type) is
-   
+   procedure Tc (Telecommand : in out asn1SccTc_Type) is   
    begin
-      Put_Line ("[TTC] Processing TC.");
       Process_TC (Telecommand);
    end Tc;
    
