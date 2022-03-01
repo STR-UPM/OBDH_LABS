@@ -1,0 +1,44 @@
+export MAKEFLAGS="-j $(grep -c ^processor /proc/cpuinfo)"
+
+ASN1SCC:=$(shell which asn1scc)
+ASN2DATAMODEL:=asn2dataModel
+GRAMMAR := dataview-uniq
+BASEGRAMMAR := dataview-uniq
+BDIR:= .
+OBJ     := $(BDIR)/$(GRAMMAR).o $(BDIR)/asn1crt.o $(BDIR)/asn1crt_encoding.o $(BDIR)/asn1crt_encoding_uper.o $(BDIR)/asn1crt_encoding_acn.o $(BDIR)/$(BASEGRAMMAR)_getset.o
+
+all:    $(BDIR)/$(BASEGRAMMAR)_getset.so $(BDIR)/DV.py
+
+$(BDIR)/$(GRAMMAR)_getset.c:       $(GRAMMAR).asn
+	mkdir -p $(BDIR)
+	$(ASN2DATAMODEL) -toPython -o $(BDIR) $<
+
+# Create the ACN file if it is missing
+$(BDIR)/$(GRAMMAR).acn:
+	$(ASN1SCC) -ACND -o $(BDIR) $(GRAMMAR).asn
+
+# The hell of multiple outputs (see https://www.gnu.org/software/automake/manual/html_node/Multiple-Outputs.html )
+$(BDIR)/asn1crt.c:	$(GRAMMAR).asn  $(GRAMMAR).acn
+	$(ASN1SCC) -ACN -c -uPER -equal -o $(BDIR) $< $(GRAMMAR).acn
+
+# The hell of multiple outputs (see https://www.gnu.org/software/automake/manual/html_node/Multiple-Outputs.html )
+$(BDIR)/$(GRAMMAR).c $(BDIR)/asn1crt_encoding.c $(BDIR)/asn1crt_encoding_uper.c $(BDIR)/asn1crt_encoding_acn.c $(BDIR)/$(GRAMMAR).h $(BDIR)/asn1crt.h:	$(BDIR)/asn1crt.c
+## Recover from the removal of any of these
+	@for i in $@; do               	    if test -f "$$i" ; then :; 	    else                       		rm -f $< ;             		$(MAKE) $< ;           	    fi ;                       	done
+
+$(BDIR)/$(GRAMMAR).c $(BDIR)/asn1crt_encoding.c $(BDIR)/asn1crt_encoding_uper.c $(BDIR)/asn1crt_encoding_acn.c $(BDIR)/$(GRAMMAR).h $(BDIR)/asn1crt.h:
+
+$(BDIR)/DV.py:       $(GRAMMAR).asn $(BDIR)/$(GRAMMAR).h
+	grep 'REQUIRED_BYTES_FOR_.*ENCODING' $(BDIR)/$(GRAMMAR).h | awk '{print $$2 " = " $$3}' > $@
+	python learn_CHOICE_enums.py dataview-uniq >> $@ || rm $@
+
+$(BDIR)/%.o:       $(BDIR)/%.c $(BDIR)/$(GRAMMAR).h
+	gcc -g -fPIC -c -o $@ $<
+
+$(BDIR)/$(BASEGRAMMAR)_getset.so:	${OBJ}
+	gcc -g -fPIC -shared -o $@ $^
+
+clean:
+	rm -f $(BDIR)/asn1crt*  $(BDIR)/$(GRAMMAR).?
+	rm -f $(BDIR)/DV.py $(BDIR)/*.pyc $(BDIR)/$(BASEGRAMMAR)_getset.? $(BDIR)/$(BASEGRAMMAR)_getset.so
+	rm -f $(BDIR)/$(GRAMMAR)_asn.py
