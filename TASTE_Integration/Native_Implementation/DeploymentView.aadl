@@ -92,6 +92,7 @@ SUBCOMPONENTS
 
    demo : PROCESS deploymentview::DV::Node_Linux::demo.others {
       Deployment::Port_Number => 0;
+      TASTE_DV_Properties::CoverageEnabled => false;
       TASTE::CFlags => "-no-pie";
       TASTE::LDFlags => "-no-pie";
    };
