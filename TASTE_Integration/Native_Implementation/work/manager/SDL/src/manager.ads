@@ -23,7 +23,7 @@ package Manager with Elaborate_Body is
        idle_error_msg => (Data => (92, 39, 111, 112, 101, 110, 45, 108, 105, 110, 107, 92, 39, 32, 105, 115, 32, 111, 110, 108, 121, 32, 97, 108, 108, 111, 119, 101, 100, 32, 100, 117, 114, 105, 110, 103, 32, 73, 100, 108, 101, 32, 109, 111, 100, 101, others => 0), Length => 46),
       coverage_error_msg => (Data => (92, 39, 99, 108, 111, 115, 101, 45, 108, 105, 110, 107, 92, 39, 32, 97, 110, 100, 32, 92, 39, 114, 101, 113, 117, 101, 115, 116, 45, 104, 107, 92, 39, 32, 111, 110, 108, 121, 32, 97, 108, 108, 111, 119, 101, 100, 32, 100, 117, 114, 105, 110, 103, 32, 67, 111, 118, 101, 114, 97, 103, 101, 32, 109, 111, 100, 101, others => 0), Length => 67),
       others => <>);
-   function To_Tm_Type_selection (Src : NATIVE_IMPLEMENTATION_DATAVIEW.asn1SccTm_Type_selection) return Manager_Datamodel.asn1SccManager_Tm_Type_selection is (Manager_Datamodel.asn1SccManager_Tm_Type_selection'Enum_Val (Src'Enum_Rep));
+   function To_Tm_Type_selection (Src : NATIVE_IMPLEMENTATION_DATAVIEW.asn1SccTm_Type_selection) return Manager_Datamodel.asn1SccTm_Type_selection is (Manager_Datamodel.asn1SccTm_Type_selection'Enum_Val (Src'Enum_Rep));
    function Get_State return chars_ptr is (New_String (asn1SccManager_States'Image (ctxt.State))) with Export, Convention => C, Link_Name => "manager_state";
    procedure Startup with Export, Convention => C, Link_Name => "Manager_startup";
    procedure Current_Mode(Current: in out asn1SccOperating_Mode);
@@ -46,6 +46,4 @@ package Manager with Elaborate_Body is
    --  Timer Coverage_Timer SET and RESET functions
    procedure SET_Coverage_Timer (Val : in out asn1SccT_UInt32) renames Manager_RI.Set_Coverage_Timer;
    procedure RESET_Coverage_Timer renames Manager_RI.Reset_Coverage_Timer;
-   procedure Execute_Transition (Id : Integer);
-   CS_Only : constant := 8;
 end Manager;

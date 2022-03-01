@@ -1,3 +1,20 @@
+------------------------------------------------------------------------------
+--                                                                          --
+--          Copyright (C) 2022 Universidad Politécnica de Madrid            --
+--                                                                          --
+-- This is free software;  you can redistribute it  and/or modify it  under --
+-- terms of the  GNU General Public License as published  by the Free Soft- --
+-- ware  Foundation;  either version 3,  or (at your option) any later ver- --
+-- sion.  This software is distributed in the hope  that it will be useful, --
+-- but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHAN- --
+-- TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public --
+-- License for  more details.  You should have  received  a copy of the GNU --
+-- General  Public  License  distributed  with  this  software;   see  file --
+-- COPYING3.  If not, go to http://www.gnu.org/licenses for a complete copy --
+-- of the license.                                                          --
+--                                                                          --
+------------------------------------------------------------------------------
+
 NATIVE-IMPLEMENTATION-DATAVIEW DEFINITIONS ::=
 BEGIN
 
@@ -8,7 +25,8 @@ BEGIN
     -- Reusable data types --
     -------------------------
     T-UInt16 ::= INTEGER (0 .. 65535)
-    T-UInt64 ::= INTEGER (0 .. 18446744073709551615)
+    -- NOTE: It is uint_32, since the GUI does not support UINT64
+    T-UInt64 ::= INTEGER (0 .. 4294967295)
     T-Float  ::= REAL (-3.4e+38 .. 3.4e+38)
 
     Mission-Time ::= T-UInt64
@@ -70,11 +88,7 @@ BEGIN
     }
 
     -- Hello
-    TM-Hello-Contents ::= SEQUENCE {
-        op-mode Operating-Mode,
-        analog-data Analog-Data-Table
-    }
-    TM-Hello ::= TM-Message {TM-Hello-Contents}
+    TM-Hello ::= TM-Message {Satellite-State}
 
     -- Housekeeping
     hk-size INTEGER ::= 4
@@ -82,8 +96,7 @@ BEGIN
     TM-Housekeeping ::= TM-Message {TM-Housekeeping-Contents}
 
     -- Mode
-    TM-Mode-Contents ::= Operating-Mode
-    TM-Mode ::= TM-Message {TM-Mode-Contents}
+    TM-Mode ::= TM-Message {Operating-Mode}
 
     -- Error
     msg-size INTEGER ::= 80

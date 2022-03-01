@@ -138,12 +138,12 @@ end asn1SccT_UInt64_Init;
 
 function asn1SccT_UInt64_IsConstraintValid(val : asn1SccT_UInt64) return adaasn1rtl.ASN1_RESULT
 is
-    pragma Unreferenced (val);
     pragma Warnings (Off, "initialization of ret has no effect");        
     ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
     pragma Warnings (On, "initialization of ret has no effect");        
 begin
-    ret := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    ret.Success := (val <= 4294967295);
+    ret.ErrorCode := (if ret.Success then 0 else ERR_T_UINT64);
     return ret;
 end asn1SccT_UInt64_IsConstraintValid;
 
@@ -222,6 +222,52 @@ begin
     end if;
     return ret;
 end asn1SccSatellite_State_IsConstraintValid;
+
+
+
+function asn1SccTM_Hello_Equal (val1, val2 :  asn1SccTM_Hello) return Boolean
+is
+    pragma Warnings (Off, "initialization of ret has no effect");
+    ret : Boolean := True;
+    pragma Warnings (On, "initialization of ret has no effect");
+
+begin
+    ret := (val1.tm_timestamp = val2.tm_timestamp);
+
+    if ret then
+        ret := asn1SccSatellite_State_Equal(val1.tm_payload, val2.tm_payload);
+
+    end if;
+	return ret;
+
+end asn1SccTM_Hello_Equal;
+
+function asn1SccTM_Hello_Init return asn1SccTM_Hello
+is
+    val: asn1SccTM_Hello;
+begin
+
+    --set tm_timestamp 
+    val.tm_timestamp := asn1SccT_UInt64_Init;
+    --set tm_payload 
+    val.tm_payload := asn1SccSatellite_State_Init;
+	pragma Warnings (Off, "object ""val"" is always");
+    return val;
+	pragma Warnings (On, "object ""val"" is always");
+end asn1SccTM_Hello_Init;
+
+function asn1SccTM_Hello_IsConstraintValid(val : asn1SccTM_Hello) return adaasn1rtl.ASN1_RESULT
+is
+    pragma Warnings (Off, "initialization of ret has no effect");        
+    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    pragma Warnings (On, "initialization of ret has no effect");        
+begin
+    ret := asn1SccT_UInt64_IsConstraintValid(val.tm_timestamp);
+    if ret.Success then
+        ret := asn1SccSatellite_State_IsConstraintValid(val.tm_payload);
+    end if;
+    return ret;
+end asn1SccTM_Hello_IsConstraintValid;
 
 
 
@@ -608,128 +654,6 @@ end asn1SccOperating_Mode_IsConstraintValid;
 
 
 
-function asn1SccTM_Hello_Contents_Equal (val1, val2 :  asn1SccTM_Hello_Contents) return Boolean
-is
-    pragma Warnings (Off, "initialization of ret has no effect");
-    ret : Boolean := True;
-    pragma Warnings (On, "initialization of ret has no effect");
-
-begin
-    ret := (val1.op_mode = val2.op_mode);
-
-    if ret then
-        ret := asn1SccAnalog_Data_Table_Equal(val1.analog_data, val2.analog_data);
-
-    end if;
-	return ret;
-
-end asn1SccTM_Hello_Contents_Equal;
-
-function asn1SccTM_Hello_Contents_Init return asn1SccTM_Hello_Contents
-is
-    val: asn1SccTM_Hello_Contents;
-begin
-
-    --set op_mode 
-    val.op_mode := asn1SccOperating_Mode_Init;
-    --set analog_data 
-    val.analog_data := asn1SccAnalog_Data_Table_Init;
-	pragma Warnings (Off, "object ""val"" is always");
-    return val;
-	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTM_Hello_Contents_Init;
-
-function asn1SccTM_Hello_Contents_IsConstraintValid(val : asn1SccTM_Hello_Contents) return adaasn1rtl.ASN1_RESULT
-is
-    pragma Warnings (Off, "initialization of ret has no effect");        
-    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
-    pragma Warnings (On, "initialization of ret has no effect");        
-begin
-    ret := asn1SccOperating_Mode_IsConstraintValid(val.op_mode);
-    if ret.Success then
-        ret := asn1SccAnalog_Data_Table_IsConstraintValid(val.analog_data);
-    end if;
-    return ret;
-end asn1SccTM_Hello_Contents_IsConstraintValid;
-
-
-
-function asn1SccTM_Hello_Equal (val1, val2 :  asn1SccTM_Hello) return Boolean
-is
-    pragma Warnings (Off, "initialization of ret has no effect");
-    ret : Boolean := True;
-    pragma Warnings (On, "initialization of ret has no effect");
-
-begin
-    ret := (val1.tm_timestamp = val2.tm_timestamp);
-
-    if ret then
-        ret := asn1SccTM_Hello_Contents_Equal(val1.tm_payload, val2.tm_payload);
-
-    end if;
-	return ret;
-
-end asn1SccTM_Hello_Equal;
-
-function asn1SccTM_Hello_Init return asn1SccTM_Hello
-is
-    val: asn1SccTM_Hello;
-begin
-
-    --set tm_timestamp 
-    val.tm_timestamp := asn1SccT_UInt64_Init;
-    --set tm_payload 
-    val.tm_payload := asn1SccTM_Hello_Contents_Init;
-	pragma Warnings (Off, "object ""val"" is always");
-    return val;
-	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTM_Hello_Init;
-
-function asn1SccTM_Hello_IsConstraintValid(val : asn1SccTM_Hello) return adaasn1rtl.ASN1_RESULT
-is
-    pragma Warnings (Off, "initialization of ret has no effect");        
-    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
-    pragma Warnings (On, "initialization of ret has no effect");        
-begin
-    ret := asn1SccT_UInt64_IsConstraintValid(val.tm_timestamp);
-    if ret.Success then
-        ret := asn1SccTM_Hello_Contents_IsConstraintValid(val.tm_payload);
-    end if;
-    return ret;
-end asn1SccTM_Hello_IsConstraintValid;
-
-
-
-function asn1SccTM_Mode_Contents_Equal (val1, val2 :  asn1SccTM_Mode_Contents) return Boolean
-is
-
-begin
-	return val1 = val2;
-
-end asn1SccTM_Mode_Contents_Equal;
-
-function asn1SccTM_Mode_Contents_Init return asn1SccTM_Mode_Contents
-is
-    val: asn1SccTM_Mode_Contents;
-begin
-    val := asn1SccOperating_Mode_Init;
-	pragma Warnings (Off, "object ""val"" is always");
-    return val;
-	pragma Warnings (On, "object ""val"" is always");
-end asn1SccTM_Mode_Contents_Init;
-
-function asn1SccTM_Mode_Contents_IsConstraintValid(val : asn1SccTM_Mode_Contents) return adaasn1rtl.ASN1_RESULT
-is
-    pragma Warnings (Off, "initialization of ret has no effect");        
-    ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
-    pragma Warnings (On, "initialization of ret has no effect");        
-begin
-    ret := asn1SccOperating_Mode_IsConstraintValid(val);
-    return ret;
-end asn1SccTM_Mode_Contents_IsConstraintValid;
-
-
-
 function asn1SccTM_Mode_Equal (val1, val2 :  asn1SccTM_Mode) return Boolean
 is
     pragma Warnings (Off, "initialization of ret has no effect");
@@ -811,7 +735,7 @@ function asn1SccTM_Error_Contents_Equal (val1, val2 :  asn1SccTM_Error_Contents)
 is
 
 begin
-	return val1.Data = val2.Data;
+	return val1.Length = val2.Length and then val1.Data(1 .. val1.Length) = val2.Data(1 .. val2.Length);
 
 end asn1SccTM_Error_Contents_Equal;
 
@@ -828,7 +752,7 @@ begin
         val.Data(i1) := adaasn1rtl.Asn1Byte(0);
         i1 := i1 + 1;
     end loop;
-
+    val.Length := 0;
 	pragma Warnings (Off, "object ""val"" is always");
     return val;
 	pragma Warnings (On, "object ""val"" is always");
@@ -836,12 +760,12 @@ end asn1SccTM_Error_Contents_Init;
 
 function asn1SccTM_Error_Contents_IsConstraintValid(val : asn1SccTM_Error_Contents) return adaasn1rtl.ASN1_RESULT
 is
-    pragma Unreferenced (val);
     pragma Warnings (Off, "initialization of ret has no effect");        
     ret : adaasn1rtl.ASN1_RESULT := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
     pragma Warnings (On, "initialization of ret has no effect");        
 begin
-    ret := adaasn1rtl.ASN1_RESULT'(Success => true, ErrorCode => 0);
+    ret.Success := (val.Length <= 80);
+    ret.ErrorCode := (if ret.Success then 0 else ERR_TM_ERROR_CONTENTS);
     return ret;
 end asn1SccTM_Error_Contents_IsConstraintValid;
 

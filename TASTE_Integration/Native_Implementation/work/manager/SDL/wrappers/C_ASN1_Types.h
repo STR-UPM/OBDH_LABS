@@ -328,30 +328,6 @@ int Decode_ACN_TC_Type(asn1SccTC_Type *pDst, void *pBuffer, size_t iBufferSize);
 int Decode_NATIVE_TC_Type(asn1SccTC_Type *pDst, void *pBuffer, size_t iBufferSize);
 #endif
 
-#ifdef __NEED_TM_Hello_Contents_UPER
-int Encode_UPER_TM_Hello_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Hello_Contents *pSrc);
-#endif
-
-#ifdef __NEED_TM_Hello_Contents_ACN
-int Encode_ACN_TM_Hello_Contents(void *pBuffer, size_t iMaxBufferSize, asn1SccTM_Hello_Contents *pSrc);
-#endif
-
-#ifdef __NEED_TM_Hello_Contents_NATIVE
-int Encode_NATIVE_TM_Hello_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Hello_Contents *pSrc);
-#endif
-
-#ifdef __NEED_TM_Hello_Contents_UPER
-int Decode_UPER_TM_Hello_Contents(asn1SccTM_Hello_Contents *pDst, void *pBuffer, size_t iBufferSize);
-#endif
-
-#ifdef __NEED_TM_Hello_Contents_ACN
-int Decode_ACN_TM_Hello_Contents(asn1SccTM_Hello_Contents *pDst, void *pBuffer, size_t iBufferSize);
-#endif
-
-#ifdef __NEED_TM_Hello_Contents_NATIVE
-int Decode_NATIVE_TM_Hello_Contents(asn1SccTM_Hello_Contents *pDst, void *pBuffer, size_t iBufferSize);
-#endif
-
 #ifdef __NEED_TM_Hello_UPER
 int Encode_UPER_TM_Hello(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Hello *pSrc);
 #endif
@@ -422,30 +398,6 @@ int Decode_ACN_TM_Housekeeping(asn1SccTM_Housekeeping *pDst, void *pBuffer, size
 
 #ifdef __NEED_TM_Housekeeping_NATIVE
 int Decode_NATIVE_TM_Housekeeping(asn1SccTM_Housekeeping *pDst, void *pBuffer, size_t iBufferSize);
-#endif
-
-#ifdef __NEED_TM_Mode_Contents_UPER
-int Encode_UPER_TM_Mode_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Mode_Contents *pSrc);
-#endif
-
-#ifdef __NEED_TM_Mode_Contents_ACN
-int Encode_ACN_TM_Mode_Contents(void *pBuffer, size_t iMaxBufferSize, asn1SccTM_Mode_Contents *pSrc);
-#endif
-
-#ifdef __NEED_TM_Mode_Contents_NATIVE
-int Encode_NATIVE_TM_Mode_Contents(void *pBuffer, size_t iMaxBufferSize, const asn1SccTM_Mode_Contents *pSrc);
-#endif
-
-#ifdef __NEED_TM_Mode_Contents_UPER
-int Decode_UPER_TM_Mode_Contents(asn1SccTM_Mode_Contents *pDst, void *pBuffer, size_t iBufferSize);
-#endif
-
-#ifdef __NEED_TM_Mode_Contents_ACN
-int Decode_ACN_TM_Mode_Contents(asn1SccTM_Mode_Contents *pDst, void *pBuffer, size_t iBufferSize);
-#endif
-
-#ifdef __NEED_TM_Mode_Contents_NATIVE
-int Decode_NATIVE_TM_Mode_Contents(asn1SccTM_Mode_Contents *pDst, void *pBuffer, size_t iBufferSize);
 #endif
 
 #ifdef __NEED_TM_Mode_UPER

@@ -1,6 +1,6 @@
 project DataView_c is
    for Languages use ("ASN1");
-   for Source_Dirs use (".");
+   for Source_Dirs use (".", "code");
    for Source_Files use ("dataview-uniq.asn");
    for Object_Dir use "code";
 
@@ -13,7 +13,8 @@ project DataView_c is
 
        for Leading_Required_Switches ("ASN1") use
          ("-c",
+          "-equal",
           "-typePrefix",
-          "Asn1Scc", "manager_newtypes.asn");
+          "Asn1Scc", "manager_datamodel.asn");
    end Compiler;
 end DataView_c;
