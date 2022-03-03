@@ -1,14 +1,26 @@
+%===============================================================================
+% OBDH laboratory manual
+%
+% © 2020 Juan A. de la Puente <juan.de.la.puente@upm.es>
+% © 2022 Juan Zamorano <juanrafael.zamorano@upm.es>
+%
+% Some rights reserved. This work is licensed under a  
+% Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+% http://creativecommons.org/licenses/by-nc-sa/4.0/
+%===============================================================================
 \documentclass[12pt,a4paper,english,twoside]{book}
 
 \bibliographystyle{abbrvnat}
+\usepackage{natbib}
 
-\usepackage{t1enc}                % Latin1 characters
-%\usepackage[utf8]{inputenc}
-\usepackage{babel}                % hyphenation etc.
+\usepackage[utf8]{inputenc}    % UTF8 encoding
+%\usepackage{t1enc}                % Latin1 characters
+%\usepackage{babel}                % hyphenation etc. - not needed 
 \usepackage{graphicx}             % figures
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \graphicspath{{fig/}}
-\usepackage{natbib}
+\usepackage{xcolor}
+
 \usepackage{amssymb,amsmath}
 \usepackage{alltt}
 \usepackage[hmargin=3cm,vmargin=2cm]{geometry} % page margins
@@ -21,8 +33,6 @@
 \usepackage{theorem}
 \usepackage{listings}
 
-
-\usepackage{xcolor}
 \definecolor{mGreen}{rgb}{0,0.6,0}
 \definecolor{mGray}{rgb}{0.5,0.5,0.5}
 \definecolor{mPurple}{rgb}{0.58,0,0.82}
@@ -30,27 +40,27 @@
 \definecolor{backgroundColour}{rgb}{255,255,255}
 % \definecolor{orangered}{RGB}{239,134,64}
 
-\lstset{inputpath=code/}
-\lstdefinestyle{CStyle}{
-    backgroundcolor=\color{backgroundColour},
-    commentstyle=\color{mGreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{mGray},
-    stringstyle=\color{mPurple},
-    basicstyle=\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=4,
-    morekeywords={vTaskNotifyGiveFromISR},
-    language=C
-}
+%\lstset{inputpath=code/}
+%\lstdefinestyle{CStyle}{
+%    backgroundcolor=\color{backgroundColour},
+%    commentstyle=\color{mGreen},
+%    keywordstyle=\color{magenta},
+%    numberstyle=\tiny\color{mGray},
+%    stringstyle=\color{mPurple},
+%    basicstyle=\footnotesize,
+%    breakatwhitespace=false,
+%    breaklines=true,
+%    captionpos=b,
+%    keepspaces=true,
+%    numbers=left,
+%    numbersep=5pt,
+%    showspaces=false,
+%    showstringspaces=false,
+%    showtabs=false,
+%    tabsize=4,
+%    morekeywords={vTaskNotifyGiveFromISR},
+%    language=C
+%}
 
 %\lstdefinestyle{c}{
 %       language=c,
@@ -62,14 +72,14 @@
 
 %------------- software versions ------------------------------------
 
-\newcommand{\simplicitystudio}{Simplicity
-Studio\textsuperscript{\tiny\texttrademark} 4 }
-\newcommand{\sdk}{Flex Software Development Kit (SDK) Gecko v5.0.0}
-\newcommand{\matlabversion}{Matlab R2018b}
-\newcommand{\gccversion}{\prog{GCC~7.2.1}}
-\newcommand{\gdbversion}{\prog{GDB~8.0}}
-\newcommand{\binutils}{\prog{binutils 2.29.51}}
-\newcommand{\newlibversion}{\prog{Newlib~2.5.0}}
+%\newcommand{\simplicitystudio}{Simplicity
+%Studio\textsuperscript{\tiny\texttrademark} 4 }
+%\newcommand{\sdk}{Flex Software Development Kit (SDK) Gecko v5.0.0}
+%\newcommand{\matlabversion}{Matlab R2018b}
+%\newcommand{\gccversion}{\prog{GCC~7.2.1}}
+%\newcommand{\gdbversion}{\prog{GDB~8.0}}
+%\newcommand{\binutils}{\prog{binutils 2.29.51}}
+%\newcommand{\newlibversion}{\prog{Newlib~2.5.0}}
 
 %-------------- other commands ---------------------------------------
 \newcommand{\prog}[1]{\textsf{#1}}
@@ -100,17 +110,20 @@ Studio\textsuperscript{\tiny\texttrademark} 4 }
 %======================= document ===================================
 \begin{document}
 %======================= front matter ===============================
-\pagestyle{empty}
+\frontmatter
 
 \input{title.tex}
-\input{copyright.tex}
+\thispagestyle{empty}
 
+\input{copyright.tex}
 \cleardoublepage\pagestyle{plain}
-\pagenumbering{roman}\setcounter{page}{1}
+%\pagenumbering{roman}
+\setcounter{page}{1}
 \setcounter{tocdepth}{1}
 \tableofcontents
 
 %======================= document body =================================
+\mainmatter
 \cleardoublepage
 \pagestyle{headings}
 \pagenumbering{arabic}\setcounter{page}{1}
@@ -132,15 +145,15 @@ Studio\textsuperscript{\tiny\texttrademark} 4 }
 \renewcommand{\chaptername}{Final project}
 \include{obdh}
 %----------------------------------------------------------------------
-\cleardoublepage
-%\addcontentsline{toc}{section}{\protect\textbf{Appendices}}
-\appendix
-%\begin{appendices}
-\include{licence}
-%\end{appendices}
+%\cleardoublepage
+%%\addcontentsline{toc}{section}{\protect\textbf{Appendices}}
+%\appendix
+%%\begin{appendices}
+%\include{licence}
+%%\end{appendices}
 %======================= back matter ===================================
-\addcontentsline{toc}{chapter}{\numberline{}Bibliography}
-\bibliography{realtime,anser}
-\cleardoublepage
+%\addcontentsline{toc}{chapter}{\numberline{}Bibliography}
+%\bibliography{realtime,anser}
+%\cleardoublepage
 \end{document}
 
