@@ -70,7 +70,7 @@ The following real-time requirements are specified for the system:
 \item The {\tt TC} task is sporadic, and is executed upon reception of a telecommand. The minimum separation of the event is 2 s, and the deadline is 1 s.
 \item The {\tt Coverage\_Timer} task is sporadic with a minimum separation of 60 s and a deadline of 1 s.
 \end{itemize}
-Priorities are assigned in deadline-monotonic order, as shown in table~\ref{tb:obdh-requeriments}. The {\tt Buffer} protected object, which is part of the {\tt Storage} implementation, is accessed by the {\tt Housekeeping}, {\tt Basic\_TM} and {\tt TC} tasks, and thus has a ceiling priority equal to the priority of the {\tt Housekeeping} task.
+Priorities are assigned in deadline-monotonic order, as shown in table~\ref{tb:obdh-requirements}. The {\tt Buffer} protected object, which is part of the {\tt Storage} implementation, is accessed by the {\tt Housekeeping}, {\tt Basic\_TM} and {\tt TC} tasks, and thus has a ceiling priority equal to the priority of the {\tt Housekeeping} task.
 
 \begin{table}[htb]
 \begin{center}
@@ -82,8 +82,8 @@ Basic\_TM & 10.0 & 0.5 & 12 \\
 TC & 1.0 & 1.0 & 10 \\
 Storage buffer & - & - & 20 \\ \hline
 \end{tabular}
-\caption{OBDH real-time requeriments.}
-\label{tb:obdh-requeriments}
+\caption{OBDH real-time requirements.}
+\label{tb:obdh-requirements}
 \end{center}
 \end{table}
 

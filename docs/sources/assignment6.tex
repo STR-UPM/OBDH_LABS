@@ -22,7 +22,7 @@ The following real-time requirements are specified for the system:
 \item The {\tt TTC} task executes with a period of 10 s and has a deadline of 2 s.
 \end{itemize}
 
-Priorities are assigned in deadline-monotonic order, as shown in table~\ref{tb:requeriments}. The Buffer protected object, which is part of the {\tt Storage} implementation, is accessed by both application tasks and thus has a ceiling priority equal to the priority of the {\tt Housekeeping} task.
+Priorities are assigned in deadline-monotonic order, as shown in table~\ref{tb:requirements}. The Buffer protected object, which is part of the {\tt Storage} implementation, is accessed by both application tasks and thus has a ceiling priority equal to the priority of the {\tt Housekeeping} task.
 
 \begin{table}[htb]
 \begin{center}
@@ -32,8 +32,8 @@ Housekeeping & 1.0 & 1.0 & 20 \\
 TTC & 10.0 & 2.0 & 10 \\
 Storage buffer & - & - & 20 \\ \hline
 \end{tabular}
-\caption{Real-time requeriments.}
-\label{tb:requeriments}
+\caption{Real-time requirements.}
+\label{tb:requirements}
 \end{center}
 \end{table}
 
