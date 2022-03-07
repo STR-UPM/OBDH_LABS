@@ -58,7 +58,7 @@ The rest of the implementation is the same as in the previous project.
 Open GPS and do the following:
 \begin{enumerate}
 \item Select {\tt Open} project on the welcome window. Navigate to the LAB6 directory and open the {\tt realtime\_housekeeping.gpr} project file.
-\item Build the executable and load it into the board by clicking on the \hbox{\includegraphics[width=1.5em]{buildandload.png}} symbol in the tool bar (or select {\tt Build} > {\tt Bareboard} > {\tt Flash to board} on the top menu).
+\item Build the executable and load it into the board by clicking on the \hbox{\includegraphics[width=1.5em]{buildandload.png}} symbol in the tool bar (or select {\tt Build} $\rightarrow$ {\tt Bareboard} $\rightarrow$ {\tt Flash to board} on the top menu).
 
 The program will be compiled, and the executable will be loaded into the board flash memory. After that, the program starts to run on the board (check the blinking LEDs).
 \item Connect the serial cable to a USB port on the host computer, if not already done.
@@ -97,10 +97,10 @@ Once you have an estimate of worst case execution times, apply the RTA equations
 \begin{table}[htb]
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|} \hline
-Task & T & C & B & D & R & P & CPut & CGet\\ \hline
-Housekeeping & 1.0 & $13\cdot10^{-6}$ & $4\cdot10^{-6}$ & 1.0 & $17\cdot10^{-6}$& 20 & $3\cdot10^{-6}$ & - \\
-TTC & 10.0 & $26\cdot10^{-6}$ & 0 & 2.0 & $39\cdot10^{-6}$ & 10 & - & $4\cdot10^{-6}$ \\ \hline
-& & & & & & CP & 20 & 10 \\ \hline
+Task & T & C & B & D & R & P & Storage & Operation\\ \hline
+Housekeeping & 1.0 & $13\cdot10^{-6}$ & $4\cdot10^{-6}$ & 1.0 & $17\cdot10^{-6}$& 20 & $3\cdot10^{-6}$ & CPut \\
+TTC & 10.0 & $26\cdot10^{-6}$ & 0 & 2.0 & $39\cdot10^{-6}$ & 10 & $4\cdot10^{-6}$ & CGet \\ \hline
+& & & & & & CP & \multicolumn{2}{|c|}{20} \\ \hline
 \end{tabular}
 \caption{Data arrangement for RTA of the housekeeping system.}
 \label{tb:wcet}

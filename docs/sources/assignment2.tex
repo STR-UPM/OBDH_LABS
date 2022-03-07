@@ -56,12 +56,12 @@ The next thing is to compile a run a simple embedded program. This program is on
 
 Open GPS and do the following:
 \begin{enumerate}
-\item Create a new project by clicking on {\tt File} > {\tt New Project} ... in the top menu. Choose the {\tt STM324F compatible} > {\tt LED demo project template}.
+\item Create a new project by clicking on {\tt File} $\rightarrow$ {\tt New Project} ... in the top menu. Choose the {\tt STM324F compatible} $\rightarrow$ {\tt LED demo project template}.
 \item	Choose a folder to deploy the project, e.g. OBDH\_LABS/LAB2. Set the project name to {\tt led\_demo} and the main name to {\tt main.} A window with a project including a number of source files will open.
-\item	Right-click on the project icon on the left side area, and choose {\tt Project} > {\tt Properties} (figure 6). On the emerging window, select Embedded and change the Connection tool selector to st-util. Save the settings.
+\item	Right-click on the project icon on the left side area, and choose {\tt Project} $\rightarrow$ {\tt Properties} (figure 6). On the emerging window, select Embedded and change the Connection tool selector to st-util. Save the settings.
 \item	Connect the STM32F4 board to the computer by means of a USB A / mini USB cable.
 \item	Build the executable and load it into the board by clicking on the
-\hbox{\includegraphics[width=1.5em]{buildandload.png}} symbol in the tool bar (or select {\tt Build} > {\tt Bareboard} > {\tt Flash to board} on the top menu). You should see a number of compilation-related messages ending with ``Flashing complete. You may need to reset or cycle power".
+\hbox{\includegraphics[width=1.5em]{buildandload.png}} symbol in the tool bar (or select {\tt Build} $\rightarrow$ {\tt Bareboard} $\rightarrow$ {\tt Flash to board} on the top menu). You should see a number of compilation-related messages ending with ``Flashing complete. You may need to reset or cycle power".
 \item	If everything is all right, you will see the LEDS on the board blinking in a circular pattern.
 \item Download and install the Ada Drivers Library
 The Ada Drivers Library is a set of Ada packages that make it easier to write software for embedded devices, including the STM32F4 microcontroller family and some demonstration boards. The source code can be found at \url{https://github.com/AdaCore/Ada\_Drivers\_Library}. To install the library, click on the green {\tt Clone} or {\tt download} button on the upper right side and then on Download Zip in the emerging window. You will get a zip archive in your downloads folder. Unzip the archive and move the resulting folder to your OBDH\_LABS folder. Rename the folder to {\tt Ada\_Drivers\_Library}, removing any trailing text.
@@ -70,7 +70,7 @@ The Ada Drivers Library is a set of Ada packages that make it easier to write so
 Open GPS and do the following:
 \begin{enumerate}
 \item Select {\tt Open} project on the welcome window. Navigate to .../OBDH\_LABS/\-Ada\_Drivers\_Li\-brary/\-examples/STMF4\_DISCO and open the project file: {\tt blinky\-\_f4disco.gpr}.
-\item	Build the executable and load it into the board by clicking on the \hbox{\includegraphics[width=1.5em]{buildandload.png}} symbol in the tool bar (or select {\tt Build} > {\tt Bareboard} > {\tt Flash to board} on the top menu). When the loading is complete, you will see the board LEDS blinking all at the same time.
+\item	Build the executable and load it into the board by clicking on the \hbox{\includegraphics[width=1.5em]{buildandload.png}} symbol in the tool bar (or select {\tt Build} $\rightarrow$ {\tt Bareboard} $\rightarrow$ {\tt Flash to board} on the top menu). When the loading is complete, you will see the board LEDS blinking all at the same time.
 \end{enumerate}
 
 \section{Install MATLAB\texttrademark and Simulink\texttrademark}
