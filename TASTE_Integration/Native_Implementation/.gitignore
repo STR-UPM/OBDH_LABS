@@ -58,3 +58,40 @@ work/manager/SDL/*
 !work/manager/SDL/src
 work/manager/SDL/src/*
 !work/manager/SDL/src/manager.pr
+
+# Except Simulated_ACS_HW source files
+!work/simulated_acs_hw
+work/simulated_acs_hw/*
+!work/simulated_acs_hw/implem
+work/simulated_acs_hw/implem/*
+!work/simulated_acs_hw/implem/default
+work/simulated_acs_hw/implem/default/*
+!work/simulated_acs_hw/implem/default/Ada
+work/simulated_acs_hw/implem/default/Ada/*
+!work/simulated_acs_hw/implem/default/Ada/src
+work/simulated_acs_hw/implem/default/Ada/src/*
+!work/simulated_acs_hw/implem/default/Ada/src/simulated_acs_hw.adb
+
+# Except Measurer_And_Actuator source files
+!work/measurer_and_actuator
+work/measurer_and_actuator/*
+!work/measurer_and_actuator/implem
+work/measurer_and_actuator/implem/*
+!work/measurer_and_actuator/implem/default
+work/measurer_and_actuator/implem/default/*
+!work/measurer_and_actuator/implem/default/Ada
+work/measurer_and_actuator/implem/default/Ada/*
+!work/measurer_and_actuator/implem/default/Ada/src
+work/measurer_and_actuator/implem/default/Ada/src/*
+!work/measurer_and_actuator/implem/default/Ada/src/measurer_and_actuator.adb
+
+# Except ACS_Algorithm source files
+!work/acs_algorithm
+work/acs_algorithm/*
+!work/acs_algorithm/implem
+work/acs_algorithm/implem/*
+!work/acs_algorithm/implem/default
+work/acs_algorithm/implem/default/*
+!work/acs_algorithm/implem/default/QGenAda
+work/acs_algorithm/implem/default/QGenAda/*
+!work/acs_algorithm/implem/default/QGenAda/src

@@ -311,6 +311,154 @@ flag asn1SccT_Control_Encode(const asn1SccT_Control* pVal, BitStream* pBitStrm, 
 #define ERR_UPER_DECODE_T_CONTROL		83  /**/
 #define ERR_UPER_DECODE_T_CONTROL_ELM_2		78  /**/
 flag asn1SccT_Control_Decode(asn1SccT_Control* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccFormatted_Data_Table --------------------------------------------*/
+typedef struct {
+    asn1SccT_Float obc_t;
+    asn1SccT_Float obc_v;
+
+} asn1SccFormatted_Data_Table;
+
+void asn1SccFormatted_Data_Table_Initialize(asn1SccFormatted_Data_Table* pVal);
+
+#define ERR_FORMATTED_DATA_TABLE		801  /**/
+#define ERR_FORMATTED_DATA_TABLE_OBC_T_2		786  /**/
+#define ERR_FORMATTED_DATA_TABLE_OBC_V_2		796  /**/
+flag asn1SccFormatted_Data_Table_IsConstraintValid(const asn1SccFormatted_Data_Table* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_FORMATTED_DATA_TABLE		802  /**/
+#define ERR_UPER_ENCODE_FORMATTED_DATA_TABLE_OBC_T_2		787  /**/
+#define ERR_UPER_ENCODE_FORMATTED_DATA_TABLE_OBC_V_2		797  /**/
+#define asn1SccFormatted_Data_Table_REQUIRED_BYTES_FOR_ENCODING       26 
+#define asn1SccFormatted_Data_Table_REQUIRED_BITS_FOR_ENCODING        208
+
+flag asn1SccFormatted_Data_Table_Encode(const asn1SccFormatted_Data_Table* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_FORMATTED_DATA_TABLE		803  /**/
+#define ERR_UPER_DECODE_FORMATTED_DATA_TABLE_OBC_T_2		788  /**/
+#define ERR_UPER_DECODE_FORMATTED_DATA_TABLE_OBC_V_2		798  /**/
+flag asn1SccFormatted_Data_Table_Decode(asn1SccFormatted_Data_Table* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccSatellite_State_Formatted --------------------------------------------*/
+typedef struct {
+    int nCount; 
+    
+    byte arr[80];
+} asn1SccSatellite_State_Formatted_timestamp;
+
+typedef struct {
+    asn1SccSatellite_State_Formatted_timestamp timestamp;
+    asn1SccFormatted_Data_Table data;
+
+} asn1SccSatellite_State_Formatted;
+
+void asn1SccSatellite_State_Formatted_timestamp_Initialize(asn1SccSatellite_State_Formatted_timestamp* pVal);
+void asn1SccSatellite_State_Formatted_Initialize(asn1SccSatellite_State_Formatted* pVal);
+
+#define ERR_SATELLITE_STATE_FORMATTED		841  /**/
+#define ERR_SATELLITE_STATE_FORMATTED_TIMESTAMP		806  /**/
+#define ERR_SATELLITE_STATE_FORMATTED_DATA_2		836  /**/
+flag asn1SccSatellite_State_Formatted_IsConstraintValid(const asn1SccSatellite_State_Formatted* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_SATELLITE_STATE_FORMATTED		842  /**/
+#define ERR_UPER_ENCODE_SATELLITE_STATE_FORMATTED_TIMESTAMP		807  /**/
+#define ERR_UPER_ENCODE_SATELLITE_STATE_FORMATTED_DATA_2		837  /**/
+#define asn1SccSatellite_State_Formatted_REQUIRED_BYTES_FOR_ENCODING       107 
+#define asn1SccSatellite_State_Formatted_REQUIRED_BITS_FOR_ENCODING        855
+
+flag asn1SccSatellite_State_Formatted_Encode(const asn1SccSatellite_State_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_SATELLITE_STATE_FORMATTED		843  /**/
+#define ERR_UPER_DECODE_SATELLITE_STATE_FORMATTED_TIMESTAMP		808  /**/
+#define ERR_UPER_DECODE_SATELLITE_STATE_FORMATTED_DATA_2		838  /**/
+flag asn1SccSatellite_State_Formatted_Decode(asn1SccSatellite_State_Formatted* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccTM_Hello_Formatted --------------------------------------------*/
+typedef struct {
+    int nCount; 
+    
+    byte arr[80];
+} asn1SccTM_Hello_Formatted_tm_timestamp;
+
+typedef struct {
+    asn1SccTM_Hello_Formatted_tm_timestamp tm_timestamp;
+    asn1SccSatellite_State_Formatted tm_payload;
+
+} asn1SccTM_Hello_Formatted;
+
+void asn1SccTM_Hello_Formatted_tm_timestamp_Initialize(asn1SccTM_Hello_Formatted_tm_timestamp* pVal);
+void asn1SccTM_Hello_Formatted_Initialize(asn1SccTM_Hello_Formatted* pVal);
+
+#define ERR_TM_HELLO_FORMATTED		896  /**/
+#define ERR_TM_HELLO_FORMATTED_TM_TIMESTAMP		846  /**/
+#define ERR_TM_HELLO_FORMATTED_TM_PAYLOAD_2		891  /**/
+flag asn1SccTM_Hello_Formatted_IsConstraintValid(const asn1SccTM_Hello_Formatted* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_TM_HELLO_FORMATTED		897  /**/
+#define ERR_UPER_ENCODE_TM_HELLO_FORMATTED_TM_TIMESTAMP		847  /**/
+#define ERR_UPER_ENCODE_TM_HELLO_FORMATTED_TM_PAYLOAD_2		892  /**/
+#define asn1SccTM_Hello_Formatted_REQUIRED_BYTES_FOR_ENCODING       188 
+#define asn1SccTM_Hello_Formatted_REQUIRED_BITS_FOR_ENCODING        1502
+
+flag asn1SccTM_Hello_Formatted_Encode(const asn1SccTM_Hello_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_TM_HELLO_FORMATTED		898  /**/
+#define ERR_UPER_DECODE_TM_HELLO_FORMATTED_TM_TIMESTAMP		848  /**/
+#define ERR_UPER_DECODE_TM_HELLO_FORMATTED_TM_PAYLOAD_2		893  /**/
+flag asn1SccTM_Hello_Formatted_Decode(asn1SccTM_Hello_Formatted* pVal, BitStream* pBitStrm, int* pErrCode);
+
+
+typedef struct {
+    
+    asn1SccSatellite_State_Formatted arr[4];
+} asn1SccTM_Housekeeping_Formatted_Contents;
+
+void asn1SccTM_Housekeeping_Formatted_Contents_Initialize(asn1SccTM_Housekeeping_Formatted_Contents* pVal);
+
+#define ERR_TM_HOUSEKEEPING_FORMATTED_CONTENTS		946  /**/
+#define ERR_TM_HOUSEKEEPING_FORMATTED_CONTENTS_ELM_2		941  /**/
+flag asn1SccTM_Housekeeping_Formatted_Contents_IsConstraintValid(const asn1SccTM_Housekeeping_Formatted_Contents* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_TM_HOUSEKEEPING_FORMATTED_CONTENTS		947  /**/
+#define ERR_UPER_ENCODE_TM_HOUSEKEEPING_FORMATTED_CONTENTS_ELM_2		942  /**/
+#define asn1SccTM_Housekeeping_Formatted_Contents_REQUIRED_BYTES_FOR_ENCODING       428 
+#define asn1SccTM_Housekeeping_Formatted_Contents_REQUIRED_BITS_FOR_ENCODING        3420
+
+flag asn1SccTM_Housekeeping_Formatted_Contents_Encode(const asn1SccTM_Housekeeping_Formatted_Contents* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED_CONTENTS		948  /**/
+#define ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED_CONTENTS_ELM_2		943  /**/
+flag asn1SccTM_Housekeeping_Formatted_Contents_Decode(asn1SccTM_Housekeeping_Formatted_Contents* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccTM_Housekeeping_Formatted --------------------------------------------*/
+typedef struct {
+    int nCount; 
+    
+    byte arr[80];
+} asn1SccTM_Housekeeping_Formatted_tm_timestamp;
+
+typedef struct {
+    asn1SccTM_Housekeeping_Formatted_tm_timestamp tm_timestamp;
+    asn1SccTM_Housekeeping_Formatted_Contents tm_payload;
+
+} asn1SccTM_Housekeeping_Formatted;
+
+void asn1SccTM_Housekeeping_Formatted_tm_timestamp_Initialize(asn1SccTM_Housekeeping_Formatted_tm_timestamp* pVal);
+void asn1SccTM_Housekeeping_Formatted_Initialize(asn1SccTM_Housekeeping_Formatted* pVal);
+
+#define ERR_TM_HOUSEKEEPING_FORMATTED		1011  /**/
+#define ERR_TM_HOUSEKEEPING_FORMATTED_TM_TIMESTAMP		951  /**/
+#define ERR_TM_HOUSEKEEPING_FORMATTED_TM_PAYLOAD_2		1006  /**/
+flag asn1SccTM_Housekeeping_Formatted_IsConstraintValid(const asn1SccTM_Housekeeping_Formatted* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_TM_HOUSEKEEPING_FORMATTED		1012  /**/
+#define ERR_UPER_ENCODE_TM_HOUSEKEEPING_FORMATTED_TM_TIMESTAMP		952  /**/
+#define ERR_UPER_ENCODE_TM_HOUSEKEEPING_FORMATTED_TM_PAYLOAD_2		1007  /**/
+#define asn1SccTM_Housekeeping_Formatted_REQUIRED_BYTES_FOR_ENCODING       509 
+#define asn1SccTM_Housekeeping_Formatted_REQUIRED_BITS_FOR_ENCODING        4067
+
+flag asn1SccTM_Housekeeping_Formatted_Encode(const asn1SccTM_Housekeeping_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED		1013  /**/
+#define ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED_TM_TIMESTAMP		953  /**/
+#define ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED_TM_PAYLOAD_2		1008  /**/
+flag asn1SccTM_Housekeeping_Formatted_Decode(asn1SccTM_Housekeeping_Formatted* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef enum {
     asn1Sccidle = 0,
     asn1Scccoverage = 1
@@ -359,6 +507,39 @@ flag asn1SccTM_Mode_Encode(const asn1SccTM_Mode* pVal, BitStream* pBitStrm, int*
 #define ERR_UPER_DECODE_TM_MODE_TM_TIMESTAMP_2_2		463  /**/
 #define ERR_UPER_DECODE_TM_MODE_TM_PAYLOAD_2		473  /**/
 flag asn1SccTM_Mode_Decode(asn1SccTM_Mode* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccTM_Mode_Formatted --------------------------------------------*/
+typedef struct {
+    int nCount; 
+    
+    byte arr[80];
+} asn1SccTM_Mode_Formatted_tm_timestamp;
+
+typedef struct {
+    asn1SccTM_Mode_Formatted_tm_timestamp tm_timestamp;
+    asn1SccOperating_Mode tm_payload;
+
+} asn1SccTM_Mode_Formatted;
+
+void asn1SccTM_Mode_Formatted_tm_timestamp_Initialize(asn1SccTM_Mode_Formatted_tm_timestamp* pVal);
+void asn1SccTM_Mode_Formatted_Initialize(asn1SccTM_Mode_Formatted* pVal);
+
+#define ERR_TM_MODE_FORMATTED		1031  /**/
+#define ERR_TM_MODE_FORMATTED_TM_TIMESTAMP		1016  /**/
+#define ERR_TM_MODE_FORMATTED_TM_PAYLOAD_2		1026  /**/
+flag asn1SccTM_Mode_Formatted_IsConstraintValid(const asn1SccTM_Mode_Formatted* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_TM_MODE_FORMATTED		1032  /**/
+#define ERR_UPER_ENCODE_TM_MODE_FORMATTED_TM_TIMESTAMP		1017  /**/
+#define ERR_UPER_ENCODE_TM_MODE_FORMATTED_TM_PAYLOAD_2		1027  /**/
+#define asn1SccTM_Mode_Formatted_REQUIRED_BYTES_FOR_ENCODING       81 
+#define asn1SccTM_Mode_Formatted_REQUIRED_BITS_FOR_ENCODING        648
+
+flag asn1SccTM_Mode_Formatted_Encode(const asn1SccTM_Mode_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_TM_MODE_FORMATTED		1033  /**/
+#define ERR_UPER_DECODE_TM_MODE_FORMATTED_TM_TIMESTAMP		1018  /**/
+#define ERR_UPER_DECODE_TM_MODE_FORMATTED_TM_PAYLOAD_2		1028  /**/
+flag asn1SccTM_Mode_Formatted_Decode(asn1SccTM_Mode_Formatted* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef enum {
     asn1Sccopen_link = 0,
     asn1Sccclose_link = 1,
@@ -433,10 +614,10 @@ flag asn1SccTM_Error_Decode(asn1SccTM_Error* pVal, BitStream* pBitStrm, int* pEr
 
 typedef enum {
     TM_Type_NONE,
-    hello_PRESENT,
-    hk_PRESENT,
-    mode_PRESENT,
-    err_PRESENT 
+    TM_Type_hello_PRESENT,
+    TM_Type_hk_PRESENT,
+    TM_Type_mode_PRESENT,
+    TM_Type_err_PRESENT 
 } asn1SccTM_Type_selection;
 
 
@@ -476,85 +657,165 @@ flag asn1SccTM_Type_Encode(const asn1SccTM_Type* pVal, BitStream* pBitStrm, int*
 #define ERR_UPER_DECODE_TM_TYPE_MODE_2		738  /**/
 #define ERR_UPER_DECODE_TM_TYPE_ERR_2		773  /**/
 flag asn1SccTM_Type_Decode(asn1SccTM_Type* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccTM_Error_Formatted --------------------------------------------*/
+typedef struct {
+    int nCount; 
+    
+    byte arr[80];
+} asn1SccTM_Error_Formatted_tm_timestamp;
+
+typedef struct {
+    asn1SccTM_Error_Formatted_tm_timestamp tm_timestamp;
+    asn1SccTM_Error_Contents tm_payload;
+
+} asn1SccTM_Error_Formatted;
+
+void asn1SccTM_Error_Formatted_tm_timestamp_Initialize(asn1SccTM_Error_Formatted_tm_timestamp* pVal);
+void asn1SccTM_Error_Formatted_Initialize(asn1SccTM_Error_Formatted* pVal);
+
+#define ERR_TM_ERROR_FORMATTED		1051  /**/
+#define ERR_TM_ERROR_FORMATTED_TM_TIMESTAMP		1036  /**/
+#define ERR_TM_ERROR_FORMATTED_TM_PAYLOAD_2		1046  /**/
+flag asn1SccTM_Error_Formatted_IsConstraintValid(const asn1SccTM_Error_Formatted* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_TM_ERROR_FORMATTED		1052  /**/
+#define ERR_UPER_ENCODE_TM_ERROR_FORMATTED_TM_TIMESTAMP		1037  /**/
+#define ERR_UPER_ENCODE_TM_ERROR_FORMATTED_TM_PAYLOAD_2		1047  /**/
+#define asn1SccTM_Error_Formatted_REQUIRED_BYTES_FOR_ENCODING       162 
+#define asn1SccTM_Error_Formatted_REQUIRED_BITS_FOR_ENCODING        1294
+
+flag asn1SccTM_Error_Formatted_Encode(const asn1SccTM_Error_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_TM_ERROR_FORMATTED		1053  /**/
+#define ERR_UPER_DECODE_TM_ERROR_FORMATTED_TM_TIMESTAMP		1038  /**/
+#define ERR_UPER_DECODE_TM_ERROR_FORMATTED_TM_PAYLOAD_2		1048  /**/
+flag asn1SccTM_Error_Formatted_Decode(asn1SccTM_Error_Formatted* pVal, BitStream* pBitStrm, int* pErrCode);
+/*-- asn1SccTM_Type_Formatted --------------------------------------------*/
+
+typedef enum {
+    TM_Type_Formatted_NONE,
+    TM_Type_Formatted_hello_PRESENT,
+    TM_Type_Formatted_hk_PRESENT,
+    TM_Type_Formatted_mode_PRESENT,
+    TM_Type_Formatted_err_PRESENT 
+} asn1SccTM_Type_Formatted_selection;
+
+
+typedef struct {
+    asn1SccTM_Type_Formatted_selection kind;
+    
+    union {
+        asn1SccTM_Hello_Formatted hello;
+        asn1SccTM_Housekeeping_Formatted hk;
+        asn1SccTM_Mode_Formatted mode;
+        asn1SccTM_Error_Formatted err;
+    } u; 
+} asn1SccTM_Type_Formatted;
+
+void asn1SccTM_Type_Formatted_Initialize(asn1SccTM_Type_Formatted* pVal);
+
+#define ERR_TM_TYPE_FORMATTED		1236  /**/
+#define ERR_TM_TYPE_FORMATTED_HELLO_2		1111  /**/
+#define ERR_TM_TYPE_FORMATTED_HK_2		1181  /**/
+#define ERR_TM_TYPE_FORMATTED_MODE_2		1206  /**/
+#define ERR_TM_TYPE_FORMATTED_ERR_2		1231  /**/
+flag asn1SccTM_Type_Formatted_IsConstraintValid(const asn1SccTM_Type_Formatted* pVal, int* pErrCode);
+
+#define ERR_UPER_ENCODE_TM_TYPE_FORMATTED		1237  /**/
+#define ERR_UPER_ENCODE_TM_TYPE_FORMATTED_HELLO_2		1112  /**/
+#define ERR_UPER_ENCODE_TM_TYPE_FORMATTED_HK_2		1182  /**/
+#define ERR_UPER_ENCODE_TM_TYPE_FORMATTED_MODE_2		1207  /**/
+#define ERR_UPER_ENCODE_TM_TYPE_FORMATTED_ERR_2		1232  /**/
+#define asn1SccTM_Type_Formatted_REQUIRED_BYTES_FOR_ENCODING       509 
+#define asn1SccTM_Type_Formatted_REQUIRED_BITS_FOR_ENCODING        4069
+
+flag asn1SccTM_Type_Formatted_Encode(const asn1SccTM_Type_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+
+#define ERR_UPER_DECODE_TM_TYPE_FORMATTED		1238  /**/
+#define ERR_UPER_DECODE_TM_TYPE_FORMATTED_HELLO_2		1113  /**/
+#define ERR_UPER_DECODE_TM_TYPE_FORMATTED_HK_2		1183  /**/
+#define ERR_UPER_DECODE_TM_TYPE_FORMATTED_MODE_2		1208  /**/
+#define ERR_UPER_DECODE_TM_TYPE_FORMATTED_ERR_2		1233  /**/
+flag asn1SccTM_Type_Formatted_Decode(asn1SccTM_Type_Formatted* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef asn1SccSint asn1SccT_Int32;
 
 
 void asn1SccT_Int32_Initialize(asn1SccT_Int32* pVal);
 
-#define ERR_T_INT32		781  /**/
+#define ERR_T_INT32		1241  /**/
 flag asn1SccT_Int32_IsConstraintValid(const asn1SccT_Int32* pVal, int* pErrCode);
 
-#define ERR_UPER_ENCODE_T_INT32		782  /**/
+#define ERR_UPER_ENCODE_T_INT32		1242  /**/
 #define asn1SccT_Int32_REQUIRED_BYTES_FOR_ENCODING       4 
 #define asn1SccT_Int32_REQUIRED_BITS_FOR_ENCODING        32
 
 flag asn1SccT_Int32_Encode(const asn1SccT_Int32* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 
-#define ERR_UPER_DECODE_T_INT32		783  /**/
+#define ERR_UPER_DECODE_T_INT32		1243  /**/
 flag asn1SccT_Int32_Decode(asn1SccT_Int32* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef asn1SccUint asn1SccT_UInt32;
 
 
 void asn1SccT_UInt32_Initialize(asn1SccT_UInt32* pVal);
 
-#define ERR_T_UINT32		786  /**/
+#define ERR_T_UINT32		1246  /**/
 flag asn1SccT_UInt32_IsConstraintValid(const asn1SccT_UInt32* pVal, int* pErrCode);
 
-#define ERR_UPER_ENCODE_T_UINT32		787  /**/
+#define ERR_UPER_ENCODE_T_UINT32		1247  /**/
 #define asn1SccT_UInt32_REQUIRED_BYTES_FOR_ENCODING       4 
 #define asn1SccT_UInt32_REQUIRED_BITS_FOR_ENCODING        32
 
 flag asn1SccT_UInt32_Encode(const asn1SccT_UInt32* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 
-#define ERR_UPER_DECODE_T_UINT32		788  /**/
+#define ERR_UPER_DECODE_T_UINT32		1248  /**/
 flag asn1SccT_UInt32_Decode(asn1SccT_UInt32* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef asn1SccSint asn1SccT_Int8;
 
 
 void asn1SccT_Int8_Initialize(asn1SccT_Int8* pVal);
 
-#define ERR_T_INT8		791  /**/
+#define ERR_T_INT8		1251  /**/
 flag asn1SccT_Int8_IsConstraintValid(const asn1SccT_Int8* pVal, int* pErrCode);
 
-#define ERR_UPER_ENCODE_T_INT8		792  /**/
+#define ERR_UPER_ENCODE_T_INT8		1252  /**/
 #define asn1SccT_Int8_REQUIRED_BYTES_FOR_ENCODING       1 
 #define asn1SccT_Int8_REQUIRED_BITS_FOR_ENCODING        8
 
 flag asn1SccT_Int8_Encode(const asn1SccT_Int8* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 
-#define ERR_UPER_DECODE_T_INT8		793  /**/
+#define ERR_UPER_DECODE_T_INT8		1253  /**/
 flag asn1SccT_Int8_Decode(asn1SccT_Int8* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef asn1SccUint asn1SccT_UInt8;
 
 
 void asn1SccT_UInt8_Initialize(asn1SccT_UInt8* pVal);
 
-#define ERR_T_UINT8		796  /**/
+#define ERR_T_UINT8		1256  /**/
 flag asn1SccT_UInt8_IsConstraintValid(const asn1SccT_UInt8* pVal, int* pErrCode);
 
-#define ERR_UPER_ENCODE_T_UINT8		797  /**/
+#define ERR_UPER_ENCODE_T_UINT8		1257  /**/
 #define asn1SccT_UInt8_REQUIRED_BYTES_FOR_ENCODING       1 
 #define asn1SccT_UInt8_REQUIRED_BITS_FOR_ENCODING        8
 
 flag asn1SccT_UInt8_Encode(const asn1SccT_UInt8* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 
-#define ERR_UPER_DECODE_T_UINT8		798  /**/
+#define ERR_UPER_DECODE_T_UINT8		1258  /**/
 flag asn1SccT_UInt8_Decode(asn1SccT_UInt8* pVal, BitStream* pBitStrm, int* pErrCode);
 typedef flag asn1SccT_Boolean;
 
 
 void asn1SccT_Boolean_Initialize(asn1SccT_Boolean* pVal);
 
-#define ERR_T_BOOLEAN		801  /**/
+#define ERR_T_BOOLEAN		1261  /**/
 flag asn1SccT_Boolean_IsConstraintValid(const asn1SccT_Boolean* pVal, int* pErrCode);
 
-#define ERR_UPER_ENCODE_T_BOOLEAN		802  /**/
+#define ERR_UPER_ENCODE_T_BOOLEAN		1262  /**/
 #define asn1SccT_Boolean_REQUIRED_BYTES_FOR_ENCODING       1 
 #define asn1SccT_Boolean_REQUIRED_BITS_FOR_ENCODING        1
 
 flag asn1SccT_Boolean_Encode(const asn1SccT_Boolean* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 
-#define ERR_UPER_DECODE_T_BOOLEAN		803  /**/
+#define ERR_UPER_DECODE_T_BOOLEAN		1263  /**/
 flag asn1SccT_Boolean_Decode(asn1SccT_Boolean* pVal, BitStream* pBitStrm, int* pErrCode);
 /*-- asn1SccT_Null_Record --------------------------------------------*/
 typedef struct {
@@ -563,7 +824,7 @@ typedef struct {
 
 void asn1SccT_Null_Record_Initialize(asn1SccT_Null_Record* pVal);
 
-#define ERR_T_NULL_RECORD		806  /**/
+#define ERR_T_NULL_RECORD		1266  /**/
 flag asn1SccT_Null_Record_IsConstraintValid(const asn1SccT_Null_Record* pVal, int* pErrCode);
 
 #define asn1SccT_Null_Record_REQUIRED_BYTES_FOR_ENCODING       0 

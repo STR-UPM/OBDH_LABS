@@ -214,6 +214,205 @@ TM_Type_elem05.Dimensions=1;
 TM_Type = Simulink.Bus;
 TM_Type.Elements = [TM_Type_elem01 TM_Type_elem02 TM_Type_elem03 TM_Type_elem04 TM_Type_elem05 ];
 
+Formatted_Data_Table_elem01=Simulink.BusElement;
+Formatted_Data_Table_elem01.Name='obc_t';
+Formatted_Data_Table_elem01.DataType='double';
+Formatted_Data_Table_elem01.Dimensions=1;
+
+Formatted_Data_Table_elem02=Simulink.BusElement;
+Formatted_Data_Table_elem02.Name='obc_v';
+Formatted_Data_Table_elem02.DataType='double';
+Formatted_Data_Table_elem02.Dimensions=1;
+
+Formatted_Data_Table = Simulink.Bus;
+Formatted_Data_Table.Elements = [Formatted_Data_Table_elem01 Formatted_Data_Table_elem02 ];
+
+Satellite_State_Formatted_timestamp_member_data=Simulink.BusElement;
+Satellite_State_Formatted_timestamp_member_data.Name='element_data';
+Satellite_State_Formatted_timestamp_member_data.DataType='uint8';
+Satellite_State_Formatted_timestamp_member_data.Dimensions=80;
+
+Satellite_State_Formatted_timestamp_member_length=Simulink.BusElement;
+Satellite_State_Formatted_timestamp_member_length.Name='length';
+Satellite_State_Formatted_timestamp_member_length.DataType='int32';
+Satellite_State_Formatted_timestamp_member_length.Dimensions=1;
+
+Satellite_State_Formatted_timestamp=Simulink.Bus;
+Satellite_State_Formatted_timestamp.Elements = [Satellite_State_Formatted_timestamp_member_data Satellite_State_Formatted_timestamp_member_length];
+
+Satellite_State_Formatted_elem01=Simulink.BusElement;
+Satellite_State_Formatted_elem01.Name='timestamp';
+Satellite_State_Formatted_elem01.DataType='Satellite_State_Formatted_timestamp';
+Satellite_State_Formatted_elem01.Dimensions=1;
+
+Satellite_State_Formatted_elem02=Simulink.BusElement;
+Satellite_State_Formatted_elem02.Name='data';
+Satellite_State_Formatted_elem02.DataType='Formatted_Data_Table';
+Satellite_State_Formatted_elem02.Dimensions=1;
+
+Satellite_State_Formatted = Simulink.Bus;
+Satellite_State_Formatted.Elements = [Satellite_State_Formatted_elem01 Satellite_State_Formatted_elem02 ];
+
+TM_Hello_Formatted_tm_timestamp_member_data=Simulink.BusElement;
+TM_Hello_Formatted_tm_timestamp_member_data.Name='element_data';
+TM_Hello_Formatted_tm_timestamp_member_data.DataType='uint8';
+TM_Hello_Formatted_tm_timestamp_member_data.Dimensions=80;
+
+TM_Hello_Formatted_tm_timestamp_member_length=Simulink.BusElement;
+TM_Hello_Formatted_tm_timestamp_member_length.Name='length';
+TM_Hello_Formatted_tm_timestamp_member_length.DataType='int32';
+TM_Hello_Formatted_tm_timestamp_member_length.Dimensions=1;
+
+TM_Hello_Formatted_tm_timestamp=Simulink.Bus;
+TM_Hello_Formatted_tm_timestamp.Elements = [TM_Hello_Formatted_tm_timestamp_member_data TM_Hello_Formatted_tm_timestamp_member_length];
+
+TM_Hello_Formatted_elem01=Simulink.BusElement;
+TM_Hello_Formatted_elem01.Name='tm_timestamp';
+TM_Hello_Formatted_elem01.DataType='TM_Hello_Formatted_tm_timestamp';
+TM_Hello_Formatted_elem01.Dimensions=1;
+
+TM_Hello_Formatted_elem02=Simulink.BusElement;
+TM_Hello_Formatted_elem02.Name='tm_payload';
+TM_Hello_Formatted_elem02.DataType='Satellite_State_Formatted';
+TM_Hello_Formatted_elem02.Dimensions=1;
+
+TM_Hello_Formatted = Simulink.Bus;
+TM_Hello_Formatted.Elements = [TM_Hello_Formatted_elem01 TM_Hello_Formatted_elem02 ];
+
+TM_Housekeeping_Formatted_Contents_member_00=Simulink.BusElement;
+TM_Housekeeping_Formatted_Contents_member_00.Name='element_00';
+TM_Housekeeping_Formatted_Contents_member_00.DataType='Satellite_State_Formatted';
+TM_Housekeeping_Formatted_Contents_member_00.Dimensions=1;
+
+TM_Housekeeping_Formatted_Contents_member_01=Simulink.BusElement;
+TM_Housekeeping_Formatted_Contents_member_01.Name='element_01';
+TM_Housekeeping_Formatted_Contents_member_01.DataType='Satellite_State_Formatted';
+TM_Housekeeping_Formatted_Contents_member_01.Dimensions=1;
+
+TM_Housekeeping_Formatted_Contents_member_02=Simulink.BusElement;
+TM_Housekeeping_Formatted_Contents_member_02.Name='element_02';
+TM_Housekeeping_Formatted_Contents_member_02.DataType='Satellite_State_Formatted';
+TM_Housekeeping_Formatted_Contents_member_02.Dimensions=1;
+
+TM_Housekeeping_Formatted_Contents_member_03=Simulink.BusElement;
+TM_Housekeeping_Formatted_Contents_member_03.Name='element_03';
+TM_Housekeeping_Formatted_Contents_member_03.DataType='Satellite_State_Formatted';
+TM_Housekeeping_Formatted_Contents_member_03.Dimensions=1;
+
+TM_Housekeeping_Formatted_Contents_member_length=Simulink.BusElement;
+TM_Housekeeping_Formatted_Contents_member_length.Name='length';
+TM_Housekeeping_Formatted_Contents_member_length.DataType='int32';
+TM_Housekeeping_Formatted_Contents_member_length.Dimensions=1;
+
+TM_Housekeeping_Formatted_Contents=Simulink.Bus;
+TM_Housekeeping_Formatted_Contents.Elements = [TM_Housekeeping_Formatted_Contents_member_00 TM_Housekeeping_Formatted_Contents_member_01 TM_Housekeeping_Formatted_Contents_member_02 TM_Housekeeping_Formatted_Contents_member_03 TM_Housekeeping_Formatted_Contents_member_length];
+
+TM_Housekeeping_Formatted_tm_timestamp_member_data=Simulink.BusElement;
+TM_Housekeeping_Formatted_tm_timestamp_member_data.Name='element_data';
+TM_Housekeeping_Formatted_tm_timestamp_member_data.DataType='uint8';
+TM_Housekeeping_Formatted_tm_timestamp_member_data.Dimensions=80;
+
+TM_Housekeeping_Formatted_tm_timestamp_member_length=Simulink.BusElement;
+TM_Housekeeping_Formatted_tm_timestamp_member_length.Name='length';
+TM_Housekeeping_Formatted_tm_timestamp_member_length.DataType='int32';
+TM_Housekeeping_Formatted_tm_timestamp_member_length.Dimensions=1;
+
+TM_Housekeeping_Formatted_tm_timestamp=Simulink.Bus;
+TM_Housekeeping_Formatted_tm_timestamp.Elements = [TM_Housekeeping_Formatted_tm_timestamp_member_data TM_Housekeeping_Formatted_tm_timestamp_member_length];
+
+TM_Housekeeping_Formatted_elem01=Simulink.BusElement;
+TM_Housekeeping_Formatted_elem01.Name='tm_timestamp';
+TM_Housekeeping_Formatted_elem01.DataType='TM_Housekeeping_Formatted_tm_timestamp';
+TM_Housekeeping_Formatted_elem01.Dimensions=1;
+
+TM_Housekeeping_Formatted_elem02=Simulink.BusElement;
+TM_Housekeeping_Formatted_elem02.Name='tm_payload';
+TM_Housekeeping_Formatted_elem02.DataType='TM_Housekeeping_Formatted_Contents';
+TM_Housekeeping_Formatted_elem02.Dimensions=1;
+
+TM_Housekeeping_Formatted = Simulink.Bus;
+TM_Housekeeping_Formatted.Elements = [TM_Housekeeping_Formatted_elem01 TM_Housekeeping_Formatted_elem02 ];
+
+TM_Mode_Formatted_tm_timestamp_member_data=Simulink.BusElement;
+TM_Mode_Formatted_tm_timestamp_member_data.Name='element_data';
+TM_Mode_Formatted_tm_timestamp_member_data.DataType='uint8';
+TM_Mode_Formatted_tm_timestamp_member_data.Dimensions=80;
+
+TM_Mode_Formatted_tm_timestamp_member_length=Simulink.BusElement;
+TM_Mode_Formatted_tm_timestamp_member_length.Name='length';
+TM_Mode_Formatted_tm_timestamp_member_length.DataType='int32';
+TM_Mode_Formatted_tm_timestamp_member_length.Dimensions=1;
+
+TM_Mode_Formatted_tm_timestamp=Simulink.Bus;
+TM_Mode_Formatted_tm_timestamp.Elements = [TM_Mode_Formatted_tm_timestamp_member_data TM_Mode_Formatted_tm_timestamp_member_length];
+
+TM_Mode_Formatted_elem01=Simulink.BusElement;
+TM_Mode_Formatted_elem01.Name='tm_timestamp';
+TM_Mode_Formatted_elem01.DataType='TM_Mode_Formatted_tm_timestamp';
+TM_Mode_Formatted_elem01.Dimensions=1;
+
+TM_Mode_Formatted_elem02=Simulink.BusElement;
+TM_Mode_Formatted_elem02.Name='tm_payload';
+TM_Mode_Formatted_elem02.DataType='int32';
+TM_Mode_Formatted_elem02.Dimensions=1;
+
+TM_Mode_Formatted = Simulink.Bus;
+TM_Mode_Formatted.Elements = [TM_Mode_Formatted_elem01 TM_Mode_Formatted_elem02 ];
+
+TM_Error_Formatted_tm_timestamp_member_data=Simulink.BusElement;
+TM_Error_Formatted_tm_timestamp_member_data.Name='element_data';
+TM_Error_Formatted_tm_timestamp_member_data.DataType='uint8';
+TM_Error_Formatted_tm_timestamp_member_data.Dimensions=80;
+
+TM_Error_Formatted_tm_timestamp_member_length=Simulink.BusElement;
+TM_Error_Formatted_tm_timestamp_member_length.Name='length';
+TM_Error_Formatted_tm_timestamp_member_length.DataType='int32';
+TM_Error_Formatted_tm_timestamp_member_length.Dimensions=1;
+
+TM_Error_Formatted_tm_timestamp=Simulink.Bus;
+TM_Error_Formatted_tm_timestamp.Elements = [TM_Error_Formatted_tm_timestamp_member_data TM_Error_Formatted_tm_timestamp_member_length];
+
+TM_Error_Formatted_elem01=Simulink.BusElement;
+TM_Error_Formatted_elem01.Name='tm_timestamp';
+TM_Error_Formatted_elem01.DataType='TM_Error_Formatted_tm_timestamp';
+TM_Error_Formatted_elem01.Dimensions=1;
+
+TM_Error_Formatted_elem02=Simulink.BusElement;
+TM_Error_Formatted_elem02.Name='tm_payload';
+TM_Error_Formatted_elem02.DataType='TM_Error_Contents';
+TM_Error_Formatted_elem02.Dimensions=1;
+
+TM_Error_Formatted = Simulink.Bus;
+TM_Error_Formatted.Elements = [TM_Error_Formatted_elem01 TM_Error_Formatted_elem02 ];
+
+TM_Type_Formatted_elem01=Simulink.BusElement;
+TM_Type_Formatted_elem01.Name='choiceIdx';
+TM_Type_Formatted_elem01.DataType='uint8';
+TM_Type_Formatted_elem01.Dimensions=1;
+
+TM_Type_Formatted_elem02=Simulink.BusElement;
+TM_Type_Formatted_elem02.Name='hello';
+TM_Type_Formatted_elem02.DataType='TM_Hello_Formatted';
+TM_Type_Formatted_elem02.Dimensions=1;
+
+TM_Type_Formatted_elem03=Simulink.BusElement;
+TM_Type_Formatted_elem03.Name='hk';
+TM_Type_Formatted_elem03.DataType='TM_Housekeeping_Formatted';
+TM_Type_Formatted_elem03.Dimensions=1;
+
+TM_Type_Formatted_elem04=Simulink.BusElement;
+TM_Type_Formatted_elem04.Name='mode';
+TM_Type_Formatted_elem04.DataType='TM_Mode_Formatted';
+TM_Type_Formatted_elem04.Dimensions=1;
+
+TM_Type_Formatted_elem05=Simulink.BusElement;
+TM_Type_Formatted_elem05.Name='err';
+TM_Type_Formatted_elem05.DataType='TM_Error_Formatted';
+TM_Type_Formatted_elem05.Dimensions=1;
+
+TM_Type_Formatted = Simulink.Bus;
+TM_Type_Formatted.Elements = [TM_Type_Formatted_elem01 TM_Type_Formatted_elem02 TM_Type_Formatted_elem03 TM_Type_Formatted_elem04 TM_Type_Formatted_elem05 ];
+
 T_Int32 = Simulink.AliasType;
 T_Int32.BaseType = 'int32';
 T_Int32.Description = 'range is (-2147483648, 2147483647)';

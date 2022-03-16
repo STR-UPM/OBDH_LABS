@@ -804,6 +804,392 @@ flag asn1SccT_Control_Decode(asn1SccT_Control* pVal, BitStream* pBitStrm, int* p
 
 
 
+void asn1SccFormatted_Data_Table_Initialize(asn1SccFormatted_Data_Table* pVal)
+{
+	(void)pVal;
+
+
+
+	/*set obc_t */
+	asn1SccT_Float_Initialize((&(pVal->obc_t)));
+	/*set obc_v */
+	asn1SccT_Float_Initialize((&(pVal->obc_v)));
+}
+
+flag asn1SccFormatted_Data_Table_IsConstraintValid(const asn1SccFormatted_Data_Table* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    ret = asn1SccT_Float_IsConstraintValid((&(pVal->obc_t)), pErrCode);
+    if (ret) {
+        ret = asn1SccT_Float_IsConstraintValid((&(pVal->obc_v)), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccFormatted_Data_Table_Encode(const asn1SccFormatted_Data_Table* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccFormatted_Data_Table_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    /*Encode obc_t */
+	    ret = asn1SccT_Float_Encode((&(pVal->obc_t)), pBitStrm, pErrCode, FALSE);
+	    if (ret) {
+	        /*Encode obc_v */
+	        ret = asn1SccT_Float_Encode((&(pVal->obc_v)), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccFormatted_Data_Table_Decode(asn1SccFormatted_Data_Table* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+
+	/*Decode obc_t */
+	ret = asn1SccT_Float_Decode((&(pVal->obc_t)), pBitStrm, pErrCode);
+	if (ret) {
+	    /*Decode obc_v */
+	    ret = asn1SccT_Float_Decode((&(pVal->obc_v)), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccFormatted_Data_Table_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccSatellite_State_Formatted_timestamp_Initialize(asn1SccSatellite_State_Formatted_timestamp* pVal)
+{
+	(void)pVal;
+
+
+	memset(pVal->arr, 0x0, 80);
+	pVal->nCount = 0;
+
+}
+void asn1SccSatellite_State_Formatted_Initialize(asn1SccSatellite_State_Formatted* pVal)
+{
+	(void)pVal;
+
+
+
+	/*set timestamp */
+	asn1SccSatellite_State_Formatted_timestamp_Initialize((&(pVal->timestamp)));
+	/*set data */
+	asn1SccFormatted_Data_Table_Initialize((&(pVal->data)));
+}
+
+flag asn1SccSatellite_State_Formatted_IsConstraintValid(const asn1SccSatellite_State_Formatted* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    ret = (pVal->timestamp.nCount <= 80);
+    *pErrCode = ret ? 0 :  ERR_SATELLITE_STATE_FORMATTED_TIMESTAMP; 
+    if (ret) {
+        ret = asn1SccFormatted_Data_Table_IsConstraintValid((&(pVal->data)), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccSatellite_State_Formatted_Encode(const asn1SccSatellite_State_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	int i1;
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccSatellite_State_Formatted_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    /*Encode timestamp */
+	    BitStream_EncodeConstraintWholeNumber(pBitStrm, pVal->timestamp.nCount, 0, 80);
+	    	
+	    for(i1=0; (i1 < (int)pVal->timestamp.nCount) && ret; i1++) 
+	    {
+	    	BitStream_AppendByte0(pBitStrm, pVal->timestamp.arr[i1]);
+	    }
+	    if (ret) {
+	        /*Encode data */
+	        ret = asn1SccFormatted_Data_Table_Encode((&(pVal->data)), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccSatellite_State_Formatted_Decode(asn1SccSatellite_State_Formatted* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	int i1;
+	asn1SccSint nCount;
+
+	/*Decode timestamp */
+	ret = BitStream_DecodeConstraintWholeNumber(pBitStrm, &nCount, 0, 80);
+	*pErrCode = ret ? 0 : ERR_UPER_DECODE_SATELLITE_STATE_FORMATTED_TIMESTAMP;
+	pVal->timestamp.nCount = (long)nCount;
+		
+	for(i1=0; (i1 < (int)pVal->timestamp.nCount) && ret; i1++) 
+	{
+		ret = BitStream_ReadByte(pBitStrm, &(pVal->timestamp.arr[i1])); 
+		*pErrCode = ret ? 0 : ERR_UPER_DECODE_SATELLITE_STATE_FORMATTED_TIMESTAMP;
+	}
+	if (ret) {
+	    /*Decode data */
+	    ret = asn1SccFormatted_Data_Table_Decode((&(pVal->data)), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccSatellite_State_Formatted_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccTM_Hello_Formatted_tm_timestamp_Initialize(asn1SccTM_Hello_Formatted_tm_timestamp* pVal)
+{
+	(void)pVal;
+
+
+	memset(pVal->arr, 0x0, 80);
+	pVal->nCount = 0;
+
+}
+void asn1SccTM_Hello_Formatted_Initialize(asn1SccTM_Hello_Formatted* pVal)
+{
+	(void)pVal;
+
+
+
+	/*set tm_timestamp */
+	asn1SccTM_Hello_Formatted_tm_timestamp_Initialize((&(pVal->tm_timestamp)));
+	/*set tm_payload */
+	asn1SccSatellite_State_Formatted_Initialize((&(pVal->tm_payload)));
+}
+
+flag asn1SccTM_Hello_Formatted_IsConstraintValid(const asn1SccTM_Hello_Formatted* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    ret = (pVal->tm_timestamp.nCount <= 80);
+    *pErrCode = ret ? 0 :  ERR_TM_HELLO_FORMATTED_TM_TIMESTAMP; 
+    if (ret) {
+        ret = asn1SccSatellite_State_Formatted_IsConstraintValid((&(pVal->tm_payload)), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccTM_Hello_Formatted_Encode(const asn1SccTM_Hello_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	int i1;
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccTM_Hello_Formatted_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    /*Encode tm_timestamp */
+	    BitStream_EncodeConstraintWholeNumber(pBitStrm, pVal->tm_timestamp.nCount, 0, 80);
+	    	
+	    for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	    {
+	    	BitStream_AppendByte0(pBitStrm, pVal->tm_timestamp.arr[i1]);
+	    }
+	    if (ret) {
+	        /*Encode tm_payload */
+	        ret = asn1SccSatellite_State_Formatted_Encode((&(pVal->tm_payload)), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccTM_Hello_Formatted_Decode(asn1SccTM_Hello_Formatted* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	int i1;
+	asn1SccSint nCount;
+
+	/*Decode tm_timestamp */
+	ret = BitStream_DecodeConstraintWholeNumber(pBitStrm, &nCount, 0, 80);
+	*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_HELLO_FORMATTED_TM_TIMESTAMP;
+	pVal->tm_timestamp.nCount = (long)nCount;
+		
+	for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	{
+		ret = BitStream_ReadByte(pBitStrm, &(pVal->tm_timestamp.arr[i1])); 
+		*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_HELLO_FORMATTED_TM_TIMESTAMP;
+	}
+	if (ret) {
+	    /*Decode tm_payload */
+	    ret = asn1SccSatellite_State_Formatted_Decode((&(pVal->tm_payload)), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccTM_Hello_Formatted_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccTM_Housekeeping_Formatted_Contents_Initialize(asn1SccTM_Housekeeping_Formatted_Contents* pVal)
+{
+	(void)pVal;
+
+    int i1;
+
+	i1 = 0;
+	while (i1< 4) {
+	    asn1SccSatellite_State_Formatted_Initialize((&(pVal->arr[i1])));
+	    i1 = i1 + 1;
+	}
+
+}
+
+flag asn1SccTM_Housekeeping_Formatted_Contents_IsConstraintValid(const asn1SccTM_Housekeeping_Formatted_Contents* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    int i1;
+    for(i1 = 0; ret && i1 < 4; i1++) 
+    {
+    	ret = asn1SccSatellite_State_Formatted_IsConstraintValid((&(pVal->arr[i1])), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccTM_Housekeeping_Formatted_Contents_Encode(const asn1SccTM_Housekeeping_Formatted_Contents* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	int i1;
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccTM_Housekeeping_Formatted_Contents_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    	
+	    for(i1=0; (i1 < (int)4) && ret; i1++) 
+	    {
+	    	ret = asn1SccSatellite_State_Formatted_Encode((&(pVal->arr[i1])), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccTM_Housekeeping_Formatted_Contents_Decode(asn1SccTM_Housekeeping_Formatted_Contents* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	int i1;
+
+		
+	for(i1=0; (i1 < (int)4) && ret; i1++) 
+	{
+		ret = asn1SccSatellite_State_Formatted_Decode((&(pVal->arr[i1])), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccTM_Housekeeping_Formatted_Contents_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccTM_Housekeeping_Formatted_tm_timestamp_Initialize(asn1SccTM_Housekeeping_Formatted_tm_timestamp* pVal)
+{
+	(void)pVal;
+
+
+	memset(pVal->arr, 0x0, 80);
+	pVal->nCount = 0;
+
+}
+void asn1SccTM_Housekeeping_Formatted_Initialize(asn1SccTM_Housekeeping_Formatted* pVal)
+{
+	(void)pVal;
+
+
+
+	/*set tm_timestamp */
+	asn1SccTM_Housekeeping_Formatted_tm_timestamp_Initialize((&(pVal->tm_timestamp)));
+	/*set tm_payload */
+	asn1SccTM_Housekeeping_Formatted_Contents_Initialize((&(pVal->tm_payload)));
+}
+
+flag asn1SccTM_Housekeeping_Formatted_IsConstraintValid(const asn1SccTM_Housekeeping_Formatted* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    ret = (pVal->tm_timestamp.nCount <= 80);
+    *pErrCode = ret ? 0 :  ERR_TM_HOUSEKEEPING_FORMATTED_TM_TIMESTAMP; 
+    if (ret) {
+        ret = asn1SccTM_Housekeeping_Formatted_Contents_IsConstraintValid((&(pVal->tm_payload)), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccTM_Housekeeping_Formatted_Encode(const asn1SccTM_Housekeeping_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	int i1;
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccTM_Housekeeping_Formatted_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    /*Encode tm_timestamp */
+	    BitStream_EncodeConstraintWholeNumber(pBitStrm, pVal->tm_timestamp.nCount, 0, 80);
+	    	
+	    for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	    {
+	    	BitStream_AppendByte0(pBitStrm, pVal->tm_timestamp.arr[i1]);
+	    }
+	    if (ret) {
+	        /*Encode tm_payload */
+	        ret = asn1SccTM_Housekeeping_Formatted_Contents_Encode((&(pVal->tm_payload)), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccTM_Housekeeping_Formatted_Decode(asn1SccTM_Housekeeping_Formatted* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	int i1;
+	asn1SccSint nCount;
+
+	/*Decode tm_timestamp */
+	ret = BitStream_DecodeConstraintWholeNumber(pBitStrm, &nCount, 0, 80);
+	*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED_TM_TIMESTAMP;
+	pVal->tm_timestamp.nCount = (long)nCount;
+		
+	for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	{
+		ret = BitStream_ReadByte(pBitStrm, &(pVal->tm_timestamp.arr[i1])); 
+		*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_HOUSEKEEPING_FORMATTED_TM_TIMESTAMP;
+	}
+	if (ret) {
+	    /*Decode tm_payload */
+	    ret = asn1SccTM_Housekeeping_Formatted_Contents_Decode((&(pVal->tm_payload)), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccTM_Housekeeping_Formatted_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
 void asn1SccOperating_Mode_Initialize(asn1SccOperating_Mode* pVal)
 {
 	(void)pVal;
@@ -937,6 +1323,93 @@ flag asn1SccTM_Mode_Decode(asn1SccTM_Mode* pVal, BitStream* pBitStrm, int* pErrC
 	}
 
 	return ret  && asn1SccTM_Mode_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccTM_Mode_Formatted_tm_timestamp_Initialize(asn1SccTM_Mode_Formatted_tm_timestamp* pVal)
+{
+	(void)pVal;
+
+
+	memset(pVal->arr, 0x0, 80);
+	pVal->nCount = 0;
+
+}
+void asn1SccTM_Mode_Formatted_Initialize(asn1SccTM_Mode_Formatted* pVal)
+{
+	(void)pVal;
+
+
+
+	/*set tm_timestamp */
+	asn1SccTM_Mode_Formatted_tm_timestamp_Initialize((&(pVal->tm_timestamp)));
+	/*set tm_payload */
+	asn1SccOperating_Mode_Initialize((&(pVal->tm_payload)));
+}
+
+flag asn1SccTM_Mode_Formatted_IsConstraintValid(const asn1SccTM_Mode_Formatted* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    ret = (pVal->tm_timestamp.nCount <= 80);
+    *pErrCode = ret ? 0 :  ERR_TM_MODE_FORMATTED_TM_TIMESTAMP; 
+    if (ret) {
+        ret = asn1SccOperating_Mode_IsConstraintValid((&(pVal->tm_payload)), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccTM_Mode_Formatted_Encode(const asn1SccTM_Mode_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	int i1;
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccTM_Mode_Formatted_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    /*Encode tm_timestamp */
+	    BitStream_EncodeConstraintWholeNumber(pBitStrm, pVal->tm_timestamp.nCount, 0, 80);
+	    	
+	    for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	    {
+	    	BitStream_AppendByte0(pBitStrm, pVal->tm_timestamp.arr[i1]);
+	    }
+	    if (ret) {
+	        /*Encode tm_payload */
+	        ret = asn1SccOperating_Mode_Encode((&(pVal->tm_payload)), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccTM_Mode_Formatted_Decode(asn1SccTM_Mode_Formatted* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	int i1;
+	asn1SccSint nCount;
+
+	/*Decode tm_timestamp */
+	ret = BitStream_DecodeConstraintWholeNumber(pBitStrm, &nCount, 0, 80);
+	*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_MODE_FORMATTED_TM_TIMESTAMP;
+	pVal->tm_timestamp.nCount = (long)nCount;
+		
+	for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	{
+		ret = BitStream_ReadByte(pBitStrm, &(pVal->tm_timestamp.arr[i1])); 
+		*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_MODE_FORMATTED_TM_TIMESTAMP;
+	}
+	if (ret) {
+	    /*Decode tm_payload */
+	    ret = asn1SccOperating_Mode_Decode((&(pVal->tm_payload)), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccTM_Mode_Formatted_IsConstraintValid(pVal, pErrCode);
 }
 
 
@@ -1153,26 +1626,26 @@ void asn1SccTM_Type_Initialize(asn1SccTM_Type* pVal)
 
 
 	/*set hello*/
-	pVal->kind = hello_PRESENT;
+	pVal->kind = TM_Type_hello_PRESENT;
 	asn1SccTM_Hello_Initialize((&(pVal->u.hello)));
 }
 
 flag asn1SccTM_Type_IsConstraintValid(const asn1SccTM_Type* pVal, int* pErrCode)
 {
     flag ret = TRUE;
-    if (pVal->kind == hello_PRESENT) {
+    if (pVal->kind == TM_Type_hello_PRESENT) {
     	ret = asn1SccTM_Hello_IsConstraintValid((&(pVal->u.hello)), pErrCode);
     }
     if (ret) {
-        if (pVal->kind == hk_PRESENT) {
+        if (pVal->kind == TM_Type_hk_PRESENT) {
         	ret = asn1SccTM_Housekeeping_IsConstraintValid((&(pVal->u.hk)), pErrCode);
         }
         if (ret) {
-            if (pVal->kind == mode_PRESENT) {
+            if (pVal->kind == TM_Type_mode_PRESENT) {
             	ret = asn1SccTM_Mode_IsConstraintValid((&(pVal->u.mode)), pErrCode);
             }
             if (ret) {
-                if (pVal->kind == err_PRESENT) {
+                if (pVal->kind == TM_Type_err_PRESENT) {
                 	ret = asn1SccTM_Error_IsConstraintValid((&(pVal->u.err)), pErrCode);
                 }
             }
@@ -1192,19 +1665,19 @@ flag asn1SccTM_Type_Encode(const asn1SccTM_Type* pVal, BitStream* pBitStrm, int*
 	if (ret && *pErrCode == 0) {
 	    switch(pVal->kind) 
 	    {
-	    case hello_PRESENT:
+	    case TM_Type_hello_PRESENT:
 	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 0, 0, 3);
 	    	ret = asn1SccTM_Hello_Encode((&(pVal->u.hello)), pBitStrm, pErrCode, FALSE);
 	    	break;
-	    case hk_PRESENT:
+	    case TM_Type_hk_PRESENT:
 	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 1, 0, 3);
 	    	ret = asn1SccTM_Housekeeping_Encode((&(pVal->u.hk)), pBitStrm, pErrCode, FALSE);
 	    	break;
-	    case mode_PRESENT:
+	    case TM_Type_mode_PRESENT:
 	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 2, 0, 3);
 	    	ret = asn1SccTM_Mode_Encode((&(pVal->u.mode)), pBitStrm, pErrCode, FALSE);
 	    	break;
-	    case err_PRESENT:
+	    case TM_Type_err_PRESENT:
 	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 3, 0, 3);
 	    	ret = asn1SccTM_Error_Encode((&(pVal->u.err)), pBitStrm, pErrCode, FALSE);
 	    	break;
@@ -1231,19 +1704,19 @@ flag asn1SccTM_Type_Decode(asn1SccTM_Type* pVal, BitStream* pBitStrm, int* pErrC
 	    switch(asn1SccTM_Type_index_tmp) 
 	    {
 	    case 0:
-	    	pVal->kind = hello_PRESENT;
+	    	pVal->kind = TM_Type_hello_PRESENT;
 	    	ret = asn1SccTM_Hello_Decode((&(pVal->u.hello)), pBitStrm, pErrCode);
 	    	break;
 	    case 1:
-	    	pVal->kind = hk_PRESENT;
+	    	pVal->kind = TM_Type_hk_PRESENT;
 	    	ret = asn1SccTM_Housekeeping_Decode((&(pVal->u.hk)), pBitStrm, pErrCode);
 	    	break;
 	    case 2:
-	    	pVal->kind = mode_PRESENT;
+	    	pVal->kind = TM_Type_mode_PRESENT;
 	    	ret = asn1SccTM_Mode_Decode((&(pVal->u.mode)), pBitStrm, pErrCode);
 	    	break;
 	    case 3:
-	    	pVal->kind = err_PRESENT;
+	    	pVal->kind = TM_Type_err_PRESENT;
 	    	ret = asn1SccTM_Error_Decode((&(pVal->u.err)), pBitStrm, pErrCode);
 	    	break;
 	    default:                        /*COVERAGE_IGNORE*/
@@ -1253,6 +1726,203 @@ flag asn1SccTM_Type_Decode(asn1SccTM_Type* pVal, BitStream* pBitStrm, int* pErrC
 	}  /*COVERAGE_IGNORE*/
 
 	return ret  && asn1SccTM_Type_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccTM_Error_Formatted_tm_timestamp_Initialize(asn1SccTM_Error_Formatted_tm_timestamp* pVal)
+{
+	(void)pVal;
+
+
+	memset(pVal->arr, 0x0, 80);
+	pVal->nCount = 0;
+
+}
+void asn1SccTM_Error_Formatted_Initialize(asn1SccTM_Error_Formatted* pVal)
+{
+	(void)pVal;
+
+
+
+	/*set tm_timestamp */
+	asn1SccTM_Error_Formatted_tm_timestamp_Initialize((&(pVal->tm_timestamp)));
+	/*set tm_payload */
+	asn1SccTM_Error_Contents_Initialize((&(pVal->tm_payload)));
+}
+
+flag asn1SccTM_Error_Formatted_IsConstraintValid(const asn1SccTM_Error_Formatted* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    ret = (pVal->tm_timestamp.nCount <= 80);
+    *pErrCode = ret ? 0 :  ERR_TM_ERROR_FORMATTED_TM_TIMESTAMP; 
+    if (ret) {
+        ret = asn1SccTM_Error_Contents_IsConstraintValid((&(pVal->tm_payload)), pErrCode);
+    }
+
+	return ret;
+}
+
+flag asn1SccTM_Error_Formatted_Encode(const asn1SccTM_Error_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	int i1;
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccTM_Error_Formatted_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    /*Encode tm_timestamp */
+	    BitStream_EncodeConstraintWholeNumber(pBitStrm, pVal->tm_timestamp.nCount, 0, 80);
+	    	
+	    for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	    {
+	    	BitStream_AppendByte0(pBitStrm, pVal->tm_timestamp.arr[i1]);
+	    }
+	    if (ret) {
+	        /*Encode tm_payload */
+	        ret = asn1SccTM_Error_Contents_Encode((&(pVal->tm_payload)), pBitStrm, pErrCode, FALSE);
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccTM_Error_Formatted_Decode(asn1SccTM_Error_Formatted* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	int i1;
+	asn1SccSint nCount;
+
+	/*Decode tm_timestamp */
+	ret = BitStream_DecodeConstraintWholeNumber(pBitStrm, &nCount, 0, 80);
+	*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_ERROR_FORMATTED_TM_TIMESTAMP;
+	pVal->tm_timestamp.nCount = (long)nCount;
+		
+	for(i1=0; (i1 < (int)pVal->tm_timestamp.nCount) && ret; i1++) 
+	{
+		ret = BitStream_ReadByte(pBitStrm, &(pVal->tm_timestamp.arr[i1])); 
+		*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_ERROR_FORMATTED_TM_TIMESTAMP;
+	}
+	if (ret) {
+	    /*Decode tm_payload */
+	    ret = asn1SccTM_Error_Contents_Decode((&(pVal->tm_payload)), pBitStrm, pErrCode);
+	}
+
+	return ret  && asn1SccTM_Error_Formatted_IsConstraintValid(pVal, pErrCode);
+}
+
+
+
+void asn1SccTM_Type_Formatted_Initialize(asn1SccTM_Type_Formatted* pVal)
+{
+	(void)pVal;
+
+
+	/*set hello*/
+	pVal->kind = TM_Type_Formatted_hello_PRESENT;
+	asn1SccTM_Hello_Formatted_Initialize((&(pVal->u.hello)));
+}
+
+flag asn1SccTM_Type_Formatted_IsConstraintValid(const asn1SccTM_Type_Formatted* pVal, int* pErrCode)
+{
+    flag ret = TRUE;
+    if (pVal->kind == TM_Type_Formatted_hello_PRESENT) {
+    	ret = asn1SccTM_Hello_Formatted_IsConstraintValid((&(pVal->u.hello)), pErrCode);
+    }
+    if (ret) {
+        if (pVal->kind == TM_Type_Formatted_hk_PRESENT) {
+        	ret = asn1SccTM_Housekeeping_Formatted_IsConstraintValid((&(pVal->u.hk)), pErrCode);
+        }
+        if (ret) {
+            if (pVal->kind == TM_Type_Formatted_mode_PRESENT) {
+            	ret = asn1SccTM_Mode_Formatted_IsConstraintValid((&(pVal->u.mode)), pErrCode);
+            }
+            if (ret) {
+                if (pVal->kind == TM_Type_Formatted_err_PRESENT) {
+                	ret = asn1SccTM_Error_Formatted_IsConstraintValid((&(pVal->u.err)), pErrCode);
+                }
+            }
+        }
+    }
+
+	return ret;
+}
+
+flag asn1SccTM_Type_Formatted_Encode(const asn1SccTM_Type_Formatted* pVal, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints)
+{
+    flag ret = TRUE;
+
+
+	*pErrCode = 0;
+	ret = bCheckConstraints ? asn1SccTM_Type_Formatted_IsConstraintValid(pVal, pErrCode) : TRUE ;
+	if (ret && *pErrCode == 0) {
+	    switch(pVal->kind) 
+	    {
+	    case TM_Type_Formatted_hello_PRESENT:
+	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 0, 0, 3);
+	    	ret = asn1SccTM_Hello_Formatted_Encode((&(pVal->u.hello)), pBitStrm, pErrCode, FALSE);
+	    	break;
+	    case TM_Type_Formatted_hk_PRESENT:
+	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 1, 0, 3);
+	    	ret = asn1SccTM_Housekeeping_Formatted_Encode((&(pVal->u.hk)), pBitStrm, pErrCode, FALSE);
+	    	break;
+	    case TM_Type_Formatted_mode_PRESENT:
+	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 2, 0, 3);
+	    	ret = asn1SccTM_Mode_Formatted_Encode((&(pVal->u.mode)), pBitStrm, pErrCode, FALSE);
+	    	break;
+	    case TM_Type_Formatted_err_PRESENT:
+	    	BitStream_EncodeConstraintWholeNumber(pBitStrm, 3, 0, 3);
+	    	ret = asn1SccTM_Error_Formatted_Encode((&(pVal->u.err)), pBitStrm, pErrCode, FALSE);
+	    	break;
+	    default:                            /*COVERAGE_IGNORE*/
+	        *pErrCode = ERR_UPER_ENCODE_TM_TYPE_FORMATTED;         /*COVERAGE_IGNORE*/
+	        ret = FALSE;                    /*COVERAGE_IGNORE*/
+	    }
+    } /*COVERAGE_IGNORE*/
+
+	
+    return ret;
+}
+
+flag asn1SccTM_Type_Formatted_Decode(asn1SccTM_Type_Formatted* pVal, BitStream* pBitStrm, int* pErrCode)
+{
+    flag ret = TRUE;
+	*pErrCode = 0;
+
+	asn1SccSint asn1SccTM_Type_Formatted_index_tmp;
+
+	ret = BitStream_DecodeConstraintWholeNumber(pBitStrm, &asn1SccTM_Type_Formatted_index_tmp, 0, 3);
+	*pErrCode = ret ? 0 : ERR_UPER_DECODE_TM_TYPE_FORMATTED;
+	if (ret) {
+	    switch(asn1SccTM_Type_Formatted_index_tmp) 
+	    {
+	    case 0:
+	    	pVal->kind = TM_Type_Formatted_hello_PRESENT;
+	    	ret = asn1SccTM_Hello_Formatted_Decode((&(pVal->u.hello)), pBitStrm, pErrCode);
+	    	break;
+	    case 1:
+	    	pVal->kind = TM_Type_Formatted_hk_PRESENT;
+	    	ret = asn1SccTM_Housekeeping_Formatted_Decode((&(pVal->u.hk)), pBitStrm, pErrCode);
+	    	break;
+	    case 2:
+	    	pVal->kind = TM_Type_Formatted_mode_PRESENT;
+	    	ret = asn1SccTM_Mode_Formatted_Decode((&(pVal->u.mode)), pBitStrm, pErrCode);
+	    	break;
+	    case 3:
+	    	pVal->kind = TM_Type_Formatted_err_PRESENT;
+	    	ret = asn1SccTM_Error_Formatted_Decode((&(pVal->u.err)), pBitStrm, pErrCode);
+	    	break;
+	    default:                        /*COVERAGE_IGNORE*/
+	        *pErrCode = ERR_UPER_DECODE_TM_TYPE_FORMATTED;     /*COVERAGE_IGNORE*/
+	        ret = FALSE;                /*COVERAGE_IGNORE*/
+	    }
+	}  /*COVERAGE_IGNORE*/
+
+	return ret  && asn1SccTM_Type_Formatted_IsConstraintValid(pVal, pErrCode);
 }
 
 
