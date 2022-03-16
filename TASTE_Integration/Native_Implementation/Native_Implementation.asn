@@ -111,6 +111,45 @@ BEGIN
         err     TM-Error
     }
 
+    --------------------------
+    -- TM Formatted for GUI --
+    --------------------------
+    Formatted-Data-Table ::= SEQUENCE {
+        obc-t T-Float, -- OBC temperature Degrees Celsius
+        obc-v T-Float  -- OBC supply voltages
+    }
+
+    Satellite-State-Formatted ::= SEQUENCE {
+        timestamp   OCTET STRING (SIZE (0 .. msg-size)),
+        data        Formatted-Data-Table
+    }
+
+    TM-Message-Formatted {Contents} ::=  SEQUENCE {
+        tm-timestamp    OCTET STRING (SIZE (0 .. msg-size)),
+        tm-payload      Contents
+    }
+
+    -- Hello
+    TM-Hello-Formatted ::= TM-Message-Formatted {Satellite-State-Formatted}
+
+    -- Housekeeping
+    TM-Housekeeping-Formatted-Contents ::= SEQUENCE(SIZE(hk-size)) OF Satellite-State-Formatted
+    TM-Housekeeping-Formatted ::= TM-Message-Formatted {TM-Housekeeping-Formatted-Contents}
+
+    -- Mode
+    TM-Mode-Formatted ::= TM-Message-Formatted {Operating-Mode}
+
+    -- Error
+    TM-Error-Formatted ::= TM-Message-Formatted {TM-Error-Contents}
+
+    -- TM as a choice of TM Formatted types:
+    TM-Type-Formatted ::= CHOICE {
+        hello   TM-Hello-Formatted,
+        hk      TM-Housekeeping-Formatted,
+        mode    TM-Mode-Formatted,
+        err     TM-Error-Formatted
+    }
+
 END
                     --~~~~~~~~~~~~~~~~~~~~~--
                     -- Brief ASN1 tutorial --

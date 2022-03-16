@@ -41,18 +41,11 @@ msc Basic_TM;
 instance TTC;
 /* CIF MESSAGE (180, 280) (622, 280) */
 out Last to Storage;
-/* CIF MESSAGE (180, 370) (894, 370) */
-out TM to GSSW;
 endinstance;
 /* CIF INSTANCE (534, 61) (172, 87) (800, 299) */
 instance Storage;
 /* CIF MESSAGE (180, 280) (622, 280) */
 in Last from TTC;
-endinstance;
-/* CIF INSTANCE (823, 61) (143, 87) (800, 299) */
-instance GSSW;
-/* CIF MESSAGE (180, 370) (894, 370) */
-in TM from TTC;
 endinstance;
 endmsc;
 endmscdocument;
@@ -61,15 +54,8 @@ mscdocument TC_Reception /* MSC LEAF */;
     language ASN.1;
     data Native_Implementation.asn;
 msc TC_Reception;
-/* CIF INSTANCE (40, 61) (143, 87) (800, 1484) */
-instance GSSW;
-/* CIF MESSAGE (111, 217) (794, 217) */
-out TC to TTC;
-endinstance;
 /* CIF INSTANCE (730, 61) (127, 87) (800, 1484) */
 instance TTC;
-/* CIF MESSAGE (111, 217) (794, 217) */
-in TC from GSSW;
 /* CIF MESSAGE (794, 307) (1471, 307) */
 out Process_TC to Manager;
 endinstance;
