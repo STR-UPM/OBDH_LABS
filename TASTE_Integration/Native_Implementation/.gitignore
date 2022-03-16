@@ -14,6 +14,10 @@ work/dataview/*
 # Except Sensors source files
 !work/sensors
 work/sensors/*
+!work/sensors/implem
+work/sensors/implem/*
+!work/sensors/implem/default
+work/sensors/implem/default/*
 !work/sensors/implem/default/Ada
 work/sensors/implem/default/Ada/*
 !work/sensors/implem/default/Ada/src
@@ -23,6 +27,10 @@ work/sensors/implem/default/Ada/src/*
 # Except Platform source files
 !work/platform
 work/platform/*
+!work/platform/implem
+work/platform/implem/*
+!work/platform/implem/default
+work/platform/implem/default/*
 !work/platform/implem/default/Ada
 work/platform/implem/default/Ada/*
 !work/platform/implem/default/Ada/src
@@ -32,6 +40,10 @@ work/platform/implem/default/Ada/src/*
 # Except Storage source files
 !work/storage
 work/storage/*
+!work/storage/implem
+work/storage/implem/*
+!work/storage/implem/default
+work/storage/implem/default/*
 !work/storage/implem/default/Ada
 work/storage/implem/default/Ada/*
 !work/storage/implem/default/Ada/src
