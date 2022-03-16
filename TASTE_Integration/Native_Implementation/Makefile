@@ -1,6 +1,15 @@
 KAZOO?=kazoo
 SPACECREATOR?=spacecreator.AppImage
 
+POHI?=C
+KAZOO_POHI_FLAGS=-p
+ifeq ($(POHI), Ada)
+    KAZOO_POHI_FLAGS=
+endif
+
+$(info # Using the PolyORB-Hi/$(POHI) middleware)
+$(info #####################################)
+
 # Here you can specify custom compiler/linker flags, and add folders containing
 # external code you want to compile and link for a specific partition.
 # Use upper case for the partition name:
@@ -64,17 +73,17 @@ work/glue_simu:	InterfaceView.aadl DataView.aadl
 
 work/glue_release:	InterfaceView.aadl DeploymentView.aadl DataView.aadl
 	sed -i 's/CoverageEnabled => true/CoverageEnabled => false/g' DeploymentView.aadl || :
-	$(KAZOO) -p --glue --gw -o work
+	$(KAZOO) $(KAZOO_POHI_FLAGS) --glue --gw -o work
 	touch $@
 
 work/glue_debug:	InterfaceView.aadl DeploymentView.aadl DataView.aadl
 	sed -i 's/CoverageEnabled => true/CoverageEnabled => false/g' DeploymentView.aadl || :
-	$(KAZOO) --debug -p --glue --gw -o work
+	$(KAZOO) --debug $(KAZOO_POHI_FLAGS) --glue --gw -o work
 	touch $@
 
 work/glue_coverage:	InterfaceView.aadl DeploymentView.aadl DataView.aadl
 	sed -i 's/CoverageEnabled => false/CoverageEnabled => true/g' DeploymentView.aadl || :
-	$(KAZOO) --debug -p --glue --gw -o work
+	$(KAZOO) --debug $(KAZOO_POHI_FLAGS) --glue --gw -o work
 	touch $@
 
 InterfaceView.aadl:	interfaceview.xml
