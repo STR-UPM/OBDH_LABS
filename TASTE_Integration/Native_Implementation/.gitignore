@@ -6,10 +6,8 @@
 InterfaceView.aadl
 DataView.aadl
 
-# Ignore whole autogen files in work directory
-work/build/*
-work/binaries/*
-work/dataview/*
+# Ignore everything in work directory
+work/*
 
 # Except Sensors source files
 !work/sensors
