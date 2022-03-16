@@ -36,7 +36,7 @@ work/storage/*
 work/storage/implem/default/Ada/*
 !work/storage/implem/default/Ada/src
 work/storage/implem/default/Ada/src/*
-!work/storage/implem/default/Ada/src/*.adb
+!work/storage/implem/default/Ada/src/storage.adb
 
 # Except Manager pr (OpenGeode) file
 !work/manager/
@@ -45,4 +45,4 @@ work/manager/*
 work/manager/SDL/*
 !work/manager/SDL/src
 work/manager/SDL/src/*
-!work/manager/SDL/src/*.pr
+!work/manager/SDL/src/manager.pr
