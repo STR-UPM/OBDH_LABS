@@ -1,3 +1,44 @@
 # qtcreator generated files:
 *.pro.user*
 *.creator.user*
+
+# Ignore whole autogen files in work directory
+work/build/*
+work/binaries/*
+work/dataview/*
+
+# Except Sensors source files
+!work/sensors
+work/sensors/*
+!work/sensors/implem/default/Ada
+work/sensors/implem/default/Ada/*
+!work/sensors/implem/default/Ada/src
+work/sensors/implem/default/Ada/src/*
+!work/sensors/implem/default/Ada/src/*.adb
+
+# Except Platform source files
+!work/platform
+work/platform/*
+!work/platform/implem/default/Ada
+work/platform/implem/default/Ada/*
+!work/platform/implem/default/Ada/src
+work/platform/implem/default/Ada/src/*
+!work/platform/implem/default/Ada/src/*.adb
+
+# Except Storage source files
+!work/storage
+work/storage/*
+!work/storage/implem/default/Ada
+work/storage/implem/default/Ada/*
+!work/storage/implem/default/Ada/src
+work/storage/implem/default/Ada/src/*
+!work/storage/implem/default/Ada/src/*.adb
+
+# Except Manager pr (OpenGeode) file
+!work/manager/
+work/manager/*
+!work/manager/SDL
+work/manager/SDL/*
+!work/manager/SDL/src
+work/manager/SDL/src/*
+!work/manager/SDL/src/*.pr
