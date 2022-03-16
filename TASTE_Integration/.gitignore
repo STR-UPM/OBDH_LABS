@@ -1,0 +1,29 @@
+# Output directories
+**/bin/
+**/build/
+**/.build/
+**/lib/
+**/binaries/
+
+# IDE config files
+*.iml
+*.eml
+
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+*.bak_*
+
+# session
+Session.vim
+
+# temporary
+.netrwhist
+*~
+**.\#*
+**\#*
+
+# auto-generated tag files
+tags
