@@ -85,6 +85,19 @@ work/measurer_and_actuator/implem/default/Ada/*
 work/measurer_and_actuator/implem/default/Ada/src/*
 !work/measurer_and_actuator/implem/default/Ada/src/measurer_and_actuator.adb
 
+# Except TTC source files
+!work/ttc
+work/ttc/*
+!work/ttc/implem
+work/ttc/implem/*
+!work/ttc/implem/default
+work/ttc/implem/default/*
+!work/ttc/implem/default/Ada
+work/ttc/implem/default/Ada/*
+!work/ttc/implem/default/Ada/src
+work/ttc/implem/default/Ada/src/*
+!work/ttc/implem/default/Ada/src/ttc.adb
+
 # Except ACS_Algorithm source files
 !work/acs_algorithm
 work/acs_algorithm/*
@@ -95,3 +108,16 @@ work/acs_algorithm/implem/default/*
 !work/acs_algorithm/implem/default/QGenAda
 work/acs_algorithm/implem/default/QGenAda/*
 !work/acs_algorithm/implem/default/QGenAda/src
+
+# Except GSSW user widgets (Python)
+!work/gssw
+work/gssw/*
+!work/gssw/implem
+work/gssw/implem/*
+!work/gssw/implem/default
+work/gssw/implem/default/*
+!work/gssw/implem/default/GUI
+work/gssw/implem/default/GUI/*
+!work/gssw/implem/default/GUI/src
+work/gssw/implem/default/GUI/src/*
+!work/gssw/implem/default/GUI/src/UserWidgets.py 
