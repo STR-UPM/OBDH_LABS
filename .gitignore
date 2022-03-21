@@ -7,3 +7,5 @@
 # Archive files
 *.zip
 
+# MacOS files
+*.DS_Store
