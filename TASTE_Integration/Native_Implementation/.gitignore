@@ -12,6 +12,7 @@ work/*
 # Except Sensors source files
 !work/sensors
 work/sensors/*
+!work/sensors/Ada
 !work/sensors/implem
 work/sensors/implem/*
 !work/sensors/implem/default
@@ -25,6 +26,7 @@ work/sensors/implem/default/Ada/src/*
 # Except Platform source files
 !work/platform
 work/platform/*
+!work/platform/Ada
 !work/platform/implem
 work/platform/implem/*
 !work/platform/implem/default
@@ -38,6 +40,7 @@ work/platform/implem/default/Ada/src/*
 # Except Storage source files
 !work/storage
 work/storage/*
+!work/storage/Ada
 !work/storage/implem
 work/storage/implem/*
 !work/storage/implem/default
@@ -60,6 +63,7 @@ work/manager/SDL/src/*
 # Except Simulated_ACS_HW source files
 !work/simulated_acs_hw
 work/simulated_acs_hw/*
+!work/simulated_acs_hw/Ada
 !work/simulated_acs_hw/implem
 work/simulated_acs_hw/implem/*
 !work/simulated_acs_hw/implem/default
@@ -73,6 +77,7 @@ work/simulated_acs_hw/implem/default/Ada/src/*
 # Except Measurer_And_Actuator source files
 !work/measurer_and_actuator
 work/measurer_and_actuator/*
+!work/measurer_and_actuator/Ada
 !work/measurer_and_actuator/implem
 work/measurer_and_actuator/implem/*
 !work/measurer_and_actuator/implem/default
@@ -86,6 +91,7 @@ work/measurer_and_actuator/implem/default/Ada/src/*
 # Except TTC source files
 !work/ttc
 work/ttc/*
+!work/ttc/Ada
 !work/ttc/implem
 work/ttc/implem/*
 !work/ttc/implem/default
