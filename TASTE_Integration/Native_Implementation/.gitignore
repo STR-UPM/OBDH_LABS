@@ -105,6 +105,7 @@ work/ttc/implem/default/Ada/src/*
 # Except ACS_Algorithm source files
 !work/acs_algorithm
 work/acs_algorithm/*
+!work/acs_algorithm/QGenAda
 !work/acs_algorithm/implem
 work/acs_algorithm/implem/*
 !work/acs_algorithm/implem/default
