@@ -30,12 +30,12 @@
    xmlns:geneauto.emf.models.gablocklibrary.simulinklibraries="http:///geneauto/emf/models/gablocklibrary/simulinklibraries.ecore"
    xmlns:geneauto.emf.models.gadiagrammodel="http:///geneauto/emf/models/gadiagrammodel.ecore"
    xmlns:geneauto.emf.models.gainterfacemodel="http:///geneauto/emf/models/gainterfacemodel.ecore"
-   xmi:id="5106"
+   xmi:id="5193"
    modelName="qgen_base_workspace"
    kind="MODEL"
    >
    <Instances
-      xmi:id="5107"
+      xmi:id="5194"
       xmi:type="geneauto.emf.models.gainterfacemodel:CodeInterface"
       isFixedName="false"
       name="qgen_base_workspace"
@@ -81,8 +81,21 @@
       <generatedSourcesName>qgen_type_long_float_array_6.ads</generatedSourcesName>
       <generatedSourcesName>qgen_type_float_array_2_3.ads</generatedSourcesName>
       <generatedSourcesName>qgen_type_float_array_2.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_formatted_data_table.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_satellite_state_formatted_timestamp.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_satellite_state_formatted.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_error_formatted_tm_timestamp.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_error_formatted.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_hello_formatted_tm_timestamp.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_hello_formatted.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_housekeeping_formatted_tm_timestamp.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_housekeeping_formatted_contents.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_housekeeping_formatted.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_mode_formatted_tm_timestamp.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_mode_formatted.ads</generatedSourcesName>
+      <generatedSourcesName>qgen_base_workspace_tm_type_formatted.ads</generatedSourcesName>
       <generatedInterfaces
-         xmi:id="33667"
+         xmi:id="8654"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_UInt8"
@@ -91,7 +104,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33669"
+         xmi:id="8656"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_UInt64"
@@ -100,7 +113,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33671"
+         xmi:id="8658"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_UInt32"
@@ -109,7 +122,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33673"
+         xmi:id="8660"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_UInt16"
@@ -118,7 +131,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33675"
+         xmi:id="8662"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_Int8"
@@ -127,7 +140,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33677"
+         xmi:id="8664"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_Int32"
@@ -136,7 +149,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33679"
+         xmi:id="8666"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_Float"
@@ -145,7 +158,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33680"
+         xmi:id="8667"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_Boolean"
@@ -154,7 +167,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33682"
+         xmi:id="8669"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TC_Type"
@@ -163,7 +176,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33684"
+         xmi:id="8671"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_Operating_Mode"
@@ -172,7 +185,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33686"
+         xmi:id="8673"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_Mission_Time"
@@ -181,7 +194,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33688"
+         xmi:id="8675"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_Analog_Data"
@@ -190,7 +203,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33691"
+         xmi:id="8678"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_Analog_Data_Table"
@@ -199,7 +212,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33695"
+         xmi:id="8685"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_Satellite_State"
@@ -208,7 +221,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="5122"
+         xmi:id="5209"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Error_tm_payload"
@@ -217,7 +230,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33706"
+         xmi:id="8704"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Error"
@@ -226,7 +239,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33711"
+         xmi:id="8717"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Hello"
@@ -235,7 +248,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="5125"
+         xmi:id="5212"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Housekeeping_tm_payload"
@@ -244,7 +257,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33731"
+         xmi:id="8747"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Housekeeping"
@@ -253,7 +266,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33734"
+         xmi:id="8779"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Mode"
@@ -262,7 +275,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33750"
+         xmi:id="8802"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Type"
@@ -271,7 +284,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33756"
+         xmi:id="8830"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_B_b_T"
@@ -280,7 +293,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33762"
+         xmi:id="8836"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_Control"
@@ -289,7 +302,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33764"
+         xmi:id="8838"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_MT_Working"
@@ -298,7 +311,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33766"
+         xmi:id="8840"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_T_Omega"
@@ -307,7 +320,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33772"
+         xmi:id="8846"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace"
@@ -316,7 +329,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38036"
+         xmi:id="8848"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Unsigned_8_Array_80"
@@ -325,7 +338,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38038"
+         xmi:id="8850"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Long_Float_Array_15"
@@ -334,7 +347,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38040"
+         xmi:id="8852"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Long_Float_Array_3"
@@ -343,7 +356,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33702"
+         xmi:id="8700"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Error_Contents"
@@ -352,7 +365,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="33725"
+         xmi:id="8741"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_base_workspace_TM_Housekeeping_Contents"
@@ -361,7 +374,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38042"
+         xmi:id="5226"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Float_Array_3"
@@ -370,7 +383,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38044"
+         xmi:id="5227"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Float_Array_5"
@@ -379,7 +392,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38046"
+         xmi:id="5228"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Float_Array_15"
@@ -388,7 +401,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38048"
+         xmi:id="5229"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Float_Array_6"
@@ -397,7 +410,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38049"
+         xmi:id="5230"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Boolean_Array_3"
@@ -406,7 +419,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38051"
+         xmi:id="5231"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Long_Float_Array_5"
@@ -415,7 +428,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38053"
+         xmi:id="5232"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Long_Float_Array_6"
@@ -424,7 +437,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38055"
+         xmi:id="5233"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Float_Array_2_3"
@@ -433,7 +446,7 @@
          >
       </generatedInterfaces>
       <generatedInterfaces
-         xmi:id="38057"
+         xmi:id="5234"
          xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
          isFixedName="false"
          name="qgen_type_Float_Array_2"
@@ -441,8 +454,125 @@
          isEntrypoint="false"
          >
       </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8681"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_Formatted_Data_Table"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8692"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_Satellite_State_Formatted_timestamp"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8697"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_Satellite_State_Formatted"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8707"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Error_Formatted_tm_timestamp"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8712"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Error_Formatted"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8720"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Hello_Formatted_tm_timestamp"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8727"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Hello_Formatted"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8750"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Housekeeping_Formatted_tm_timestamp"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8768"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Housekeeping_Formatted_Contents"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8776"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Housekeeping_Formatted"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8782"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Mode_Formatted_tm_timestamp"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8786"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Mode_Formatted"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
+      <generatedInterfaces
+         xmi:id="8824"
+         xmi:type="geneauto.emf.models.gainterfacemodel:ModuleDescription"
+         isFixedName="false"
+         name="qgen_base_workspace_TM_Type_Formatted"
+         sourceElementId="0"
+         isEntrypoint="false"
+         >
+      </generatedInterfaces>
       <generationParameters
-         xmi:id="5148"
+         xmi:id="5235"
          xmi:type="geneauto.emf.models.genericmodel:CodeGenParameters"
          language="LANG_ADA"
          flattening="NONE"

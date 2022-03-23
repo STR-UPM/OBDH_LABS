@@ -41,10 +41,12 @@ package body Ttc is
 
    procedure Hk_Task is
       TM_HK : asn1SccTm_Type (hk_PRESENT);
+      Reading_Success : asn1SccT_Boolean;
    begin
       TM_HK.hk.tm_timestamp := Timestamp;
       for I in TM_HK.hk.tm_payload.Data'Range loop
-         Get (TM_HK.hk.tm_payload.Data(I));
+         Get (TM_HK.hk.tm_payload.Data(I), Reading_Success);
+         exit when not Reading_Success;
       end loop;
 
       TM (TM_HK);
