@@ -12,9 +12,19 @@ work/*
 # Except Sensors source files
 !work/sensors
 work/sensors/*
+!work/sensors/C
 !work/sensors/Ada
 !work/sensors/implem
 work/sensors/implem/*
+
+!work/sensors/implem/cfs
+work/sensors/implem/cfs/*
+!work/sensors/implem/cfs/C
+work/sensors/implem/cfs/C/*
+!work/sensors/implem/cfs/C/src
+work/sensors/implem/cfs/C/src/*
+!work/sensors/implem/cfs/C/src/sensors.c
+
 !work/sensors/implem/default
 work/sensors/implem/default/*
 !work/sensors/implem/default/Ada
@@ -26,9 +36,19 @@ work/sensors/implem/default/Ada/src/*
 # Except Platform source files
 !work/platform
 work/platform/*
+!work/platform/C
 !work/platform/Ada
 !work/platform/implem
 work/platform/implem/*
+
+!work/platform/implem/cfs
+work/platform/implem/cfs/*
+!work/platform/implem/cfs/C
+work/platform/implem/cfs/C/*
+!work/platform/implem/cfs/C/src
+work/platform/implem/cfs/C/src/*
+!work/platform/implem/cfs/C/src/platform.c
+
 !work/platform/implem/default
 work/platform/implem/default/*
 !work/platform/implem/default/Ada
@@ -40,9 +60,19 @@ work/platform/implem/default/Ada/src/*
 # Except Storage source files
 !work/storage
 work/storage/*
+!work/storage/C
 !work/storage/Ada
 !work/storage/implem
 work/storage/implem/*
+
+!work/storage/implem/cfs
+work/storage/implem/cfs/*
+!work/storage/implem/cfs/C
+work/storage/implem/cfs/C/*
+!work/storage/implem/cfs/C/src
+work/storage/implem/cfs/C/src/*
+!work/storage/implem/cfs/C/src/storage.c
+
 !work/storage/implem/default
 work/storage/implem/default/*
 !work/storage/implem/default/Ada
@@ -63,9 +93,19 @@ work/manager/SDL/src/*
 # Except Simulated_ACS_HW source files
 !work/simulated_acs_hw
 work/simulated_acs_hw/*
+!work/simulated_acs_hw/C
 !work/simulated_acs_hw/Ada
 !work/simulated_acs_hw/implem
 work/simulated_acs_hw/implem/*
+
+!work/simulated_acs_hw/implem/cfs
+work/simulated_acs_hw/implem/cfs/*
+!work/simulated_acs_hw/implem/cfs/C
+work/simulated_acs_hw/implem/cfs/C/*
+!work/simulated_acs_hw/implem/cfs/C/src
+work/simulated_acs_hw/implem/cfs/C/src/*
+!work/simulated_acs_hw/implem/cfs/C/src/simulated_acs_hw.c
+
 !work/simulated_acs_hw/implem/default
 work/simulated_acs_hw/implem/default/*
 !work/simulated_acs_hw/implem/default/Ada
@@ -77,9 +117,19 @@ work/simulated_acs_hw/implem/default/Ada/src/*
 # Except Measurer_And_Actuator source files
 !work/measurer_and_actuator
 work/measurer_and_actuator/*
+!work/measurer_and_actuator/C
 !work/measurer_and_actuator/Ada
 !work/measurer_and_actuator/implem
 work/measurer_and_actuator/implem/*
+
+!work/measurer_and_actuator/implem/cfs
+work/measurer_and_actuator/implem/cfs/*
+!work/measurer_and_actuator/implem/cfs/C
+work/measurer_and_actuator/implem/cfs/C/*
+!work/measurer_and_actuator/implem/cfs/C/src
+work/measurer_and_actuator/implem/cfs/C/src/*
+!work/measurer_and_actuator/implem/cfs/C/src/measurer_and_actuator.c
+
 !work/measurer_and_actuator/implem/default
 work/measurer_and_actuator/implem/default/*
 !work/measurer_and_actuator/implem/default/Ada
@@ -91,9 +141,19 @@ work/measurer_and_actuator/implem/default/Ada/src/*
 # Except TTC source files
 !work/ttc
 work/ttc/*
+!work/ttc/C
 !work/ttc/Ada
 !work/ttc/implem
 work/ttc/implem/*
+
+!work/ttc/implem/cfs
+work/ttc/implem/cfs/*
+!work/ttc/implem/cfs/C
+work/ttc/implem/cfs/C/*
+!work/ttc/implem/cfs/C/src
+work/ttc/implem/cfs/C/src/*
+!work/ttc/implem/cfs/C/src/ttc.c
+
 !work/ttc/implem/default
 work/ttc/implem/default/*
 !work/ttc/implem/default/Ada
@@ -105,9 +165,17 @@ work/ttc/implem/default/Ada/src/*
 # Except ACS_Algorithm source files
 !work/acs_algorithm
 work/acs_algorithm/*
+!work/acs_algorithm/QGenC
 !work/acs_algorithm/QGenAda
 !work/acs_algorithm/implem
 work/acs_algorithm/implem/*
+
+!work/acs_algorithm/implem/cfs
+work/acs_algorithm/implem/cfs/*
+!work/acs_algorithm/implem/cfs/QGenC
+work/acs_algorithm/implem/cfs/QGenC/*
+!work/acs_algorithm/implem/cfs/QGenC/src
+
 !work/acs_algorithm/implem/default
 work/acs_algorithm/implem/default/*
 !work/acs_algorithm/implem/default/QGenAda

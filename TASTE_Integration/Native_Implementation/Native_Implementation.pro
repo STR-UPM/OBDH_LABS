@@ -2,7 +2,8 @@ TEMPLATE = lib
 CONFIG -= qt
 CONFIG += generateC
 
-DISTFILES +=  $(HOME)/tool-inst/share/taste-types/taste-types.asn
+DISTFILES +=  $(HOME)/tool-inst/share/taste-types/taste-types.asn \
+    deploymentview_stm32f407.dv.xml
 DISTFILES += Native_Implementation.asn
 DISTFILES += Native_Implementation.acn
 DISTFILES += Native_Implementation.msc

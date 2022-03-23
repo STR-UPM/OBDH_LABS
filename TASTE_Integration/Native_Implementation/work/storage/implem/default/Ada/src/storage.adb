@@ -55,9 +55,11 @@ package body Storage is
    -- Public subprograms (PIs) --
    ------------------------------
 
-   procedure Get (Out_Data : out asn1SccSatellite_State) is
+   procedure Get (Out_Data : out asn1SccSatellite_State;
+                  Success  : out asn1SccT_Boolean) is
    begin
-      if not Is_Empty then
+      Success := asn1SccT_Boolean (not Is_Empty);
+      if Success then
          Out_Data := Box (Next_Out);
          Next_Out := Next_Out + 1;
          Count    := Count - 1;
@@ -76,6 +78,8 @@ package body Storage is
       Next_In := Next_In + 1;
       if not Is_Full then
          Count := Count + 1;
+      else
+         Next_Out := Next_Out + 1;
       end if;
    end Put;
 
