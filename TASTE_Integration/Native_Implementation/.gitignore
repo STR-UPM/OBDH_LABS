@@ -93,7 +93,7 @@ work/manager/SDL/src/*
 # Except Simulated_ACS_HW source files
 !work/simulated_acs_hw
 work/simulated_acs_hw/*
-!work/simultaed_acs_hw/C
+!work/simulated_acs_hw/C
 !work/simulated_acs_hw/Ada
 !work/simulated_acs_hw/implem
 work/simulated_acs_hw/implem/*
