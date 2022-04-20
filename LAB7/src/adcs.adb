@@ -24,10 +24,10 @@ package body ADCS is
 
    -- controller block input and ouput objects must be global
    Control_Input : Controller_Input;
-   pragma Export (C, Control_Input, "rtU");
+   pragma Import (C, Control_Input, "rtU");
 
    Control_Output : Controller_Output;
-   pragma Export (C, Control_Output, "rtY");
+   pragma Import (C, Control_Output, "rtY");
 
    --  Initialize the ADCS subsystem
    procedure Initialize is
@@ -35,6 +35,7 @@ package body ADCS is
       pragma Import (C, Control_Initialize, "control_initialize");
    begin
       Control_Initialize;
+      Control_Input.Control_Parameters := Default_Controller_Parameters;
    end Initialize;
 
    -- ADCS task
