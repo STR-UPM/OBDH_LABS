@@ -25,6 +25,7 @@
 #include "ttc.h"
 #include <stdio.h>
 #include <time.h>
+#include <string.h> // memset
 
 /***********************
  * Private subprograms *
@@ -50,6 +51,8 @@ void ttc_PI_HK_Task(void)
 {
     asn1SccTM_Type tm_hk;
     tm_hk.kind = TM_Type_hk_PRESENT;
+    asn1SccTM_Housekeeping_Contents_Initialize(&tm_hk.u.hk.tm_payload);
+    // sets to zero
     for (int i = 0; i < 4; ++i) {
         asn1SccT_Boolean reading_success = false;
         ttc_RI_Get(&(tm_hk.u.hk.tm_payload.arr[i]),
