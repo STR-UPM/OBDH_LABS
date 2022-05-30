@@ -1,0 +1,168 @@
+---------------------------------------------------
+-- AADL2.2
+-- TASTE type interfaceview
+-- 
+-- generated code: do not edit
+---------------------------------------------------
+
+PACKAGE interfaceview::IV::Blink_Led
+PUBLIC
+
+WITH interfaceview::IV::Led_Handler;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Tick
+END PI_Tick;
+
+SUBPROGRAM IMPLEMENTATION PI_Tick.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Tick.others;
+
+SUBPROGRAM RI_Clear_LED
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END RI_Clear_LED;
+
+SUBPROGRAM IMPLEMENTATION RI_Clear_LED.others
+END RI_Clear_LED.others;
+
+SUBPROGRAM RI_Set_LED
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END RI_Set_LED;
+
+SUBPROGRAM IMPLEMENTATION RI_Set_LED.others
+END RI_Set_LED.others;
+
+SYSTEM Blink_Led
+FEATURES
+  PI_Tick : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::Blink_Led::PI_Tick.others {
+    Taste::coordinates => "128244 68106";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 100 ms;
+    Taste::InterfaceName => "Tick";
+  };
+  RI_Clear_LED : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::Led_Handler::PI_Clear_LED.others {
+    Taste::coordinates => "121977 79810";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Clear_LED";
+    Taste::labelInheritance => "true";
+  };
+  RI_Set_LED : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::Led_Handler::PI_Set_LED.others {
+    Taste::coordinates => "135457 79810";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Set_LED";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END Blink_Led;
+
+SYSTEM IMPLEMENTATION Blink_Led.others
+END Blink_Led.others;
+
+END interfaceview::IV::Blink_Led;
+
+PACKAGE interfaceview::IV::Led_Handler
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Clear_LED
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END PI_Clear_LED;
+
+SUBPROGRAM IMPLEMENTATION PI_Clear_LED.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Clear_LED.others;
+
+SUBPROGRAM PI_Set_LED
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END PI_Set_LED;
+
+SUBPROGRAM IMPLEMENTATION PI_Set_LED.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Set_LED.others;
+
+SYSTEM Led_Handler
+FEATURES
+  PI_Clear_LED : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::Led_Handler::PI_Clear_LED.others {
+    Taste::coordinates => "121972 84816";
+    Taste::RCMoperationKind => unprotected;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Clear_LED";
+  };
+  PI_Set_LED : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::Led_Handler::PI_Set_LED.others {
+    Taste::coordinates => "135451 84816";
+    Taste::RCMoperationKind => unprotected;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Set_LED";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END Led_Handler;
+
+SYSTEM IMPLEMENTATION Led_Handler.others
+END Led_Handler.others;
+
+END interfaceview::IV::Led_Handler;
+
+PACKAGE interfaceview::IV
+-- { interfaceview::IV - 144120 87054 175014 94256 
+--Led_Handler: This TASTE Function handles the 4 LEDs embedded in the STM32 board. 
+--}
+PUBLIC
+
+WITH interfaceview::IV::Blink_Led;
+WITH interfaceview::IV::Led_Handler;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM interfaceview
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  Blink_Led : SYSTEM interfaceview::IV::Blink_Led::Blink_Led.others {
+    Taste::coordinates => "114958 68106 142478 79810";
+  };
+  Led_Handler : SYSTEM interfaceview::IV::Led_Handler::Led_Handler.others {
+    Taste::coordinates => "114818 84816 142757 96331";
+  };
+CONNECTIONS
+  Blink_Led_RI_Clear_LED_Led_Handler_PI_Clear_LED : SUBPROGRAM ACCESS Led_Handler.PI_Clear_LED -> Blink_Led.RI_Clear_LED {
+    Taste::coordinates => "121977 79810 121977 81305 121972 81305 121972 84816";
+  };
+  Blink_Led_RI_Set_LED_Led_Handler_PI_Set_LED : SUBPROGRAM ACCESS Led_Handler.PI_Set_LED -> Blink_Led.RI_Set_LED {
+    Taste::coordinates => "135457 79810 135457 81305 135451 81305 135451 84816";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 297000 210000";
+  Taste::version => "2.4";
+END interfaceview::IV;
+

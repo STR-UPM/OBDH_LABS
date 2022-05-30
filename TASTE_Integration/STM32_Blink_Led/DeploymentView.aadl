@@ -1,0 +1,77 @@
+---------------------------------------------------
+-- AADL2.2
+-- TASTE type deploymentview
+-- 
+-- generated code: do not edit
+---------------------------------------------------
+
+PACKAGE deploymentview::DV::Node1
+PUBLIC
+
+WITH Taste;
+WITH Deployment;
+WITH TASTE_DV_Properties;
+WITH deploymentview::DV;
+WITH Memory_Properties;
+WITH ARINC653;
+PROCESS stm32f407_discovery_partition
+END stm32f407_discovery_partition;
+
+PROCESS IMPLEMENTATION stm32f407_discovery_partition.others
+END stm32f407_discovery_partition.others;
+
+END deploymentview::DV::Node1;
+
+PACKAGE deploymentview::DV
+PUBLIC
+
+WITH interfaceview::IV::Blink_Led;
+WITH interfaceview::IV::Led_Handler;
+WITH ocarina_processors_arm;
+WITH deploymentview::DV::Node1;
+WITH Taste;
+WITH Deployment;
+WITH interfaceview::IV;
+WITH TASTE_DV_Properties;
+SYSTEM Node1
+END Node1;
+
+SYSTEM IMPLEMENTATION Node1.others
+SUBCOMPONENTS
+  IV_Blink_Led : SYSTEM interfaceview::IV::Blink_Led::Blink_Led.others {
+    Taste::FunctionName => "Blink_Led";
+  };
+  IV_Led_Handler : SYSTEM interfaceview::IV::Led_Handler::Led_Handler.others {
+    Taste::FunctionName => "Led_Handler";
+  };
+  stm32f407_discovery_partition : PROCESS deploymentview::DV::Node1::stm32f407_discovery_partition.others {
+    Taste::coordinates => "118961 59091 166229 81160";
+    Deployment::Port_Number => 0;
+  };
+  stm32f407_discovery_gnat2020 : PROCESSOR ocarina_processors_arm::stm32f407_discovery.gnat2020 {
+    Taste::coordinates => "113052 52786 172137 84313";
+  };
+PROPERTIES
+  Taste::APLC_Binding => (reference (stm32f407_discovery_partition)) APPLIES TO IV_Blink_Led;
+  Taste::APLC_Binding => (reference (stm32f407_discovery_partition)) APPLIES TO IV_Led_Handler;
+  Actual_Processor_Binding => (reference (stm32f407_discovery_gnat2020)) APPLIES TO stm32f407_discovery_partition;
+END Node1.others;
+
+SYSTEM deploymentview
+END deploymentview;
+
+SYSTEM IMPLEMENTATION deploymentview.others
+SUBCOMPONENTS
+  Node1 : SYSTEM Node1.others {
+    Taste::coordinates => "105666 43778 179523 88817";
+  };
+  interfaceview : SYSTEM interfaceview::IV::interfaceview.others;
+END deploymentview.others;
+
+PROPERTIES
+  Taste::coordinates => "0 0 297000 210000";
+  Taste::version => "2.4";
+  Taste::interfaceView => "InterfaceView.aadl";
+  Taste::HWLibraries => ("/home/taste/tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
+END deploymentview::DV;
+

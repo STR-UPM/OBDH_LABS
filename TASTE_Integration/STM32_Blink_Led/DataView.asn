@@ -1,0 +1,25 @@
+STM32-IMPLEMENTATION-DATAVIEW DEFINITIONS ::=
+BEGIN
+
+    LED ::= ENUMERATED {
+        orange,
+        red,
+        blue,
+        green
+    }
+
+    LEDs ::= SEQUENCE (SIZE(4)) OF LED
+
+    -- The LEDs on the F4 Disco are not physically laid out "consecutively"
+    -- in such a way that we can simply go in enumeral order to get circular
+    -- rotation.
+    -- Thus we define the leds context parameter, using a consecutive index to
+    -- get the physical LED blinking order desired:
+    pattern LEDs ::= {
+	orange,
+	red,
+	blue,
+	green
+    }
+
+END
