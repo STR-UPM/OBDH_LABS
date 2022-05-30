@@ -17,8 +17,8 @@
 package body HK_Data.Converter is
 
    V_Ref       : constant := 2.930; -- V (measured value)
-   V_25C       : constant := 0.750; -- V
-   Scale       : constant := 0.010; -- V/C
+   V_25C       : constant := 0.760; -- V
+   Scale       : constant := 0.0025; -- V/C
    Calibration : constant := -1.0;  -- C (experimental calibration)
 
    Min_Temp  : constant := Temperature_Range'First;
