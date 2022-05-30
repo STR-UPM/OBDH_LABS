@@ -90,8 +90,8 @@ WITH interfaceview::IV::GSSW::Manager;
 WITH interfaceview::IV::GSSW::LEDs;
 WITH ocarina_processors_arm;
 WITH deploymentview::DV::OBC;
-WITH interfaceview::IV::GS::User_Intertface;
-WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH interfaceview::IV::GS::User_Interface;
+WITH interfaceview::IV::GS::Pretty_Formatter;
 WITH ocarina_processors_x86;
 WITH deploymentview::DV::GSC;
 WITH ocarina_buses;
@@ -154,11 +154,11 @@ END GSC;
 
 SYSTEM IMPLEMENTATION GSC.others
 SUBCOMPONENTS
-  IV_User_Intertface : SYSTEM interfaceview::IV::GS::User_Intertface::User_Intertface.others {
-    Taste::FunctionName => "User_Intertface";
+  IV_User_Interface : SYSTEM interfaceview::IV::GS::User_Interface::User_Interface.others {
+    Taste::FunctionName => "User_Interface";
   };
-  IV_Pretty_Fromater : SYSTEM interfaceview::IV::GS::Pretty_Fromater::Pretty_Fromater.others {
-    Taste::FunctionName => "Pretty_Fromater";
+  IV_Pretty_Formatter : SYSTEM interfaceview::IV::GS::Pretty_Formatter::Pretty_Formatter.others {
+    Taste::FunctionName => "Pretty_Formatter";
   };
   x86_partition : PROCESS deploymentview::DV::GSC::x86_partition.others {
     Taste::coordinates => "206160 66706 252724 80059";
@@ -173,8 +173,8 @@ SUBCOMPONENTS
 CONNECTIONS
   generic_serial_pohiada_serial_generic_link : BUS ACCESS generic_serial_pohiada_serial_generic -> generic_serial_pohiada.link;
 PROPERTIES
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_User_Intertface;
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Pretty_Fromater;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_User_Interface;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Pretty_Formatter;
   Actual_Processor_Binding => (reference (x86_linux)) APPLIES TO x86_partition;
   Actual_Processor_Binding => (reference (x86_linux)) APPLIES TO generic_serial_pohiada;
 END GSC.others;
@@ -202,8 +202,8 @@ CONNECTIONS
     Taste::coordinates => "233735 105196 233735 108078 233925 108078 233925 121099";
   };
 PROPERTIES
-  Actual_Connection_Binding => (reference (serial_generic)) APPLIES TO interfaceview.GSSW.TTC_RI_TM_Pretty_Fromater_PI_TM;
-  Actual_Connection_Binding => (reference (serial_generic)) APPLIES TO interfaceview.GS.User_Intertface_RI_TC_TTC_PI_TC;
+  Actual_Connection_Binding => (reference (serial_generic)) APPLIES TO interfaceview.GSSW.TTC_RI_TM_Pretty_Formatter_PI_TM;
+  Actual_Connection_Binding => (reference (serial_generic)) APPLIES TO interfaceview.GS.User_Interface_RI_TC_TTC_PI_TC;
 END deploymentview.others;
 
 PROPERTIES

@@ -68,3 +68,12 @@ work/pretty_formatter/Ada/*
 !work/pretty_formatter/Ada/src
 work/pretty_formatter/Ada/src/*
 !work/pretty_formatter/Ada/src/pretty_formatter.adb
+
+# Except LEDS
+!work/leds
+work/leds/*
+!work/leds/Ada
+work/leds/Ada/*
+!work/leds/Ada/src
+work/leds/Ada/src/*
+!work/leds/Ada/src/leds.adb

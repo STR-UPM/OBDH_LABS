@@ -134,7 +134,7 @@ PACKAGE interfaceview::IV::GSSW::TTC
 PUBLIC
 
 WITH interfaceview::IV::GSSW::Storage;
-WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH interfaceview::IV::GS::Pretty_Formatter;
 WITH interfaceview::IV::GSSW::Manager;
 WITH Taste;
 WITH DataView;
@@ -303,7 +303,7 @@ FEATURES
     Taste::InterfaceName => "Get";
     Taste::labelInheritance => "true";
   };
-  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Formatter::PI_TM.others {
     Taste::coordinates => "214326 99735";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "TM";
@@ -648,7 +648,7 @@ WITH interfaceview::IV::GSSW::TTC;
 WITH interfaceview::IV::GSSW::Storage;
 WITH interfaceview::IV::GSSW::Manager;
 WITH interfaceview::IV::GSSW::LEDs;
-WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH interfaceview::IV::GS::Pretty_Formatter;
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
@@ -685,7 +685,7 @@ FEATURES
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "TC";
   };
-  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Formatter::PI_TM.others {
     Taste::coordinates => "230546 99686";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "TM";
@@ -744,7 +744,7 @@ CONNECTIONS
   TTC_RI_Get_Storage_PI_Get : SUBPROGRAM ACCESS Storage.PI_Get -> TTC.RI_Get {
     Taste::coordinates => "185979 104144 178498 104144 178498 104092 176058 104092";
   };
-  TTC_RI_TM_Pretty_Fromater_PI_TM : SUBPROGRAM ACCESS RI_TM -> TTC.RI_TM {
+  TTC_RI_TM_Pretty_Formatter_PI_TM : SUBPROGRAM ACCESS RI_TM -> TTC.RI_TM {
     Taste::coordinates => "214326 99735 216530 99735 216530 99686 230546 99686";
   };
   TTC_RI_Process_TC_Manager_PI_Process_TC : SUBPROGRAM ACCESS Manager.PI_Process_TC -> TTC.RI_Process_TC {
@@ -763,7 +763,7 @@ END GSSW.others;
 
 END interfaceview::IV::GSSW;
 
-PACKAGE interfaceview::IV::GS::User_Intertface
+PACKAGE interfaceview::IV::GS::User_Interface
 PUBLIC
 
 WITH interfaceview::IV::GSSW::TTC;
@@ -784,16 +784,6 @@ PROPERTIES
   Compute_Execution_Time => 0 ms .. 0 ms;
 END PI_TM.others;
 
-SUBPROGRAM RI_TC
-FEATURES
-  Telecommand : IN PARAMETER DataView::TC_Type {
-    Taste::encoding => NATIVE;
-  };
-END RI_TC;
-
-SUBPROGRAM IMPLEMENTATION RI_TC.others
-END RI_TC.others;
-
 SUBPROGRAM PI_Unformatted_TM
 FEATURES
   Telemetry : IN PARAMETER DataView::TM_Type {
@@ -808,39 +798,52 @@ PROPERTIES
   Compute_Execution_Time => 0 ms .. 0 ms;
 END PI_Unformatted_TM.others;
 
-SYSTEM User_Intertface
+SUBPROGRAM RI_TC
 FEATURES
-  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_TM.others {
+  Telecommand : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_TC.others
+END RI_TC.others;
+
+SYSTEM User_Interface
+FEATURES
+  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_TM.others {
     Taste::coordinates => "253277 110302";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 1000 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "TM";
+  };
+  PI_Unformatted_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_Unformatted_TM.others {
+    Taste::coordinates => "264061 110302";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Unformatted_TM";
   };
   RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
     Taste::coordinates => "248634 117732";
-    Taste::RCMoperationKind => any;
+    Taste::RCMoperationKind => sporadic;
     Taste::InterfaceName => "TC";
     Taste::labelInheritance => "true";
-  };
-  PI_Unformatted_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_Unformatted_TM.others {
-    Taste::coordinates => "264061 110302";
-    Taste::RCMoperationKind => sporadic;
-    Taste::InterfaceName => "Unformatted_TM";
   };
 PROPERTIES
   Source_Language => (GUI);
   Taste::Active_Interfaces => any;
-END User_Intertface;
+END User_Interface;
 
-SYSTEM IMPLEMENTATION User_Intertface.others
-END User_Intertface.others;
+SYSTEM IMPLEMENTATION User_Interface.others
+END User_Interface.others;
 
-END interfaceview::IV::GS::User_Intertface;
+END interfaceview::IV::GS::User_Interface;
 
-PACKAGE interfaceview::IV::GS::Pretty_Fromater
+PACKAGE interfaceview::IV::GS::Pretty_Formatter
 PUBLIC
 
-WITH interfaceview::IV::GS::User_Intertface;
+WITH interfaceview::IV::GS::User_Interface;
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
@@ -878,22 +881,22 @@ END RI_Unformatted_TM;
 SUBPROGRAM IMPLEMENTATION RI_Unformatted_TM.others
 END RI_Unformatted_TM.others;
 
-SYSTEM Pretty_Fromater
+SYSTEM Pretty_Formatter
 FEATURES
-  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Formatter::PI_TM.others {
     Taste::coordinates => "249110 87005";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 500 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "TM";
   };
-  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_TM.others {
+  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_TM.others {
     Taste::coordinates => "253221 95841";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "TM";
     Taste::labelInheritance => "true";
   };
-  RI_Unformatted_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_Unformatted_TM.others {
+  RI_Unformatted_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_Unformatted_TM.others {
     Taste::coordinates => "264044 95841";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Unformatted_TM";
@@ -902,32 +905,22 @@ FEATURES
 PROPERTIES
   Source_Language => (Ada);
   Taste::Active_Interfaces => any;
-END Pretty_Fromater;
+END Pretty_Formatter;
 
-SYSTEM IMPLEMENTATION Pretty_Fromater.others
-END Pretty_Fromater.others;
+SYSTEM IMPLEMENTATION Pretty_Formatter.others
+END Pretty_Formatter.others;
 
-END interfaceview::IV::GS::Pretty_Fromater;
+END interfaceview::IV::GS::Pretty_Formatter;
 
 PACKAGE interfaceview::IV::GS
 PUBLIC
 
-WITH interfaceview::IV::GS::User_Intertface;
-WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH interfaceview::IV::GS::User_Interface;
+WITH interfaceview::IV::GS::Pretty_Formatter;
 WITH interfaceview::IV::GSSW::TTC;
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
-SUBPROGRAM RI_TC
-FEATURES
-  Telecommand : IN PARAMETER DataView::TC_Type {
-    Taste::encoding => NATIVE;
-  };
-END RI_TC;
-
-SUBPROGRAM IMPLEMENTATION RI_TC.others
-END RI_TC.others;
-
 SUBPROGRAM PI_TM
 FEATURES
   Telemetry : IN PARAMETER DataView::TM_Type {
@@ -942,20 +935,30 @@ PROPERTIES
   Compute_Execution_Time => 0 ms .. 0 ms;
 END PI_TM.others;
 
+SUBPROGRAM RI_TC
+FEATURES
+  Telecommand : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_TC.others
+END RI_TC.others;
+
 SYSTEM GS
 FEATURES
-  RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
-    Taste::coordinates => "241252 117816";
-    Taste::RCMoperationKind => any;
-    Taste::InterfaceName => "TC";
-    Taste::labelInheritance => "true";
-  };
-  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Formatter::PI_TM.others {
     Taste::coordinates => "241252 87041";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 500 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "TM";
+  };
+  RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
+    Taste::coordinates => "241252 117816";
+    Taste::RCMoperationKind => sporadic;
+    Taste::InterfaceName => "TC";
+    Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (Ada);
@@ -964,23 +967,23 @@ END GS;
 
 SYSTEM IMPLEMENTATION GS.others
 SUBCOMPONENTS
-  User_Intertface : SYSTEM interfaceview::IV::GS::User_Intertface::User_Intertface.others {
+  User_Interface : SYSTEM interfaceview::IV::GS::User_Interface::User_Interface.others {
     Taste::coordinates => "248634 110302 272235 127343";
   };
-  Pretty_Fromater : SYSTEM interfaceview::IV::GS::Pretty_Fromater::Pretty_Fromater.others {
+  Pretty_Formatter : SYSTEM interfaceview::IV::GS::Pretty_Formatter::Pretty_Formatter.others {
     Taste::coordinates => "249110 78320 271953 95841";
   };
 CONNECTIONS
-  Pretty_Fromater_RI_TM_User_Intertface_PI_TM : SUBPROGRAM ACCESS User_Intertface.PI_TM -> Pretty_Fromater.RI_TM {
+  Pretty_Formatter_RI_TM_User_Interface_PI_TM : SUBPROGRAM ACCESS User_Interface.PI_TM -> Pretty_Formatter.RI_TM {
     Taste::coordinates => "253221 95841 253221 103007 253277 103007 253277 110302";
   };
-  User_Intertface_RI_TC_TTC_PI_TC : SUBPROGRAM ACCESS RI_TC -> User_Intertface.RI_TC {
-    Taste::coordinates => "248634 117732 244943 117732 244943 117816 241252 117816";
-  };
-  Pretty_Fromater_RI_Unformatted_TM_User_Intertface_PI_Unformatted_TM : SUBPROGRAM ACCESS User_Intertface.PI_Unformatted_TM -> Pretty_Fromater.RI_Unformatted_TM {
+  Pretty_Formatter_RI_Unformatted_TM_User_Interface_PI_Unformatted_TM : SUBPROGRAM ACCESS User_Interface.PI_Unformatted_TM -> Pretty_Formatter.RI_Unformatted_TM {
     Taste::coordinates => "264044 95841 264044 103071 264061 103071 264061 110302";
   };
-  Pretty_Fromater_PI_TM_GS_PI_TM : SUBPROGRAM ACCESS Pretty_Fromater.PI_TM -> PI_TM {
+  User_Interface_RI_TC_TTC_PI_TC : SUBPROGRAM ACCESS RI_TC -> User_Interface.RI_TC {
+    Taste::coordinates => "248634 117732 244943 117732 244943 117816 241252 117816";
+  };
+  Pretty_Formatter_PI_TM_GS_PI_TM : SUBPROGRAM ACCESS Pretty_Formatter.PI_TM -> PI_TM {
     Taste::coordinates => "241252 87041 245181 87041 245181 87005 249110 87005";
   };
 END GS.others;
