@@ -1,0 +1,174 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process Manager;
+    state Idle;
+    substructure
+        out (Go_To_Coverage);
+            /* CIF TEXT (1628, 342), (299, 88) */
+            -- Text area for declarations and comments
+            
+            dcl Idle_Error_Msg TM_Error_Contents :=
+               "'open-link' is only allowed during Idle mode";
+            /* CIF ENDTEXT */
+            /* CIF START (822, 122), (70, 35) */
+            START;
+                /* CIF task (749, 177), (215, 35) */
+                task Current_Mode := idle;
+                /* CIF output (752, 232), (210, 40) */
+                output TM_Mode (Current_Mode);
+                /* CIF PROCEDURECALL (792, 292), (128, 35) */
+                call Set_Led (idle_led);
+                /* CIF PROCEDURECALL (771, 347), (171, 35) */
+                call Clear_Led (coverage_led);
+                /* CIF NEXTSTATE (808, 397), (97, 35) */
+                NEXTSTATE Wait_For_TC;
+            /* CIF state (1173, 133), (97, 35) */
+            state Wait_For_TC;
+                /* CIF input (1172, 188), (103, 30) */
+                input Process_TC;
+                    /* CIF PROCEDURECALL (1086, 238), (273, 35) */
+                    call Writeln ('[Manager] Processing TC in Idle.');
+                    /* CIF decision (1188, 288), (70, 50) */
+                    decision Last_TC;
+                        /* CIF ANSWER (1072, 358), (80, 24) */
+                        (open_link):
+                            /* CIF return (1095, 458), (35, 35) */
+                            return Go_To_Coverage;
+                        /* CIF ANSWER (1284, 358), (70, 24) */
+                        ELSE:
+                            /* CIF output (1229, 402), (179, 35) */
+                            output TM_Error (Idle_Error_Msg);
+                            /* CIF NEXTSTATE (1270, 457), (97, 35) */
+                            NEXTSTATE Wait_For_TC;
+                    enddecision;
+            endstate;
+    endsubstructure;
+    state Coverage;
+    substructure
+        out (Go_to_idle,Go_To_Idle);
+            /* CIF TEXT (1640, 401), (419, 72) */
+            -- Text area for declarations and comments
+            
+            dcl Coverage_Error_Msg TM_Error_Contents :=
+               "'close-link' and 'request-hk' only allowed during Coverage mode";
+            /* CIF ENDTEXT */
+            /* CIF START (749, 129), (70, 35) */
+            START;
+                /* CIF PROCEDURECALL (658, 184), (250, 35) */
+                call Set_Timer (10000, Coverage_Timer);
+                /* CIF task (665, 234), (237, 35) */
+                task Current_Mode := coverage;
+                /* CIF output (664, 289), (239, 35) */
+                output TM_Mode (Current_Mode);
+                /* CIF PROCEDURECALL (703, 344), (160, 35) */
+                call Set_Led (coverage_led);
+                /* CIF PROCEDURECALL (714, 399), (139, 35) */
+                call Clear_Led (idle_led);
+                /* CIF NEXTSTATE (733, 449), (102, 35) */
+                NEXTSTATE Wait_For_TC;
+            /* CIF state (1391, 140), (97, 35) */
+            state Wait_For_TC;
+                /* CIF input (1230, 195), (89, 35) */
+                input Process_TC;
+                    /* CIF PROCEDURECALL (1121, 250), (307, 35) */
+                    call Writeln ('[Manager] Processing TC in Coverage.');
+                    /* CIF decision (1240, 300), (70, 50) */
+                    decision Last_TC;
+                        /* CIF ANSWER (1036, 372), (80, 24) */
+                        (close_link):
+                            /* CIF return (1059, 469), (35, 35) */
+                            return Go_To_Idle;
+                        /* CIF ANSWER (1157, 370), (89, 24) */
+                        (request_hk):
+                            /* CIF output (1163, 412), (78, 35) */
+                            output HK_Task;
+                            /* CIF NEXTSTATE (1153, 467), (97, 35) */
+                            NEXTSTATE Wait_For_TC;
+                        /* CIF ANSWER (1338, 370), (70, 24) */
+                        ELSE:
+                            /* CIF output (1267, 412), (212, 35) */
+                            output TM_Error (Coverage_Error_Msg);
+                            /* CIF NEXTSTATE (1324, 467), (97, 35) */
+                            NEXTSTATE Wait_For_TC;
+                    enddecision;
+                /* CIF input (1522, 195), (118, 35) */
+                input Coverage_Timer;
+                    /* CIF return (1564, 250), (35, 35) */
+                    return Go_to_idle;
+            endstate;
+    endsubstructure;
+    /* CIF TEXT (767, 27), (252, 233) */
+    -- Timers defined in the interface view
+    -- Use SET_TIMER (value, timer name)
+    -- and RESET_TIMER (timer name) in a
+    -- PROCEDURE CALL symbol to use them
+    
+    timer Coverage_Timer;
+    
+    
+    -- Global variables:
+    
+    dcl Current_Mode Operating_Mode;
+    dcl Last_TC TC_Type;
+    
+    dcl idle_led LED            := red_led;
+    dcl coverage_led LED := green_led;
+    /* CIF ENDTEXT */
+    /* CIF procedure (825, 292), (89, 35) */
+    procedure Process_TC;
+        /* CIF TEXT (102, 110), (294, 72) */
+        -- Text area for declarations and comments
+        
+        fpar
+           in Tc TC_Type;
+        /* CIF ENDTEXT */
+        /* CIF START (219, 198), (70, 35) */
+        START;
+            /* CIF task (203, 253), (100, 35) */
+            task Last_TC := TC;
+            /* CIF return (236, 308), (35, 35) */
+            return ;
+    endprocedure;
+    /* CIF procedure (815, 345), (108, 35) */
+    procedure Current_Mode;
+        /* CIF TEXT (82, 193), (267, 83) */
+        -- Text area for declarations and comments
+        
+        fpar
+           out Current Operating_Mode;
+        /* CIF ENDTEXT */
+        /* CIF START (179, 293), (70, 35) */
+        START;
+            /* CIF task (128, 348), (170, 35) */
+            task Current := Current_Mode;
+            /* CIF return (196, 403), (35, 35) */
+            return ;
+    endprocedure;
+    /* CIF START (1357, 16), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (1293, 75), (196, 35) */
+        call Writeln ('[Manager] started.');
+        /* CIF NEXTSTATE (1355, 125), (74, 32) */
+        NEXTSTATE Idle;
+    /* CIF state (1194, 310), (87, 35) */
+    state Idle
+    /* CIF comment (1134, 237), (210, 61) */
+    comment 'The system is in Idle mode
+when the satellite is NOT visible
+from the ground station.';
+        /* CIF connect (1203, 365), (70, 35) */
+        connect Go_To_Coverage;
+            /* CIF NEXTSTATE (1198, 415), (78, 35) */
+            NEXTSTATE Coverage;
+    endstate;
+    /* CIF state (1468, 307), (86, 30) */
+    state Coverage
+    /* CIF comment (1392, 237), (220, 56) */
+    comment 'The system is in Coverage mode
+when the satellite is VISIBLE from
+the ground station.';
+        /* CIF connect (1476, 357), (70, 35) */
+        connect Go_To_Idle;
+            /* CIF NEXTSTATE (1472, 407), (78, 35) */
+            NEXTSTATE Idle;
+    endstate;
+endprocess Manager;
