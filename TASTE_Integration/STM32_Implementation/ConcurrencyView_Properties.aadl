@@ -1,0 +1,31 @@
+
+PACKAGE Process_Package_proxy
+PUBLIC
+WITH Process_Package;
+WITH AI;
+
+SYSTEM DeploymentView
+EXTENDS Process_Package::DeploymentView
+END DeploymentView;
+
+SYSTEM IMPLEMENTATION DeploymentView.final
+EXTENDS Process_Package::DeploymentView.final
+PROPERTIES
+  AI::root_system => "SELECTED";
+  Period => 500 ms APPLIES TO x86_partition.gs_tm;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.blink_led_tick;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.platform_hk_tick;
+  Period => 500 ms APPLIES TO stm32f407_discovery_partition.ttc_tc;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.ttc_tc;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.ttc_tm_basic_task;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.manager_coverage_timer;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.stm32f407_discovery_partition_timer_manager_tick;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.ttc_hk_task;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.ttc_tm_error;
+  Stack_Size => 5000 bytes APPLIES TO stm32f407_discovery_partition.ttc_tm_mode;
+  Stack_Size => 20000 bytes APPLIES TO x86_partition.gs_poll;
+  Stack_Size => 20000 bytes APPLIES TO x86_partition.gs_tm;
+END DeploymentView.final;
+
+END Process_Package_proxy;
+

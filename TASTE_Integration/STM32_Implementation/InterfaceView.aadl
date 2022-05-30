@@ -1,0 +1,1032 @@
+---------------------------------------------------
+-- AADL2.2
+-- TASTE type interfaceview
+-- 
+-- generated code: do not edit
+---------------------------------------------------
+
+PACKAGE interfaceview::IV::GSSW::Sensors
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Get
+FEATURES
+  AD : OUT PARAMETER DataView::Analog_Data_Table {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Get;
+
+SUBPROGRAM IMPLEMENTATION PI_Get.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Get.others;
+
+SYSTEM Sensors
+FEATURES
+  PI_Get : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Sensors::PI_Get.others {
+    Taste::coordinates => "134539 114682";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Get";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END Sensors;
+
+SYSTEM IMPLEMENTATION Sensors.others
+END Sensors.others;
+
+END interfaceview::IV::GSSW::Sensors;
+
+PACKAGE interfaceview::IV::GSSW::Platform
+PUBLIC
+
+WITH interfaceview::IV::GSSW::Sensors;
+WITH interfaceview::IV::GSSW::Storage;
+WITH interfaceview::IV::GSSW::LEDs;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_HK_Tick
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_HK_Tick;
+
+SUBPROGRAM IMPLEMENTATION PI_HK_Tick.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_HK_Tick.others;
+
+SUBPROGRAM RI_Get
+FEATURES
+  AD : OUT PARAMETER DataView::Analog_Data_Table {
+    Taste::encoding => NATIVE;
+  };
+END RI_Get;
+
+SUBPROGRAM IMPLEMENTATION RI_Get.others
+END RI_Get.others;
+
+SUBPROGRAM RI_Put
+FEATURES
+  In_Data : IN PARAMETER DataView::Satellite_State {
+    Taste::encoding => NATIVE;
+  };
+END RI_Put;
+
+SUBPROGRAM IMPLEMENTATION RI_Put.others
+END RI_Put.others;
+
+SUBPROGRAM RI_Toggle_LED
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END RI_Toggle_LED;
+
+SUBPROGRAM IMPLEMENTATION RI_Toggle_LED.others
+END RI_Toggle_LED.others;
+
+SYSTEM Platform
+FEATURES
+  PI_HK_Tick : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Platform::PI_HK_Tick.others {
+    Taste::coordinates => "129289 96270";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "HK_Tick";
+  };
+  RI_Get : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Sensors::PI_Get.others {
+    Taste::coordinates => "134627 107799";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Get";
+    Taste::labelInheritance => "true";
+  };
+  RI_Put : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Put.others {
+    Taste::coordinates => "138092 100995";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Put";
+    Taste::labelInheritance => "true";
+  };
+  RI_Toggle_LED : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Toggle_LED.others {
+    Taste::coordinates => "119839 106182";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Toggle_LED";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END Platform;
+
+SYSTEM IMPLEMENTATION Platform.others
+END Platform.others;
+
+END interfaceview::IV::GSSW::Platform;
+
+PACKAGE interfaceview::IV::GSSW::TTC
+PUBLIC
+
+WITH interfaceview::IV::GSSW::Storage;
+WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH interfaceview::IV::GSSW::Manager;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_TC
+FEATURES
+  Telecommand : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TC;
+
+SUBPROGRAM IMPLEMENTATION PI_TC.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TC.others;
+
+SUBPROGRAM PI_TM_Basic_Task
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TM_Basic_Task;
+
+SUBPROGRAM IMPLEMENTATION PI_TM_Basic_Task.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TM_Basic_Task.others;
+
+SUBPROGRAM PI_HK_Task
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_HK_Task;
+
+SUBPROGRAM IMPLEMENTATION PI_HK_Task.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_HK_Task.others;
+
+SUBPROGRAM PI_TM_Mode
+FEATURES
+  Op_Mode : IN PARAMETER DataView::Operating_Mode {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TM_Mode;
+
+SUBPROGRAM IMPLEMENTATION PI_TM_Mode.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TM_Mode.others;
+
+SUBPROGRAM PI_TM_Error
+FEATURES
+  Contents : IN PARAMETER DataView::TM_Error_Contents {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TM_Error;
+
+SUBPROGRAM IMPLEMENTATION PI_TM_Error.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TM_Error.others;
+
+SUBPROGRAM RI_Last
+FEATURES
+  Out_Data : OUT PARAMETER DataView::Satellite_State {
+    Taste::encoding => NATIVE;
+  };
+END RI_Last;
+
+SUBPROGRAM IMPLEMENTATION RI_Last.others
+END RI_Last.others;
+
+SUBPROGRAM RI_Get
+FEATURES
+  Out_Data : OUT PARAMETER DataView::Satellite_State {
+    Taste::encoding => NATIVE;
+  };
+  Success : OUT PARAMETER DataView::T_Boolean {
+    Taste::encoding => NATIVE;
+  };
+END RI_Get;
+
+SUBPROGRAM IMPLEMENTATION RI_Get.others
+END RI_Get.others;
+
+SUBPROGRAM RI_TM
+FEATURES
+  Telemetry : IN PARAMETER DataView::TM_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_TM;
+
+SUBPROGRAM IMPLEMENTATION RI_TM.others
+END RI_TM.others;
+
+SUBPROGRAM RI_Process_TC
+FEATURES
+  TC : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_Process_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_Process_TC.others
+END RI_Process_TC.others;
+
+SUBPROGRAM RI_Current_Mode
+FEATURES
+  Current : OUT PARAMETER DataView::Operating_Mode {
+    Taste::encoding => NATIVE;
+  };
+END RI_Current_Mode;
+
+SUBPROGRAM IMPLEMENTATION RI_Current_Mode.others
+END RI_Current_Mode.others;
+
+SYSTEM TTC
+FEATURES
+  PI_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
+    Taste::coordinates => "214326 103829";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TC";
+  };
+  PI_TM_Basic_Task : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TM_Basic_Task.others {
+    Taste::coordinates => "200627 115273";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TM_Basic_Task";
+  };
+  PI_HK_Task : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_HK_Task.others {
+    Taste::coordinates => "185979 86612";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "HK_Task";
+  };
+  PI_TM_Mode : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TM_Mode.others {
+    Taste::coordinates => "185979 89919";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TM_Mode";
+  };
+  PI_TM_Error : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TM_Error.others {
+    Taste::coordinates => "185979 93227";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TM_Error";
+  };
+  RI_Last : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Last.others {
+    Taste::coordinates => "185979 100994";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Last";
+    Taste::labelInheritance => "true";
+  };
+  RI_Get : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Get.others {
+    Taste::coordinates => "185979 104144";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Get";
+    Taste::labelInheritance => "true";
+  };
+  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+    Taste::coordinates => "214326 99735";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TM";
+    Taste::labelInheritance => "true";
+  };
+  RI_Process_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Manager::PI_Process_TC.others {
+    Taste::coordinates => "214326 91967";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Process_TC";
+    Taste::labelInheritance => "true";
+  };
+  RI_Current_Mode : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Manager::PI_Current_Mode.others {
+    Taste::coordinates => "214326 86771";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Current_Mode";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END TTC;
+
+SYSTEM IMPLEMENTATION TTC.others
+END TTC.others;
+
+END interfaceview::IV::GSSW::TTC;
+
+PACKAGE interfaceview::IV::GSSW::Storage
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Put
+FEATURES
+  In_Data : IN PARAMETER DataView::Satellite_State {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Put;
+
+SUBPROGRAM IMPLEMENTATION PI_Put.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Put.others;
+
+SUBPROGRAM PI_Last
+FEATURES
+  Out_Data : OUT PARAMETER DataView::Satellite_State {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Last;
+
+SUBPROGRAM IMPLEMENTATION PI_Last.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Last.others;
+
+SUBPROGRAM PI_Get
+FEATURES
+  Out_Data : OUT PARAMETER DataView::Satellite_State {
+    Taste::encoding => NATIVE;
+  };
+  Success : OUT PARAMETER DataView::T_Boolean {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Get;
+
+SUBPROGRAM IMPLEMENTATION PI_Get.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Get.others;
+
+SYSTEM Storage
+FEATURES
+  PI_Put : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Put.others {
+    Taste::coordinates => "154938 101099";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Put";
+  };
+  PI_Last : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Last.others {
+    Taste::coordinates => "176058 100942";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Last";
+  };
+  PI_Get : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Get.others {
+    Taste::coordinates => "176058 104092";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Get";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END Storage;
+
+SYSTEM IMPLEMENTATION Storage.others
+END Storage.others;
+
+END interfaceview::IV::GSSW::Storage;
+
+PACKAGE interfaceview::IV::GSSW::Manager
+PUBLIC
+
+WITH interfaceview::IV::GSSW::TTC;
+WITH interfaceview::IV::GSSW::LEDs;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Current_Mode
+FEATURES
+  Current : OUT PARAMETER DataView::Operating_Mode {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Current_Mode;
+
+SUBPROGRAM IMPLEMENTATION PI_Current_Mode.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Current_Mode.others;
+
+SUBPROGRAM PI_Process_TC
+FEATURES
+  TC : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Process_TC;
+
+SUBPROGRAM IMPLEMENTATION PI_Process_TC.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Process_TC.others;
+
+SUBPROGRAM RI_HK_Task
+END RI_HK_Task;
+
+SUBPROGRAM IMPLEMENTATION RI_HK_Task.others
+END RI_HK_Task.others;
+
+SUBPROGRAM RI_TM_Error
+FEATURES
+  Contents : IN PARAMETER DataView::TM_Error_Contents {
+    Taste::encoding => NATIVE;
+  };
+END RI_TM_Error;
+
+SUBPROGRAM IMPLEMENTATION RI_TM_Error.others
+END RI_TM_Error.others;
+
+SUBPROGRAM RI_TM_Mode
+FEATURES
+  Op_Mode : IN PARAMETER DataView::Operating_Mode {
+    Taste::encoding => NATIVE;
+  };
+END RI_TM_Mode;
+
+SUBPROGRAM IMPLEMENTATION RI_TM_Mode.others
+END RI_TM_Mode.others;
+
+SUBPROGRAM RI_Set_Led
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END RI_Set_Led;
+
+SUBPROGRAM IMPLEMENTATION RI_Set_Led.others
+END RI_Set_Led.others;
+
+SUBPROGRAM RI_Clear_Led
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+END RI_Clear_Led;
+
+SUBPROGRAM IMPLEMENTATION RI_Clear_Led.others
+END RI_Clear_Led.others;
+
+SYSTEM Manager
+FEATURES
+  PI_Current_Mode : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Manager::PI_Current_Mode.others {
+    Taste::coordinates => "214667 70187";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Current_Mode";
+  };
+  PI_Process_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Manager::PI_Process_TC.others {
+    Taste::coordinates => "214667 63258";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Process_TC";
+  };
+  RI_HK_Task : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_HK_Task.others {
+    Taste::coordinates => "183266 74754";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "HK_Task";
+    Taste::labelInheritance => "true";
+  };
+  RI_TM_Error : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TM_Error.others {
+    Taste::coordinates => "164381 74754";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TM_Error";
+    Taste::labelInheritance => "true";
+  };
+  RI_TM_Mode : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TM_Mode.others {
+    Taste::coordinates => "173698 74754";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TM_Mode";
+    Taste::labelInheritance => "true";
+  };
+  RI_Set_Led : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Set_Led.others {
+    Taste::coordinates => "151075 74754";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Set_Led";
+    Taste::labelInheritance => "true";
+  };
+  RI_Clear_Led : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Clear_Led.others {
+    Taste::coordinates => "140459 74754";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Clear_Led";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (SDL);
+  Taste::Active_Interfaces => any;
+END Manager;
+
+SYSTEM IMPLEMENTATION Manager.others
+SUBCOMPONENTS
+  Coverage_Timer : DATA DataView::Timer {
+    Taste::FS_Default_Value => "10000";
+    Access_Right => read_only;
+  };
+END Manager.others;
+
+END interfaceview::IV::GSSW::Manager;
+
+PACKAGE interfaceview::IV::GSSW::LEDs
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Toggle_LED
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Toggle_LED;
+
+SUBPROGRAM IMPLEMENTATION PI_Toggle_LED.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Toggle_LED.others;
+
+SUBPROGRAM PI_Set_Led
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Set_Led;
+
+SUBPROGRAM IMPLEMENTATION PI_Set_Led.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Set_Led.others;
+
+SUBPROGRAM PI_Clear_Led
+FEATURES
+  Led : IN PARAMETER DataView::LED {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Clear_Led;
+
+SUBPROGRAM IMPLEMENTATION PI_Clear_Led.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Clear_Led.others;
+
+SYSTEM LEDs
+FEATURES
+  PI_Toggle_LED : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Toggle_LED.others {
+    Taste::coordinates => "119524 137161";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Toggle_LED";
+  };
+  PI_Set_Led : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Set_Led.others {
+    Taste::coordinates => "151127 131650";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Set_Led";
+  };
+  PI_Clear_Led : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Clear_Led.others {
+    Taste::coordinates => "140368 131650";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Clear_Led";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END LEDs;
+
+SYSTEM IMPLEMENTATION LEDs.others
+END LEDs.others;
+
+END interfaceview::IV::GSSW::LEDs;
+
+PACKAGE interfaceview::IV::GSSW
+PUBLIC
+
+WITH interfaceview::IV::GSSW::Sensors;
+WITH interfaceview::IV::GSSW::Platform;
+WITH interfaceview::IV::GSSW::TTC;
+WITH interfaceview::IV::GSSW::Storage;
+WITH interfaceview::IV::GSSW::Manager;
+WITH interfaceview::IV::GSSW::LEDs;
+WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_TC
+FEATURES
+  Telecommand : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TC;
+
+SUBPROGRAM IMPLEMENTATION PI_TC.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TC.others;
+
+SUBPROGRAM RI_TM
+FEATURES
+  Telemetry : IN PARAMETER DataView::TM_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_TM;
+
+SUBPROGRAM IMPLEMENTATION RI_TM.others
+END RI_TM.others;
+
+SYSTEM GSSW
+FEATURES
+  PI_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
+    Taste::coordinates => "230546 103781";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TC";
+  };
+  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+    Taste::coordinates => "230546 99686";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TM";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END GSSW;
+
+SYSTEM IMPLEMENTATION GSSW.others
+SUBCOMPONENTS
+  Sensors : SYSTEM interfaceview::IV::GSSW::Sensors::Sensors.others {
+    Taste::coordinates => "120155 114682 137634 126221";
+  };
+  Platform : SYSTEM interfaceview::IV::GSSW::Platform::Platform.others {
+    Taste::coordinates => "119839 96270 138092 107799";
+  };
+  TTC : SYSTEM interfaceview::IV::GSSW::TTC::TTC.others {
+    Taste::coordinates => "185979 84250 214326 115273";
+  };
+  Storage : SYSTEM interfaceview::IV::GSSW::Storage::Storage.others {
+    Taste::coordinates => "154938 96217 176058 107232";
+  };
+  Manager : SYSTEM interfaceview::IV::GSSW::Manager::Manager.others {
+    Taste::coordinates => "118847 57117 214667 74754";
+  };
+  LEDs : SYSTEM interfaceview::IV::GSSW::LEDs::LEDs.others {
+    Taste::coordinates => "119524 131650 214325 142358";
+  };
+CONNECTIONS
+  Platform_RI_Get_Sensors_PI_Get : SUBPROGRAM ACCESS Sensors.PI_Get -> Platform.RI_Get {
+    Taste::coordinates => "134627 107799 134627 112011 134539 112011 134539 114682";
+  };
+  Platform_RI_Put_Storage_PI_Put : SUBPROGRAM ACCESS Storage.PI_Put -> Platform.RI_Put {
+    Taste::coordinates => "138092 100995 143208 100995 143208 101099 154938 101099";
+  };
+  Platform_RI_Toggle_LED_LEDs_PI_Toggle_LED : SUBPROGRAM ACCESS LEDs.PI_Toggle_LED -> Platform.RI_Toggle_LED {
+    Taste::coordinates => "119839 106182 116482 106182 116482 137161 119524 137161";
+  };
+  TTC_PI_TC_GSSW_PI_TC : SUBPROGRAM ACCESS TTC.PI_TC -> PI_TC {
+    Taste::coordinates => "230546 103781 216530 103781 216530 103829 214326 103829";
+  };
+  Manager_RI_HK_Task_TTC_PI_HK_Task : SUBPROGRAM ACCESS TTC.PI_HK_Task -> Manager.RI_HK_Task {
+    Taste::coordinates => "183266 74754 183266 86612 185979 86612";
+  };
+  Manager_RI_TM_Mode_TTC_PI_TM_Mode : SUBPROGRAM ACCESS TTC.PI_TM_Mode -> Manager.RI_TM_Mode {
+    Taste::coordinates => "173698 74754 173698 89919 185979 89919";
+  };
+  Manager_RI_TM_Error_TTC_PI_TM_Error : SUBPROGRAM ACCESS TTC.PI_TM_Error -> Manager.RI_TM_Error {
+    Taste::coordinates => "164381 74754 164381 93227 185979 93227";
+  };
+  TTC_RI_Last_Storage_PI_Last : SUBPROGRAM ACCESS Storage.PI_Last -> TTC.RI_Last {
+    Taste::coordinates => "185979 100994 178498 100994 178498 100942 176058 100942";
+  };
+  TTC_RI_Get_Storage_PI_Get : SUBPROGRAM ACCESS Storage.PI_Get -> TTC.RI_Get {
+    Taste::coordinates => "185979 104144 178498 104144 178498 104092 176058 104092";
+  };
+  TTC_RI_TM_Pretty_Fromater_PI_TM : SUBPROGRAM ACCESS RI_TM -> TTC.RI_TM {
+    Taste::coordinates => "214326 99735 216530 99735 216530 99686 230546 99686";
+  };
+  TTC_RI_Process_TC_Manager_PI_Process_TC : SUBPROGRAM ACCESS Manager.PI_Process_TC -> TTC.RI_Process_TC {
+    Taste::coordinates => "214326 91967 223238 91967 223238 63258 214667 63258";
+  };
+  TTC_RI_Current_Mode_Manager_PI_Current_Mode : SUBPROGRAM ACCESS Manager.PI_Current_Mode -> TTC.RI_Current_Mode {
+    Taste::coordinates => "214326 86771 219739 86771 219739 70187 214667 70187";
+  };
+  Manager_RI_Set_Led_LEDs_PI_Set_Led : SUBPROGRAM ACCESS LEDs.PI_Set_Led -> Manager.RI_Set_Led {
+    Taste::coordinates => "151075 74754 151075 102677 151127 102677 151127 131650";
+  };
+  Manager_RI_Clear_Led_LEDs_PI_Clear_Led : SUBPROGRAM ACCESS LEDs.PI_Clear_Led -> Manager.RI_Clear_Led {
+    Taste::coordinates => "140459 74754 140459 102677 140368 102677 140368 131650";
+  };
+END GSSW.others;
+
+END interfaceview::IV::GSSW;
+
+PACKAGE interfaceview::IV::GS::User_Intertface
+PUBLIC
+
+WITH interfaceview::IV::GSSW::TTC;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_TM
+FEATURES
+  Pretty_TM : IN PARAMETER DataView::TM_Type_Formatted {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 10;
+END PI_TM;
+
+SUBPROGRAM IMPLEMENTATION PI_TM.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TM.others;
+
+SUBPROGRAM RI_TC
+FEATURES
+  Telecommand : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_TC.others
+END RI_TC.others;
+
+SUBPROGRAM PI_Unformatted_TM
+FEATURES
+  Telemetry : IN PARAMETER DataView::TM_Type {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Unformatted_TM;
+
+SUBPROGRAM IMPLEMENTATION PI_Unformatted_TM.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_Unformatted_TM.others;
+
+SYSTEM User_Intertface
+FEATURES
+  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_TM.others {
+    Taste::coordinates => "253277 110302";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::InterfaceName => "TM";
+  };
+  RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
+    Taste::coordinates => "248634 117732";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TC";
+    Taste::labelInheritance => "true";
+  };
+  PI_Unformatted_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_Unformatted_TM.others {
+    Taste::coordinates => "264061 110302";
+    Taste::RCMoperationKind => sporadic;
+    Taste::InterfaceName => "Unformatted_TM";
+  };
+PROPERTIES
+  Source_Language => (GUI);
+  Taste::Active_Interfaces => any;
+END User_Intertface;
+
+SYSTEM IMPLEMENTATION User_Intertface.others
+END User_Intertface.others;
+
+END interfaceview::IV::GS::User_Intertface;
+
+PACKAGE interfaceview::IV::GS::Pretty_Fromater
+PUBLIC
+
+WITH interfaceview::IV::GS::User_Intertface;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_TM
+FEATURES
+  Telemetry : IN PARAMETER DataView::TM_Type {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TM;
+
+SUBPROGRAM IMPLEMENTATION PI_TM.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TM.others;
+
+SUBPROGRAM RI_TM
+FEATURES
+  Pretty_TM : IN PARAMETER DataView::TM_Type_Formatted {
+    Taste::encoding => NATIVE;
+  };
+END RI_TM;
+
+SUBPROGRAM IMPLEMENTATION RI_TM.others
+END RI_TM.others;
+
+SUBPROGRAM RI_Unformatted_TM
+FEATURES
+  Telemetry : IN PARAMETER DataView::TM_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_Unformatted_TM;
+
+SUBPROGRAM IMPLEMENTATION RI_Unformatted_TM.others
+END RI_Unformatted_TM.others;
+
+SYSTEM Pretty_Fromater
+FEATURES
+  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+    Taste::coordinates => "249110 87005";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TM";
+  };
+  RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_TM.others {
+    Taste::coordinates => "253221 95841";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TM";
+    Taste::labelInheritance => "true";
+  };
+  RI_Unformatted_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Intertface::PI_Unformatted_TM.others {
+    Taste::coordinates => "264044 95841";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Unformatted_TM";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END Pretty_Fromater;
+
+SYSTEM IMPLEMENTATION Pretty_Fromater.others
+END Pretty_Fromater.others;
+
+END interfaceview::IV::GS::Pretty_Fromater;
+
+PACKAGE interfaceview::IV::GS
+PUBLIC
+
+WITH interfaceview::IV::GS::User_Intertface;
+WITH interfaceview::IV::GS::Pretty_Fromater;
+WITH interfaceview::IV::GSSW::TTC;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM RI_TC
+FEATURES
+  Telecommand : IN PARAMETER DataView::TC_Type {
+    Taste::encoding => NATIVE;
+  };
+END RI_TC;
+
+SUBPROGRAM IMPLEMENTATION RI_TC.others
+END RI_TC.others;
+
+SUBPROGRAM PI_TM
+FEATURES
+  Telemetry : IN PARAMETER DataView::TM_Type {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TM;
+
+SUBPROGRAM IMPLEMENTATION PI_TM.others
+PROPERTIES
+  Compute_Execution_Time => 0 ms .. 0 ms;
+END PI_TM.others;
+
+SYSTEM GS
+FEATURES
+  RI_TC : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
+    Taste::coordinates => "241252 117816";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TC";
+    Taste::labelInheritance => "true";
+  };
+  PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Fromater::PI_TM.others {
+    Taste::coordinates => "241252 87041";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TM";
+  };
+PROPERTIES
+  Source_Language => (Ada);
+  Taste::Active_Interfaces => any;
+END GS;
+
+SYSTEM IMPLEMENTATION GS.others
+SUBCOMPONENTS
+  User_Intertface : SYSTEM interfaceview::IV::GS::User_Intertface::User_Intertface.others {
+    Taste::coordinates => "248634 110302 272235 127343";
+  };
+  Pretty_Fromater : SYSTEM interfaceview::IV::GS::Pretty_Fromater::Pretty_Fromater.others {
+    Taste::coordinates => "249110 78320 271953 95841";
+  };
+CONNECTIONS
+  Pretty_Fromater_RI_TM_User_Intertface_PI_TM : SUBPROGRAM ACCESS User_Intertface.PI_TM -> Pretty_Fromater.RI_TM {
+    Taste::coordinates => "253221 95841 253221 103007 253277 103007 253277 110302";
+  };
+  User_Intertface_RI_TC_TTC_PI_TC : SUBPROGRAM ACCESS RI_TC -> User_Intertface.RI_TC {
+    Taste::coordinates => "248634 117732 244943 117732 244943 117816 241252 117816";
+  };
+  Pretty_Fromater_RI_Unformatted_TM_User_Intertface_PI_Unformatted_TM : SUBPROGRAM ACCESS User_Intertface.PI_Unformatted_TM -> Pretty_Fromater.RI_Unformatted_TM {
+    Taste::coordinates => "264044 95841 264044 103071 264061 103071 264061 110302";
+  };
+  Pretty_Fromater_PI_TM_GS_PI_TM : SUBPROGRAM ACCESS Pretty_Fromater.PI_TM -> PI_TM {
+    Taste::coordinates => "241252 87041 245181 87041 245181 87005 249110 87005";
+  };
+END GS.others;
+
+END interfaceview::IV::GS;
+
+PACKAGE interfaceview::IV
+-- { interfaceview::IV - 133045 34717 200507 45624 
+-- Idle mode: RED LED is ON.
+-- coverage mode: GREEN LED is ON.
+-- HK Tick is active: BLUE LED toggling. 
+--}
+PUBLIC
+
+WITH interfaceview::IV::GSSW;
+WITH interfaceview::IV::GS;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM interfaceview
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  GSSW : SYSTEM interfaceview::IV::GSSW::GSSW.others {
+    Taste::coordinates => "109919 50077 230546 144406";
+  };
+  GS : SYSTEM interfaceview::IV::GS::GS.others {
+    Taste::coordinates => "241252 48345 280257 143461";
+  };
+CONNECTIONS
+  GSSW_PI_TC_GS_RI_TC : SUBPROGRAM ACCESS GSSW.PI_TC -> GS.RI_TC {
+    Taste::coordinates => "241252 117816 237159 117816 237159 103781 230546 103781";
+  };
+  GS_PI_TM_GSSW_RI_TM : SUBPROGRAM ACCESS GS.PI_TM -> GSSW.RI_TM {
+    Taste::coordinates => "230546 99686 237159 99686 237159 87041 241252 87041";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 297000 210000";
+  Taste::version => "2.4";
+END interfaceview::IV;
+
