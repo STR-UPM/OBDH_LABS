@@ -67,7 +67,7 @@ void storage_PI_Get
     *OUT_success = !is_empty();
     if (*OUT_success) {
         *OUT_out_data = box[next_out];
-        next_out = (next_out == BOX_CAPACITY) ? (0) : (next_out + 1);
+        next_out = (next_out == BOX_CAPACITY - 1) ? (0) : (next_out + 1);
         count = count - 1;
     }
 }
@@ -85,10 +85,10 @@ void storage_PI_Put
 {
    box[next_in] = *IN_in_data;
    last_in = next_in;
-   next_in = (next_in == BOX_CAPACITY) ? (0) : (next_in + 1);
+   next_in = (next_in == BOX_CAPACITY - 1) ? (0) : (next_in + 1);
    if (is_full()) {
        // overwrite last data
-       next_out = (next_out == BOX_CAPACITY) ? (0) : (next_out + 1);
+       next_out = (next_out == BOX_CAPACITY - 1) ? (0) : (next_out + 1);
    } else {
        count = count + 1;
    }
