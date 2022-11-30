@@ -28,7 +28,7 @@ END PI_Get.others;
 SYSTEM Sensors
 FEATURES
   PI_Get : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Sensors::PI_Get.others {
-    Taste::coordinates => "134539 114682";
+    Taste::coordinates => "135114 113265";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -96,26 +96,26 @@ END RI_Toggle_LED.others;
 SYSTEM Platform
 FEATURES
   PI_HK_Tick : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Platform::PI_HK_Tick.others {
-    Taste::coordinates => "129289 96270";
+    Taste::coordinates => "129761 96427";
     Taste::RCMoperationKind => cyclic;
     Taste::RCMperiod => 1000 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "HK_Tick";
   };
   RI_Get : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Sensors::PI_Get.others {
-    Taste::coordinates => "134627 107799";
+    Taste::coordinates => "135099 107956";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Get";
     Taste::labelInheritance => "true";
   };
   RI_Put : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Put.others {
-    Taste::coordinates => "138092 100995";
+    Taste::coordinates => "138564 101152";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Put";
     Taste::labelInheritance => "true";
   };
   RI_Toggle_LED : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Toggle_LED.others {
-    Taste::coordinates => "119839 106182";
+    Taste::coordinates => "120311 106339";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Toggle_LED";
     Taste::labelInheritance => "true";
@@ -257,7 +257,7 @@ END RI_Current_Mode.others;
 SYSTEM TTC
 FEATURES
   PI_TC : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::TTC::PI_TC.others {
-    Taste::coordinates => "214326 103829";
+    Taste::coordinates => "214326 103726";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 500 ms;
     Taste::Deadline => 0 ms;
@@ -399,7 +399,7 @@ FEATURES
     Taste::InterfaceName => "Last";
   };
   PI_Get : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::Storage::PI_Get.others {
-    Taste::coordinates => "176058 104092";
+    Taste::coordinates => "176058 104195";
     Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -538,7 +538,7 @@ FEATURES
     Taste::labelInheritance => "true";
   };
   RI_Clear_Led : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Clear_Led.others {
-    Taste::coordinates => "140459 74754";
+    Taste::coordinates => "143010 74754";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Clear_Led";
     Taste::labelInheritance => "true";
@@ -609,21 +609,21 @@ END PI_Clear_Led.others;
 SYSTEM LEDs
 FEATURES
   PI_Toggle_LED : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Toggle_LED.others {
-    Taste::coordinates => "119524 137161";
+    Taste::coordinates => "115902 129917";
     Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "Toggle_LED";
   };
   PI_Set_Led : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Set_Led.others {
-    Taste::coordinates => "151127 131650";
+    Taste::coordinates => "138347 136217";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "Set_Led";
   };
   PI_Clear_Led : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GSSW::LEDs::PI_Clear_Led.others {
-    Taste::coordinates => "140368 131650";
+    Taste::coordinates => "138347 130046";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -699,10 +699,10 @@ END GSSW;
 SYSTEM IMPLEMENTATION GSSW.others
 SUBCOMPONENTS
   Sensors : SYSTEM interfaceview::IV::GSSW::Sensors::Sensors.others {
-    Taste::coordinates => "120155 114682 137634 126221";
+    Taste::coordinates => "120627 113265 138106 124804";
   };
   Platform : SYSTEM interfaceview::IV::GSSW::Platform::Platform.others {
-    Taste::coordinates => "119839 96270 138092 107799";
+    Taste::coordinates => "120311 96427 138564 107956";
   };
   TTC : SYSTEM interfaceview::IV::GSSW::TTC::TTC.others {
     Taste::coordinates => "185979 84250 214326 115273";
@@ -714,20 +714,20 @@ SUBCOMPONENTS
     Taste::coordinates => "118847 57117 214667 74754";
   };
   LEDs : SYSTEM interfaceview::IV::GSSW::LEDs::LEDs.others {
-    Taste::coordinates => "119524 131650 214325 142358";
+    Taste::coordinates => "115902 127713 138347 138421";
   };
 CONNECTIONS
   Platform_RI_Get_Sensors_PI_Get : SUBPROGRAM ACCESS Sensors.PI_Get -> Platform.RI_Get {
-    Taste::coordinates => "134627 107799 134627 112011 134539 112011 134539 114682";
+    Taste::coordinates => "135099 107956 135099 112011 135114 112011 135114 113265";
   };
   Platform_RI_Put_Storage_PI_Put : SUBPROGRAM ACCESS Storage.PI_Put -> Platform.RI_Put {
-    Taste::coordinates => "138092 100995 143208 100995 143208 101099 154938 101099";
+    Taste::coordinates => "138564 101152 143208 101152 143208 101099 154938 101099";
   };
   Platform_RI_Toggle_LED_LEDs_PI_Toggle_LED : SUBPROGRAM ACCESS LEDs.PI_Toggle_LED -> Platform.RI_Toggle_LED {
-    Taste::coordinates => "119839 106182 116482 106182 116482 137161 119524 137161";
+    Taste::coordinates => "120311 106339 113698 106339 113698 129917 115902 129917";
   };
   TTC_PI_TC_GSSW_PI_TC : SUBPROGRAM ACCESS TTC.PI_TC -> PI_TC {
-    Taste::coordinates => "230546 103781 216530 103781 216530 103829 214326 103829";
+    Taste::coordinates => "230546 103781 216530 103781 216530 103726 214326 103726";
   };
   Manager_RI_HK_Task_TTC_PI_HK_Task : SUBPROGRAM ACCESS TTC.PI_HK_Task -> Manager.RI_HK_Task {
     Taste::coordinates => "183266 74754 183266 86612 185979 86612";
@@ -742,7 +742,7 @@ CONNECTIONS
     Taste::coordinates => "185979 100994 178498 100994 178498 100942 176058 100942";
   };
   TTC_RI_Get_Storage_PI_Get : SUBPROGRAM ACCESS Storage.PI_Get -> TTC.RI_Get {
-    Taste::coordinates => "185979 104144 178498 104144 178498 104092 176058 104092";
+    Taste::coordinates => "185979 104144 178498 104144 178498 104195 176058 104195";
   };
   TTC_RI_TM_Pretty_Formatter_PI_TM : SUBPROGRAM ACCESS RI_TM -> TTC.RI_TM {
     Taste::coordinates => "214326 99735 216530 99735 216530 99686 230546 99686";
@@ -754,10 +754,10 @@ CONNECTIONS
     Taste::coordinates => "214326 86771 219739 86771 219739 70187 214667 70187";
   };
   Manager_RI_Set_Led_LEDs_PI_Set_Led : SUBPROGRAM ACCESS LEDs.PI_Set_Led -> Manager.RI_Set_Led {
-    Taste::coordinates => "151075 74754 151075 102677 151127 102677 151127 131650";
+    Taste::coordinates => "151075 74754 151075 124406 151180 124406 151180 136217 138321 136217";
   };
   Manager_RI_Clear_Led_LEDs_PI_Clear_Led : SUBPROGRAM ACCESS LEDs.PI_Clear_Led -> Manager.RI_Clear_Led {
-    Taste::coordinates => "140459 74754 140459 102677 140368 102677 140368 131650";
+    Taste::coordinates => "143010 74754 143010 127474 142996 127474 142996 130046 138347 130046";
   };
 END GSSW.others;
 
@@ -811,14 +811,14 @@ END RI_TC.others;
 SYSTEM User_Interface
 FEATURES
   PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_TM.others {
-    Taste::coordinates => "253277 110302";
+    Taste::coordinates => "254127 110302";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 1000 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "TM";
   };
   PI_Unformatted_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_Unformatted_TM.others {
-    Taste::coordinates => "264061 110302";
+    Taste::coordinates => "264170 110302";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -884,20 +884,20 @@ END RI_Unformatted_TM.others;
 SYSTEM Pretty_Formatter
 FEATURES
   PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Formatter::PI_TM.others {
-    Taste::coordinates => "249110 87005";
+    Taste::coordinates => "249110 85115";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 500 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "TM";
   };
   RI_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_TM.others {
-    Taste::coordinates => "253221 95841";
+    Taste::coordinates => "254126 95841";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "TM";
     Taste::labelInheritance => "true";
   };
   RI_Unformatted_TM : REQUIRES SUBPROGRAM ACCESS interfaceview::IV::GS::User_Interface::PI_Unformatted_TM.others {
-    Taste::coordinates => "264044 95841";
+    Taste::coordinates => "264154 95841";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Unformatted_TM";
     Taste::labelInheritance => "true";
@@ -948,7 +948,7 @@ END RI_TC.others;
 SYSTEM GS
 FEATURES
   PI_TM : PROVIDES SUBPROGRAM ACCESS interfaceview::IV::GS::Pretty_Formatter::PI_TM.others {
-    Taste::coordinates => "241252 87041";
+    Taste::coordinates => "241252 84994";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 500 ms;
     Taste::Deadline => 0 ms;
@@ -975,16 +975,16 @@ SUBCOMPONENTS
   };
 CONNECTIONS
   Pretty_Formatter_RI_TM_User_Interface_PI_TM : SUBPROGRAM ACCESS User_Interface.PI_TM -> Pretty_Formatter.RI_TM {
-    Taste::coordinates => "253221 95841 253221 103007 253277 103007 253277 110302";
+    Taste::coordinates => "254126 95841 254126 103007 254127 103007 254127 110302";
   };
   Pretty_Formatter_RI_Unformatted_TM_User_Interface_PI_Unformatted_TM : SUBPROGRAM ACCESS User_Interface.PI_Unformatted_TM -> Pretty_Formatter.RI_Unformatted_TM {
-    Taste::coordinates => "264044 95841 264044 103071 264061 103071 264061 110302";
+    Taste::coordinates => "264154 95841 264154 103071 264170 103071 264170 110302";
   };
   User_Interface_RI_TC_TTC_PI_TC : SUBPROGRAM ACCESS RI_TC -> User_Interface.RI_TC {
     Taste::coordinates => "248634 117732 244943 117732 244943 117816 241252 117816";
   };
   Pretty_Formatter_PI_TM_GS_PI_TM : SUBPROGRAM ACCESS Pretty_Formatter.PI_TM -> PI_TM {
-    Taste::coordinates => "241252 87041 245181 87041 245181 87005 249110 87005";
+    Taste::coordinates => "241252 84994 245181 84994 245181 85115 249110 85115";
   };
 END GS.others;
 
@@ -1022,7 +1022,7 @@ CONNECTIONS
     Taste::coordinates => "241252 117816 237159 117816 237159 103781 230546 103781";
   };
   GS_PI_TM_GSSW_RI_TM : SUBPROGRAM ACCESS GS.PI_TM -> GSSW.RI_TM {
-    Taste::coordinates => "230546 99686 237159 99686 237159 87041 241252 87041";
+    Taste::coordinates => "230546 99686 237159 99686 237159 84994 241252 84994";
   };
 END interfaceview.others;
 
