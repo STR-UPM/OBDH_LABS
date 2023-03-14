@@ -5,7 +5,7 @@ Code for the MUSE/OBDH course laboratory
 
 This repository uses submodules. To clone it, you must use the --recursive git option:
 
-```
+```bash
 $ git clone --recursive https://github.com/STR-UPM/OBDH_LABS.git
 ```
 
