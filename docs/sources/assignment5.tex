@@ -58,7 +58,7 @@ Now, to set up PuTTY, open the application and set the configuration parameters 
 The recommended application is screen, which is already installed in MacOS.
 First you have to identify the USB serial port. Open a terminal window and type
 \begin{verbatim}
-\$ ls /dev | grep -i usb
+$ ls /dev | grep -i usb
 \end{verbatim}
 You will get a list of devices like the following:
 \begin{verbatim}
@@ -70,7 +70,7 @@ As you can see, there are two devices for each serial line. You can use any of t
 
 To use the screen application enter the following command:
 \begin{verbatim}
-\$ screen /dev/cu.usbserial-XXXX 115200
+$ screen /dev/cu.usbserial-XXXX 115200
 \end{verbatim}
 
 where {\tt /dev/cu.usbserial-XXXX} is the name of your device.
@@ -81,13 +81,13 @@ To exit the application, type CTRL-A and then CTRL-K.
 
 The recommended application is screen\footnote{{\tt gtkterm} or {\tt kermit} are good alternatives}, which can be installed in Ubuntu Linux with:
 \begin{verbatim}
-\$ sudo apt install screen
+$ sudo apt install screen
 \end{verbatim}
 
 In order to identify the USB serial port, type the following command on a terminal:
 
 \begin{verbatim}
-\$ ls /dev | grep -i usb
+$ ls /dev | grep -i usb
 \end{verbatim}
 
 You will get a result like the following:
@@ -98,7 +98,7 @@ ttyUSB0
 To use the screen application enter the following command:
 
 \begin{verbatim}
-\$ screen /dev/ttyUSB0 115200
+$ screen /dev/ttyUSB0 115200
 \end{verbatim}
 
 To exit the application, type CTRL-A and then SHIFT-K.

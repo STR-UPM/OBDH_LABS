@@ -12,6 +12,16 @@ The GNAT Community compilation system can be downloaded from \url{https://www.ad
 \item Download the file {\tt gnat-2021-20210519-x86\_64-windows64-bin.exe}
 \item Run the file and follow the instructions.
 \end{enumerate}
+
+GNATStudio installs additional configuration files in the \texttt{.gnatstudio} folder,
+which is located under your Home directory (e.g.: \texttt{C:\textbackslash{}\textbackslash{}user\_name\textbackslash{}.gnatstudio}).
+Notice that the application will not start if your user account contains special character such as spaces or accent marks.
+Then, to solve this you must remove all special characters from your user account.
+This 
+\href{https://superuser.com/questions/890812/how-to-rename-the-user-folder-in-windows-10/1346983#1346983}
+{link}
+provides detail instructions to do it.
+
 \subsection{MacOS}
 \begin{enumerate}
 \item Download the file {\tt gnat-2020-20200818-x86\_64-darwin-bin.dmg}
@@ -30,7 +40,7 @@ xcode-select -s /Applications/Xcode.app/Contents/Developer
 \item Download the file {\tt gnat-2021-20210519-x86\_64-linux-bin}
 \item You will need to make the package executable before running it. In a command prompt, execute the following command:
 \begin{verbatim}
-     chmod +x path\_to\_the\_package.bin
+     chmod +x path_to_the_package.bin
 \end{verbatim}
 and execute the package. The {\tt README.txt} file contains additional installation and execution instructions.
 \end{enumerate}
@@ -53,7 +63,7 @@ The GNAT compilation system includes the GPS (GNAT programming studio) programmi
 \item	the messages window at the bottom
 \end{itemize}
 
-GPS organises source code in projects. A project is a set of source files which are compiled together in order to produce a single binary executable. 
+GPS organizes source code in projects. A project is a set of source files which are compiled together in order to produce a single binary executable. 
 Before starting you will need to create a folder to store your software projects. The recommendation is to create a folder named OBDH\_LABS in a directory of your choice.
 The next activity is to write and run a simple Ada program using GPS:
 \begin{enumerate}
