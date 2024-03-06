@@ -43,19 +43,29 @@ The STM32F407 board is used as a low-cost replacement for a satellite on-board c
 
 Figure~\ref{fig:board} shows an overall view of the computer board.
 
-\begin{figure}[h]
+\begin{figure}[hbtp!]
             \centering{\includegraphics[height=11cm,keepaspectratio]{board.png}}
             \caption{Computer board.}
             \label{fig:board}
 \end{figure}
 
-The main elements that will be used in the laboratory are:
+The following are the main components used in this laboratory:
 \begin{itemize}
-\item	USB ST-LINK connector, which is linked to a PC with a mini USB-USB A cable. This connection is used for the following functions:
-\begin{itemize}
-\item	power supply to the board (5 V)
-\item	program loading and debugging from host
-\end{itemize}
-\item	GPIO pins PB6, PB7 and GND. GPIO (General Purpose Input-Output) is a standard interface for connecting external devices. These GPIO pins are used in the laboratory to connect a serial line to a USB port on a PC, emulating the connection to the on-board radio equipment in a satellite.
-\item	Temperature and voltage sensors. These sensors are part of the STM32 microcomputer chip, and can be read using internal registers in the MCU. They are used in the laboratory to emulate the housekeeping 
+	\item	USB ST-LINK connector, which is linked to a PC with a mini-USB to USB-A cable. This connection is used to supply power to the board (5 V) and load and debug the software from the host PC.
+	
+	\item	General Purpose Input-Output (GPIO) pins PB6, PB7 and GND.
+	GPIO is a standard interface for connecting external devices.
+	These GPIO pins are used in the laboratory
+	to connect a serial line to a USB port on a PC,
+	emulating the connection to the on-board radio equipment in a satellite.
+	Specifically the pin:
+	\begin{itemize}
+		\item \textbf{PB6} is used as the transmitter pin (TX).
+		\item \textbf{PB7} is used as the receiver pin (RX).
+		\item \textbf{GND} is used for grounding.
+	\end{itemize}
+	
+	\item	Temperature and voltage sensors. These sensors are part of the STM32 microcomputer chip,
+	and can be read using internal registers in the MCU.
+	They are used in the laboratory to emulate the housekeeping devices onboard the satellite.
 \end{itemize}

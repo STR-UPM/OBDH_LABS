@@ -5,14 +5,22 @@
 The aim of this assignment is to install a native programming environment for the Ada language on the student PC. This environment will later be extended with cross-compilation tools for the STM32 board to be used in the laboratory. 
 
 The programming environment to be used is GNAT Community, an open-source software development environment freely available from AdaCore, a company specialised in providing tools and solutions for developing high-integrity software,
-\section{Download and install GNAT}
-The GNAT Community compilation system can be downloaded from \url{https://www.adacore.com/download/more}. Installation packages for Windows, MacOS and GNU Linux are available at the download page. The file {\tt README.txt} provides installation instructions, which are summarised as follows:
-\subsection{Windows}
+
+\subsection{Download and install GNAT}
+The GNAT Community compilation system can be downloaded from \url{https://www.adacore.com/download/more}.
+Installation packages for Windows, MacOS and GNU Linux
+are available at the download page.
+The file \texttt{README.txt} provides installation instructions,
+which are summarized in the following subsections:
+
+\subsubsection*{Windows}
 \begin{enumerate}
-\item Download the file {\tt gnat-2021-20210519-x86\_64-windows64-bin.exe}
-\item Run the file and follow the instructions.
+	\item Download the file \href{https://community.download.adacore.com/v1/797dbae8bdb8a3f661dad78dd73d8e40218a68d8?filename=gnat-2021-20210519-x86\_64-windows64-bin.exe\&rand=1472}{\texttt{gnat-2021-20210519-x86\_64-windows64-bin.exe}}
+	
+	\item Run the file and follow the instructions.
 \end{enumerate}
 
+\textbf{\textcolor{mRedBrown}{Important}}:
 GNATStudio installs additional configuration files in the \texttt{.gnatstudio} folder,
 which is located under your Home directory (e.g.: \texttt{C:\textbackslash{}\textbackslash{}user\_name\textbackslash{}.gnatstudio}).
 Notice that the application will not start if your user account contains special character such as spaces or accent marks.
@@ -20,29 +28,42 @@ Then, to solve this you must remove all special characters from your user accoun
 This 
 \href{https://superuser.com/questions/890812/how-to-rename-the-user-folder-in-windows-10/1346983#1346983}
 {link}
-provides detail instructions to do it.
+provides detailed instructions to solve this issue.
 
-\subsection{MacOS}
+\subsubsection*{MacOS}
 \begin{enumerate}
-\item Download the file {\tt gnat-2020-20200818-x86\_64-darwin-bin.dmg}
-\item Open the dmg disk and execute the application inside it. In order to circumvent the system protection, control-click on the file and then click on ``opens" in the emergent window.
+	\item Download the file \texttt{gnat-2020-20200818-x86\_64-darwin-bin.dmg}
+	\item Open the dmg disk and execute the application inside it.
+	In order to circumvent the system protection,
+	control-click on the file and then click on ``opens" in the emergent window.
 \end{enumerate}
-Notice that you need to have installed the Xcode application to install GNAT. If you still see the following error:
-\begin{verbatim}
-ld: library not found for -lSystem
-\end{verbatim}
+
+Notice that you need to have installed the Xcode application to install GNAT.
+If you still see the following error:
+
+\begin{BVerbatim}
+	ld: library not found for -lSystem
+\end{BVerbatim}
+\\
+
 then you might have to execute the following:
-\begin{verbatim}
-xcode-select -s /Applications/Xcode.app/Contents/Developer
-\end{verbatim}
-\subsection{GNU Linux}
+
+\begin{BVerbatim}
+	xcode-select -s /Applications/Xcode.app/Contents/Developer
+\end{BVerbatim}
+
+\subsubsection*{GNU Linux}
 \begin{enumerate}
-\item Download the file {\tt gnat-2021-20210519-x86\_64-linux-bin}
-\item You will need to make the package executable before running it. In a command prompt, execute the following command:
-\begin{verbatim}
-     chmod +x path_to_the_package.bin
-\end{verbatim}
-and execute the package. The {\tt README.txt} file contains additional installation and execution instructions.
+	\item Download the file \texttt{gnat-2021-20210519-x86\_64-linux-bin}
+	\item You will need provide execution permissions to the binary in order to run it.
+	Run the following command in your terminal:
+	
+	\begin{BVerbatim}
+		chmod +x path_to_the_package.bin
+	\end{BVerbatim}
+	
+	and execute the package. The \texttt{README.txt} file
+	contains additional installation and execution instructions.
 \end{enumerate}
 
 \section{Test the installation with a simple program}

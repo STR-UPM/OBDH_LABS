@@ -1,0 +1,46 @@
+%!TEX root = practica.tex
+%===============================================================================
+\chapter{Temperature sensor}\label{ap:sensor}
+%\addcontentsline{toc}{chapter}{Temperature sensor}
+%----------------------------------------------------------------------
+
+The STM32F407 reference manual (section 13.10) states that the internal temperature sensor of the MCU is internally cabled to the ADC1\_IN16 analog input channel. The steps required to read the sensor are:
+
+\begin{enumerate}
+	\item Select ADC1\_IN16 input channel in the ADC.
+	\item Select a sampling time greater than the minimum sampling time specified in the datasheet (see table~\ref{tb:sensor} below).
+	\item Set the TSVREFE bit in the ADC\_CCR register to wake up the temperature sensor from power down mode.
+	\item Start the ADC conversion by setting the SWSTART bit (or by external trigger).
+	\item Read the resulting VSENSE data in the ADC data register.
+	\item Calculate the temperature using the following formula:
+	
+	Temperature (in \degree{C}) = {(VSENSE - V25) / Avg\_Slope} + 25
+	
+	Where:
+	\begin{itemize}
+		\item V25 = VSENSE value for 25 \degree{C} (table~\ref{tb:sensor})
+		\item Avg\_Slope = average slope of the temperature vs. VSENSE curve (table~\ref{tb:sensor}).
+	\end{itemize}
+\end{enumerate}
+
+The sensor has a startup time after waking from power down mode before it can output VSENSE at the correct level. The ADC also has a startup time after power-on, so to minimize the delay, the ADON and TSVREFE bits should be set at the same time.
+
+The sensor has a range of -40 to 125 \degree{C}, with a precision of $\pm$1.5 \degree{C}. Its main characteristics are described in the STM32F407 datasheet (table~\ref{tb:sensor}).
+
+\begin{table}[htb]
+	\begin{center}
+		\begin{tabular}{llllll} \hline
+			Symbol & Parameter & Min & Typ & Max & Unit \\ \hline
+			TL & VSENSE linearity with temperature & - & $\pm1$ & $\pm2$ & \degree{C}\\
+			Avg\_Slope & Average slope & - & 2.5 & & mV/\degree{C}\\
+			V25 & Voltage at 25 \degree{C} & - & 0.76 & & V\\
+			tSTART & Startup time & - & 6 & 10 & $\mu{s}$\\
+			TS\_temp & ADC sampling time when reading & 10 & - & - & $\mu{s}$\\
+			& the temperature (1 \degree{C} accuracy) &  &  &  & \\ \hline
+		\end{tabular}
+		\caption{STM32F407 temperature sensor characteristic.}
+		\label{tb:sensor}
+	\end{center}
+\end{table}
+
+The Ada Drivers Library includes the package STM32.ADC, which provides facilities for handling the analog to digital converter.
