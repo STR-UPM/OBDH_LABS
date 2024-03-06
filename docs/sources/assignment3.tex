@@ -54,7 +54,7 @@ The Ada Drivers Library includes the package STM32.ADC, which provides facilitie
 The software architecture of the simple housekeeping program is depicted in figure~\ref{fig:simple}\footnote{The graphic notation is AADL (Architecture Analysis and Design Language).}. The software components are:
 
 \begin{figure}[h]
-            \centering{\includegraphics[width=0.5\textwidth,keepaspectratio]{simple.png}}
+            \centering{\includegraphics[width=0.6\textwidth,keepaspectratio]{simple.png}}
             \caption{Software architecture of simple housekeeping system.}
             \label{fig:simple}
 \end{figure}
@@ -69,7 +69,22 @@ Since the OBC board does not have a text output device, it has to be simulated o
 
 \subsection{Download the code and study the implementation}
 
-The implementation code, as initially provided to the students, can be downloaded from \url{https://github.com/STR-UPM/OBDH_LABS}. Click on {\tt Clone} or {\tt download}, download a zip archive, unzip and move to your work directory. The code for this assignment is in the LAB3 folder.
+The implementation code, as initially provided to the students, can be downloaded from
+
+\begin{center}
+	\begin{tcolorbox}[width=0.6\textwidth,
+		boxsep=0pt,
+		left=0pt,
+		right=0pt,
+		top=5pt,
+		]
+		\centering
+		\color{blue}{\url{https://github.com/STR-UPM/SEU-OBDH-Lab}}
+	\end{tcolorbox}
+\end{center}
+
+Click on {\tt <> Code} $\rightarrow$ {\tt Download ZIP} to download a zip archive, unzip and move it to your working directory.
+The code for this assignment is in the \textcolor{mPurple}{\texttt{LAB3}} folder.
 
 The {\tt Housekeeping} package is the root element of the housekeeping subsystem. Its specification consists of one procedure, {\tt Initialize}, that starts the operation of the component. It has three subpackages:
 

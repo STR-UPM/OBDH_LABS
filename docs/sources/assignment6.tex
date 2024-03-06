@@ -6,11 +6,11 @@ The next version of the housekeeping program includes real-time requirements and
 
 \section{Software architecture}
 
-The software architecture now includes a period of 10 s for the {\tt TTC} task. This task reads the last value from the storage every 10 s (figure~\ref{fig:real-time}).
+The software architecture now includes a period of 10 s for the {\tt TTC} task. This task reads the last value from the storage every 10 seconds (figure~\ref{fig:real-time}).
 
 \begin{figure}[h]
-            \centering{\includegraphics[width=0.8\textwidth,keepaspectratio]{real-time.png}}
-            \caption{Software architecture of real-time housekeeping system.}
+            \centering{\includegraphics[width=0.9\textwidth,keepaspectratio]{real-time.png}}
+            \caption{Software architecture of real-time housekeeping system. The only difference with the previous assignment is the 10 sec period of the {\tt TTC} task.}
             \label{fig:real-time}
 \end{figure}
 
@@ -82,7 +82,7 @@ An execution time measurement tool is available in the LAB6 directory. In order 
 \item Make sure that the serial cable is still connected to the board and the USB port in the host computer. If the remote terminal application is not open, open it.
 \end{enumerate}
 
-A measurement test is executed on the board, and repeated every 60 s. The output of the test is shown on the host terminal application (figure~\ref{fig:wcet}). The output shows the execution times for the bodies of the {\tt Housekeeping} (HK) and {\tt TTC} (TC) tasks, as well as the bodies of the protected operations of the {\tt Storage} object (ST). Notice that a new entry, {\tt Get\_Immediate}, has been added for the latter in order to avoid the measuring task to get blocked. The new entry is exactly the same as {\tt Get} but has a {\tt True} barrier so that it is always open.
+A measurement test is executed on the board, and repeated every 60 s. The output of the test is shown on the host terminal application (figure~\ref{fig:wcet}). The output shows the execution times for the bodies of the {\tt Housekeeping} (HK) and {\tt TTC} (TC) tasks, as well as the bodies of the protected operations of the {\tt Storage} object (ST). Notice that a new entry, {\tt Get\_Immediate}, has been added for the latter in order \textit{to avoid the measuring task to get blocked}. The new entry is exactly the same as {\tt Get} but has a {\tt True} barrier so that it is always open.
 
 \begin{figure}[h]
             \centering{\includegraphics[width=0.6\textwidth,keepaspectratio]{wcet.png}}
@@ -90,19 +90,40 @@ A measurement test is executed on the board, and repeated every 60 s. The output
             \label{fig:wcet}
 \end{figure}
 
-In the example shown on figure~\ref{fig:wcet}, the HK execution time has been measured $10^{6}$ times, with a total measurement time of 13.02 s. Therefore, the value to be taken for the response time analysis is $13.02\cdot10^{-6}~s = 13.02~\mu${s}, and the same for the other tasks. Take into account that the values measured on your board will probably be slightly different from the above shown.
+In the example shown on figure~\ref{fig:wcet}, the HK execution time has been measured $10^{6}$ times, with a total measurement time of 13.02 s. Therefore, the value to be taken for the response time analysis is $13.02\cdot10^{-6}~\text{s} = 13.02~\mu${s}, and the same for the other tasks. Take into account that the values measured on your board will probably be slightly different from the above shown.
 
-Once you have an estimate of worst case execution times, apply the RTA equations for computing the worst-case response time and check if all the deadlines are met. The setup for the calculations is shown on table~\ref{tb:wcet}.
+Once you have an estimate of worst case execution times, apply the RTA equations for computing the worst-case response time and check if all the deadlines are met. The setup for the calculations is shown on table~\ref{tb:wcet}
+containing the period (T), execution time (C),
+blocking time (B), deadline (D),
+response time (R), and priority (P) of all tasks.
+The last two columns (Storage and Operation)
+present the protected object called \texttt{Storage}
+that is accessed with a mean execution time of
+$3\cdot10^{-6}$ seconds by the \texttt{Housekeeping} task through its CPut operation,
+and $4\cdot10^{-6}$ seconds by the \texttt{TTC} task through its CGet operation.
+Finally, the last row contains the ceiling priority of the Storage protected object. 
+
+\begingroup
+\setlength{\tabcolsep}{8pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.2} % Default value: 1
 
 \begin{table}[htb]
-\begin{center}
-\begin{tabular}{|l|r|r|r|r|r|r|r|r|} \hline
-Task & T & C & B & D & R & P & Storage & Operation\\ \hline
-Housekeeping & 1.0 & $13\cdot10^{-6}$ & $4\cdot10^{-6}$ & 1.0 & $17\cdot10^{-6}$& 20 & $3\cdot10^{-6}$ & CPut \\
-TTC & 10.0 & $26\cdot10^{-6}$ & 0 & 2.0 & $39\cdot10^{-6}$ & 10 & $4\cdot10^{-6}$ & CGet \\ \hline
-& & & & & & CP & \multicolumn{2}{|c|}{20} \\ \hline
-\end{tabular}
-\caption{Data arrangement for RTA of the housekeeping system.}
-\label{tb:wcet}
-\end{center}
+	\begin{center}
+		
+		\small % Font size
+		
+		\begin{tabular}{|r r r r r r r |r r|} \hline
+			\textbf{Task} & T & C & B & D & R & P & Storage & Operation\\ \hline
+			
+			\textbf{Housekeeping} & 1.0 & $13\cdot10^{-6}$ & \textcolor{mRedBrown}{\textbf{?}} & 1.0 & \textcolor{mRedBrown}{\textbf{?}} & 20 & $3\cdot10^{-6}$ & CPut \\
+			
+			\textbf{TTC} & 10.0 & $26\cdot10^{-6}$ & \textcolor{mRedBrown}{\textbf{?}} & 2.0 & \textcolor{mRedBrown}{\textbf{?}} & 10 & $4\cdot10^{-6}$ & CGet \\ \hline
+			
+			\multicolumn{7}{|r|}{Ceiling Priority} & \multicolumn{2}{|c|}{\textcolor{mRedBrown}{\textbf{?}}} \\ \hline
+		\end{tabular}
+		\caption{Data arrangement for RTA of the housekeeping system. Time units in seconds.}
+		\label{tb:wcet}
+	\end{center}
 \end{table}
+
+\endgroup

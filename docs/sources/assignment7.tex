@@ -2,7 +2,15 @@
 %===============================================================================
 \chapter{Real-time program with Attitude Control System}\label{ch:assignment7}
 
-The aim of this assignment is to validate the Attitude Control System (ACS) following the Processor In the Loop (PIL) approach. The real-time version of the On-Board Software (OBSW) is used with the ACS of the UPMSat-2 satellite. The ACS uses magnetic sensors and actuators, which is commonly known as magnetic attitude control (figure~\ref{fig:acs}).
+The aim of this assignment is to validate the Attitude Control System (ACS)
+with the Processor In the Loop (PIL) technique.
+PIL consists on the simulation from the external environment
+through mathematical models (designed in Simulink)
+that are directly connected to the onboard computer.
+This way, we can analyze the system's behaviour
+based on simulated readings and actuations performed by the OBSW.
+
+The real-time version of the On-Board Software (OBSW) is used with the ACS of the UPMSat-2 satellite. The ACS uses magnetic sensors and actuators, which is commonly known as magnetic attitude control (figure~\ref{fig:acs}).
 
 \begin{figure}[h]
             \centering{\includegraphics[width=.6\textwidth,keepaspectratio]{acs.png}}
@@ -10,7 +18,7 @@ The aim of this assignment is to validate the Attitude Control System (ACS) foll
             \label{fig:acs}
 \end{figure}
 
-Magnetometers are magnetic sensors that provide a measurement of the strength and direction of the magnetic field, i.e. the magnetic field vector, at a given point. Magnetorquer are magnetic coil which produce a magnetic moment that interacts with the Earth's field, thus enabling the attitude of the satellite to be changed.
+\textbf{Magnetometers} are magnetic sensors that provide a measurement of the strength and direction of the magnetic field, i.e. the magnetic field vector, at a given point. \textbf{Magnetorquers} are magnetic coil which produce a magnetic moment that interacts with the Earth's field, thus enabling the attitude of the satellite to be changed.
 
 \section{Model In the Loop (MIL) validation}
 
@@ -26,7 +34,8 @@ The first validation phase uses a model of the ACS, together with models of the 
 
 The ACS simulink model can be simulated by running {\tt matlab} from directory LAB7/ACS and opening ACS.slx. Three new windows will be pop-up: the simulink window with the ACS model and two scope windows that show the angular velocity of the satellite in body reference and the actuation over the three magnetorquers.
 
-The simulink window (figure~\ref{fig:acs-simulink}) shows the high level blocks, that are the satellite itself, its dynamic and the models of the Earth's field and Sun with the perturbations.
+The Simulink window (figure~\ref{fig:acs-simulink}) shows the high level blocks: the satellite's model is located in the middle (turquoise block),
+its dynamics and the models of the Earth's field and Sun with the perturbations.
 
 \begin{figure}[h]
             \centering{\includegraphics[width=\textwidth,keepaspectratio]{acs-simulink.png}}
@@ -34,7 +43,7 @@ The simulink window (figure~\ref{fig:acs-simulink}) shows the high level blocks,
             \label{fig:acs-simulink}
 \end{figure}
 
-The nominal attitude control can be show by selecting {\tt Nominal Attitude Control} in the Model Browser menu (left part of simulink window) or by clicking on {\tt Satellite} $\rightarrow$ {\tt OBC} $\rightarrow$ {\tt Nominal Attitude Control} blocks.
+The nominal attitude control can be visualized by selecting {\tt Nominal Attitude Control} in the Model Browser menu (left part of simulink window) or by clicking on {\tt Satellite} $\rightarrow$ {\tt OBC} $\rightarrow$ {\tt Nominal Attitude Control} blocks.
 
 Nominal attitude control has three blocks (figure~\ref{fig:nac}):
 \begin{description}
@@ -49,7 +58,13 @@ Nominal attitude control has three blocks (figure~\ref{fig:nac}):
             \label{fig:nac}
 \end{figure}
 
-To simulate the model an verify its behaviour, click on {\tt Run} bottom. The evolution of the angular velocity of the satellite and the actuation over the three magnetorquers will be shown in the corresponding scope windows. The commanded angular velocity is [0, 0, 0.1] rad/s and the result of the simulation (figure~\ref{fig:scope}) shows that evolution from the initial angular velocity ([0.1, -0.1, -0.1] rad/s).
+To simulate the model an verify its behaviour,
+click on Run bottom.
+The evolution of the angular velocity of the satellite
+and the actuation over the three magnetorquers will be shown in the corresponding scope windows.
+The commanded angular velocity set-point is [0, 0, 0.1] rad/s
+and the result of the simulation (figure~\ref{fig:scope})
+shows the evolution from the initial angular velocity ([0.1, -0.1, -0.1] rad/s).
 
 \begin{figure}[h]
             \centering{\includegraphics[width=\textwidth,keepaspectratio]{scope.png}}
@@ -72,7 +87,7 @@ This model named control.slx can be found in LAB7/ACS\_PIL directory. Use {\tt m
             \label{fig:control}
 \end{figure}
 
-The code generation option as well as characteristics of the target hardware can be set by clicking on the {\tt Settings} menu. {\tt control.slx} model has already the proper options, therefore you can take a look but be carefully and do not modify then.
+The code generation option as well as characteristics of the target hardware can be set by clicking on the {\tt Settings} menu. The {\tt control.slx} model has already the proper options, therefore you can take a look but be carefully and do not modify then.
 
 Now the code can be generated by clicking on the {\tt Build} menu. Once upon the code is generated, a code generation report window appear. It is possible to explore the generated code together with different code metrics. Click on {\tt control.h} and look for lines 50-79 (figure~\ref{fig:code}) where the generated code interface is located.
 

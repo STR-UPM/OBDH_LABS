@@ -9,7 +9,7 @@ The aim of this assignment is to extend the simple housekeeping program of the p
 The software architecture of the tasking housekeeping program is depicted in figure~\ref{fig:tasking}. The software components are:
 
 \begin{figure}[h]
-            \centering{\includegraphics[width=.8\textwidth,keepaspectratio]{tasking.png}}
+            \centering{\includegraphics[width=.9\textwidth,keepaspectratio]{tasking.png}}
             \caption{Software architecture of tasking housekeeping system.}
             \label{fig:tasking}
 \end{figure}
@@ -60,8 +60,11 @@ Continuing.
 
 \section{Make changes to the program}
 
-You may include the same changes that were proposed in the previous assignment:
+It is advised that you make changes
+to the provided program in order to make sure
+that you understand the project implementation,
+and the mapping from the architecture to source code.
 
-\begin{enumerate}
-\item Include the conversion to Celsius in the {\tt Display.Put} procedure.
-\end{enumerate}
+\textcolor{mRedBrown}{\textit{The proposed change is to}}: Include the conversion to Celsius in the \texttt{TTC.Send} procedure.
+The temperature transfer function is implemented by \texttt{HK\_data-converter}
+which can be found in utilities.
