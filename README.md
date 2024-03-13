@@ -1,12 +1,12 @@
 # OBDH_LABS
-Code for the MUSE/OBDH course laboratory
+Source code for the MUSE/OBDH laboratories.
 
 ## Important notice
 
 This repository uses submodules. To clone it, you must use the --recursive git option:
 
 ```bash
-$ git clone --recursive https://github.com/STR-UPM/OBDH_LABS.git
+git clone --recursive https://github.com/STR-UPM/OBDH_LABS.git
 ```
 
 ## Environment
